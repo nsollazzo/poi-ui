@@ -1,0 +1,40 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# Changesets opens/updates a "Version Packages" PR; merging it publishes to npm.
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write # npm trusted publishing (OIDC) + provenance
+
+concurrency:
+  group: release-${{ github.ref }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      # npm trusted publishing (OIDC) needs npm >= 11.5.1
+      - run: npm install -g npm@latest
+      - name: Create Release PR or publish to npm
+        uses: changesets/action@v1
+        with:
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: 'true'
+          # No NPM_TOKEN needed once a Trusted Publisher is configured on npmjs.com
+          # for this repo + workflow. As a fallback, set NODE_AUTH_TOKEN to an npm
+          # granular access token:
+          # NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

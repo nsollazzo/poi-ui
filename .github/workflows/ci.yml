@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Lint, check & test (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Install Playwright (chromium)
+        run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm lint
+      - run: pnpm check
+      - run: pnpm test:coverage
+      - name: Upload coverage to Coveralls
+        if: matrix.node == 22
+        uses: coverallsapp/github-action@v2
+        with:
+          file: ./coverage/lcov.info
+
+  package:
+    name: Validate package & build Storybook
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build package (svelte-package)
+        run: pnpm prepack
+      - name: Validate package (publint)
+        run: pnpm check:package
+      - name: Build Storybook
+        run: pnpm build-storybook

@@ -1,0 +1,37 @@
+/* POI-UI — Layer 2 (semantic): THE MACHINE.
+   Dark: white + red on black, neon-glow emphasis. Watchful, benevolent. */
+[data-theme='machine'] {
+	color-scheme: dark;
+
+	--poi-surface-base: var(--poi-raw-black);
+	--poi-surface-1: rgba(255, 255, 255, 0.04);
+	--poi-surface-2: rgba(255, 255, 255, 0.07);
+	--poi-surface-3: rgba(255, 255, 255, 0.12);
+
+	--poi-ink: var(--poi-raw-white);
+	--poi-ink-dim: rgba(255, 255, 255, 0.6);
+	--poi-line: #aaa3a3;
+
+	--poi-accent: var(--poi-raw-red-machine);
+	--poi-accent-ink: var(--poi-raw-white);
+
+	/* Emphasis = outer neon glow */
+	--poi-emphasis-shadow: 0 0 12px var(--poi-accent);
+	--poi-emphasis-text-shadow: 0 0 8px var(--poi-accent);
+
+	/* Focus ring: surface-colored inner gap + accent outer ring (visible on any surface) */
+	--poi-focus-ring: 0 0 0 2px var(--poi-surface-base), 0 0 0 4px var(--poi-accent);
+
+	/* Selection */
+	--poi-selection-bg: rgba(134, 0, 0, 0.6);
+	--poi-selection-ink: rgba(255, 0, 0, 0.95);
+
+	/* Designation accents */
+	--poi-threat: var(--poi-accent);
+	--poi-asset: var(--poi-raw-white);
+
+	/* Opt-in canonical Machine "box" accents (default stays white + red) */
+	--poi-box-amber: var(--poi-raw-amber);
+	--poi-box-blue: var(--poi-raw-blue);
+	--poi-box-green: var(--poi-raw-green);
+}

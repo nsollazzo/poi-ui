@@ -1,0 +1,35 @@
+/* POI-UI — Layer 2 (semantic): SAMARITAN.
+   Light: black + red on white, crisp and glow-free. Cold, total, authoritarian.
+   Strictly monochrome — black + red only. */
+[data-theme='samaritan'] {
+	color-scheme: light;
+
+	--poi-surface-base: var(--poi-raw-white);
+	--poi-surface-1: rgba(0, 0, 0, 0.04);
+	--poi-surface-2: rgba(0, 0, 0, 0.06);
+	--poi-surface-3: rgba(0, 0, 0, 0.08);
+
+	--poi-ink: var(--poi-raw-black);
+	--poi-ink-dim: rgba(0, 0, 0, 0.55);
+	--poi-line: rgba(0, 0, 0, 0.45);
+
+	--poi-accent: var(--poi-raw-red-samaritan);
+	--poi-accent-ink: var(--poi-raw-white);
+
+	/* Emphasis = crisp red, NO neon glow */
+	--poi-emphasis-shadow: none;
+	--poi-emphasis-text-shadow: none;
+
+	--poi-focus-ring: 0 0 0 2px var(--poi-surface-base), 0 0 0 4px var(--poi-accent);
+
+	--poi-selection-bg: var(--poi-accent);
+	--poi-selection-ink: var(--poi-raw-white);
+
+	--poi-threat: var(--poi-accent);
+	--poi-asset: var(--poi-raw-black);
+
+	/* Monochrome: "box" accents collapse onto the red/ink set */
+	--poi-box-amber: var(--poi-accent);
+	--poi-box-blue: var(--poi-ink);
+	--poi-box-green: var(--poi-ink);
+}
