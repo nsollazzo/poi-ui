@@ -13,6 +13,10 @@ permissions:
 concurrency:
   group: release-${{ github.ref }}
 
+# Don't run git hooks (commitlint would reject the bot's "Version Packages" commit).
+env:
+  HUSKY: '0'
+
 jobs:
   release:
     runs-on: ubuntu-latest
