@@ -1,9 +1,9 @@
 # POI-UI
 
-[![npm version](https://img.shields.io/npm/v/@midika/poi-ui)](https://www.npmjs.com/package/@midika/poi-ui)
+[![npm version](https://img.shields.io/npm/v/@nsollazzo/poi-ui)](https://www.npmjs.com/package/@nsollazzo/poi-ui)
 [![CI](https://github.com/nsollazzo/poi-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/nsollazzo/poi-ui/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/nsollazzo/poi-ui/badge.svg?branch=main)](https://coveralls.io/github/nsollazzo/poi-ui?branch=main)
-[![license](https://img.shields.io/npm/l/@midika/poi-ui)](./LICENSE)
+[![license](https://img.shields.io/npm/l/@nsollazzo/poi-ui)](./LICENSE)
 
 > An AI's point of view, rendered as UI.
 
@@ -29,7 +29,7 @@ By **MiDika SRL**. MIT licensed.
 ## Install
 
 ```sh
-pnpm add @midika/poi-ui svelte
+pnpm add @nsollazzo/poi-ui svelte
 ```
 
 `svelte@^5` is a peer dependency.
@@ -38,8 +38,8 @@ pnpm add @midika/poi-ui svelte
 
 ```svelte
 <script>
-	import { ThemeProvider } from '@midika/poi-ui';
-	import '@midika/poi-ui/tokens.css';
+	import { ThemeProvider } from '@nsollazzo/poi-ui';
+	import '@nsollazzo/poi-ui/tokens.css';
 </script>
 
 <ThemeProvider theme="machine">
