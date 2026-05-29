@@ -1,8 +1,8 @@
 # POI-UI
 
 [![npm version](https://img.shields.io/npm/v/@midika/poi-ui)](https://www.npmjs.com/package/@midika/poi-ui)
-[![CI](https://github.com/midika/poi-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/midika/poi-ui/actions/workflows/ci.yml)
-[![Coverage Status](https://coveralls.io/repos/github/midika/poi-ui/badge.svg?branch=main)](https://coveralls.io/github/midika/poi-ui?branch=main)
+[![CI](https://github.com/nsollazzo/poi-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/nsollazzo/poi-ui/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/nsollazzo/poi-ui/badge.svg?branch=main)](https://coveralls.io/github/nsollazzo/poi-ui?branch=main)
 [![license](https://img.shields.io/npm/l/@midika/poi-ui)](./LICENSE)
 
 > An AI's point of view, rendered as UI.
@@ -72,8 +72,8 @@ Also exported: `useTheme`, the `reducedMotion` helper, the `MACHINE_DESIGNATIONS
 
 ## Demo & docs
 
-- **Kitchen-sink demo** (both themes side by side): https://midika.github.io/poi-ui/
-- **Storybook** (per-component, with a11y checks): https://midika.github.io/poi-ui/storybook/
+- **Kitchen-sink demo** (both themes side by side): https://nsollazzo.github.io/poi-ui/
+- **Storybook** (per-component, with a11y checks): https://nsollazzo.github.io/poi-ui/storybook/
 
 ## Develop
 

@@ -5,13 +5,13 @@
 	"author": "MiDika SRL",
 	"license": "MIT",
 	"packageManager": "pnpm@10.16.1",
-	"homepage": "https://github.com/midika/poi-ui#readme",
+	"homepage": "https://github.com/nsollazzo/poi-ui#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/midika/poi-ui.git"
+		"url": "git+https://github.com/nsollazzo/poi-ui.git"
 	},
 	"bugs": {
-		"url": "https://github.com/midika/poi-ui/issues"
+		"url": "https://github.com/nsollazzo/poi-ui/issues"
 	},
 	"scripts": {
 		"dev": "vite dev",
