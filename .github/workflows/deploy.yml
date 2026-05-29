@@ -1,0 +1,52 @@
+name: Deploy demo & Storybook
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Needs GitHub Pages enabled for the repo (Settings → Pages → Source: GitHub Actions).
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Build demo (prerendered, under the repo subpath)
+        run: pnpm exec vite build
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}
+      - name: Build Storybook
+        run: pnpm build-storybook
+      - name: Assemble site (demo at /, Storybook at /storybook)
+        run: |
+          mkdir -p build/storybook
+          cp -r storybook-static/. build/storybook/
+          touch build/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

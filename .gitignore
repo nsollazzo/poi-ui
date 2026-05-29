@@ -11,6 +11,10 @@ node_modules
 /coverage
 *.tgz
 
+# svelte-package may emit .d.ts next to non-lib .svelte sources during build.
+# Scoped to src so the published dist/**/*.svelte.d.ts types are unaffected.
+src/**/*.svelte.d.ts
+
 # OS
 .DS_Store
 Thumbs.db

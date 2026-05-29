@@ -19,7 +19,13 @@ export default defineConfig({
 			provider: 'v8',
 			include: ['src/lib/**/*.{ts,svelte}'],
 			exclude: ['src/lib/index.ts', 'src/lib/**/*.{test,spec}.{js,ts}', 'src/lib/**/*.stories.*'],
-			reporter: ['text', 'html', 'lcov']
+			reporter: ['text', 'html', 'lcov'],
+			thresholds: {
+				statements: 90,
+				functions: 90,
+				lines: 90,
+				branches: 55
+			}
 		},
 		projects: [
 			{
