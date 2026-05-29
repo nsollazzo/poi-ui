@@ -36,4 +36,9 @@
 	/* SubjectFrame motif: thin full edge + visible crosshair reticle, crisp (no glow) */
 	--poi-frame-edge: var(--poi-line);
 	--poi-frame-reticle: block;
+
+	/* Window chrome: severe red title bar, white title, no traffic-light dots */
+	--poi-window-bar-bg: var(--poi-accent);
+	--poi-window-bar-ink: var(--poi-accent-ink);
+	--poi-window-dots: none;
 }

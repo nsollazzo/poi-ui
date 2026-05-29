@@ -1,5 +1,21 @@
 <script lang="ts">
-	import { ThemeProvider, type PoiTheme } from '$lib/index.js';
+	import {
+		ThemeProvider,
+		SubjectFrame,
+		DesignationTag,
+		StatusRow,
+		Block,
+		Card,
+		Box,
+		Button,
+		ProgressBar,
+		RecDot,
+		Terminal,
+		Banner,
+		Loading,
+		Window,
+		type PoiTheme
+	} from '$lib/index.js';
 
 	let interactive = $state<PoiTheme>('machine');
 </script>
@@ -10,19 +26,49 @@
 
 {#snippet kitchenSink()}
 	<div class="sink">
-		<p class="eyebrow">Surfaces</p>
-		<div class="row">
-			<span class="swatch s1">surface-1</span>
-			<span class="swatch s2">surface-2</span>
-			<span class="swatch s3">surface-3</span>
+		<Banner text="Threat detected" />
+
+		<SubjectFrame designation="Primary Asset" tone="asset">
+			<StatusRow label="Name" value="John Reese" />
+			<StatusRow label="Status">
+				<RecDot label="Recording" />
+			</StatusRow>
+			<StatusRow label="Relevance" value="HIGH" accent />
+		</SubjectFrame>
+
+		<div class="tags">
+			<DesignationTag label="Admin" />
+			<DesignationTag label="Asset" tone="asset" />
+			<DesignationTag label="Threat" tone="threat" />
 		</div>
-		<p class="eyebrow">Accent / line / ink</p>
-		<div class="row">
-			<span class="swatch accent">accent</span>
-			<span class="swatch line">line</span>
-			<span class="swatch ink">ink</span>
+
+		<Block title="Block">
+			<StatusRow label="Density" value="ROOMY" />
+		</Block>
+		<Card title="Card">
+			<StatusRow label="Density" value="MEDIUM" />
+		</Card>
+		<Box title="Box" tone="threat">
+			<StatusRow label="Density" value="TIGHT" accent />
+		</Box>
+
+		<ProgressBar value={68} label="Acquiring target" />
+		<ProgressBar value={32} size="lg" label="System relevance" />
+
+		<div class="buttons">
+			<Button>Acquire</Button>
+			<Button tone="threat">Engage</Button>
+			<Button disabled>Offline</Button>
 		</div>
-		<p class="note">Components land here, milestone by milestone.</p>
+
+		<Window title="Surveillance Feed">
+			<StatusRow label="Camera" value="42ND ST" />
+			<StatusRow label="Status" value="LIVE" accent />
+		</Window>
+
+		<Terminal prompt="root@poi:~#">access --override</Terminal>
+
+		<div class="loader"><Loading label="Acquiring" /></div>
 	</div>
 {/snippet}
 
@@ -92,7 +138,7 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 	}
-	@media (max-width: 720px) {
+	@media (max-width: 860px) {
 		.side-by-side {
 			grid-template-columns: 1fr;
 		}
@@ -105,58 +151,32 @@
 		font-family: system-ui, sans-serif;
 	}
 
-	/* Content below reads themed tokens from the enclosing <ThemeProvider> root. */
 	.panel {
 		padding: 1.5rem;
-		min-height: 240px;
 	}
 	.panel h2 {
 		margin: 0 0 1rem;
 		text-transform: uppercase;
 		letter-spacing: var(--poi-tracking-display);
 	}
-	.eyebrow {
-		margin: 1rem 0 0.5rem;
-		text-transform: uppercase;
-		font-size: var(--poi-font-size-1);
-		letter-spacing: 0.1em;
-		color: var(--poi-ink-dim);
+
+	.sink {
+		display: grid;
+		gap: 1.25rem;
 	}
-	.row {
+	.tags {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
 	}
-	.swatch {
-		padding: 0.5rem 0.75rem;
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-1);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
+	.buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
 	}
-	.s1 {
-		background: var(--poi-surface-1);
-	}
-	.s2 {
-		background: var(--poi-surface-2);
-	}
-	.s3 {
-		background: var(--poi-surface-3);
-	}
-	.accent {
-		background: var(--poi-accent);
-		color: var(--poi-accent-ink);
-		box-shadow: var(--poi-emphasis-shadow);
-		border-color: transparent;
-	}
-	.ink {
-		background: var(--poi-ink);
-		color: var(--poi-surface-base);
-		border-color: transparent;
-	}
-	.note {
-		margin-top: 1.5rem;
-		font-size: var(--poi-font-size-1);
-		color: var(--poi-ink-dim);
+	.loader {
+		display: flex;
+		justify-content: center;
+		padding: 1rem 0;
 	}
 </style>

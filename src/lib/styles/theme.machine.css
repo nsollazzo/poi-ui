@@ -38,4 +38,9 @@
 	/* SubjectFrame motif: solid corner brackets (glowing), no full edge, no reticle */
 	--poi-frame-edge: transparent;
 	--poi-frame-reticle: none;
+
+	/* Window chrome: dark title bar, white title, mac-style traffic-light dots */
+	--poi-window-bar-bg: var(--poi-surface-2);
+	--poi-window-bar-ink: var(--poi-ink);
+	--poi-window-dots: inline-flex;
 }
