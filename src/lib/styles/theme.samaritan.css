@@ -32,4 +32,8 @@
 	--poi-box-amber: var(--poi-accent);
 	--poi-box-blue: var(--poi-ink);
 	--poi-box-green: var(--poi-ink);
+
+	/* SubjectFrame motif: thin full edge + visible crosshair reticle, crisp (no glow) */
+	--poi-frame-edge: var(--poi-line);
+	--poi-frame-reticle: block;
 }

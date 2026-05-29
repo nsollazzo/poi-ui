@@ -34,4 +34,8 @@
 	--poi-box-amber: var(--poi-raw-amber);
 	--poi-box-blue: var(--poi-raw-blue);
 	--poi-box-green: var(--poi-raw-green);
+
+	/* SubjectFrame motif: solid corner brackets (glowing), no full edge, no reticle */
+	--poi-frame-edge: transparent;
+	--poi-frame-reticle: none;
 }
