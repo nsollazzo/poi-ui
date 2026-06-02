@@ -38,7 +38,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'true'
-          # No NPM_TOKEN needed once a Trusted Publisher is configured on npmjs.com
-          # for this repo + workflow. As a fallback, set NODE_AUTH_TOKEN to an npm
-          # granular access token:
-          # NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # Granular access token (publish + bypass-2FA) stored as the NPM_TOKEN
+          # repo secret. Can later be swapped for OIDC trusted publishing to drop
+          # the token entirely (provenance keeps working via id-token: write).
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
