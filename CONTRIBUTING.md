@@ -1,6 +1,6 @@
 # Contributing to POI-UI
 
-Thanks for your interest in contributing! POI-UI is an open-source Svelte 5 component library by MiDika SRL.
+Thanks for your interest in contributing! POI-UI is an open-source Svelte 5 component library by Nicholas Sollazzo (https://nsollazzo.com).
 
 ## Getting started
 

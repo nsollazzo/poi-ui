@@ -14,8 +14,9 @@ environment for everyone. Be respectful and considerate in all project spaces
 ## Reporting
 
 If you experience or witness unacceptable behavior, please report it to the
-maintainers at **conduct@midika.it**. All reports will be reviewed and
-investigated promptly and fairly, and the reporter's privacy will be respected.
+maintainer, Nicholas Sollazzo, via **[nsollazzo.com](https://nsollazzo.com)**.
+All reports will be reviewed and investigated promptly and fairly, and the
+reporter's privacy will be respected.
 
 Project maintainers are responsible for clarifying standards and may take
 appropriate, fair corrective action in response to any behavior they deem

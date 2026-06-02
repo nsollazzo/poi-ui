@@ -22,7 +22,7 @@ A **Svelte 5** component library and design system styled after the two artifici
 
 Red is the only constant accent; the two themes are a deliberate light/dark inversion that share type, radius (~0), hairlines, uppercase display type, and monospace data. Switching the attribute re‑skins everything via a swapped token layer — no component forks.
 
-By **MiDika SRL**. MIT licensed.
+By **[Nicholas Sollazzo](https://nsollazzo.com)**. MIT licensed.
 
 > **Status: pre‑release (`0.0.0`).** The toolchain and theming foundation are in place; components are landing milestone by milestone. APIs may change before `1.0`.
 
