@@ -20,4 +20,16 @@ describe('Banner', () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Banner, componentProps: { text: 'A B C D' } });
 		expect(document.querySelectorAll('.poi-banner__word')).toHaveLength(4);
 	});
+
+	// `solid` covers the Backdrop grid with the theme's base surface.
+	test('solid paints a white fill in Samaritan', () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: Banner,
+			componentProps: { text: 'SOLID', solid: true }
+		});
+		expect(
+			getComputedStyle(document.querySelector('.poi-banner') as HTMLElement).backgroundColor
+		).toBe('rgb(255, 255, 255)');
+	});
 });

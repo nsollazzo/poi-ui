@@ -49,4 +49,14 @@ describe('ProgressBar', () => {
 		render(ThemedHarness, { theme: 'machine', Comp: ProgressBar, componentProps: { value: 50 } });
 		expect(getComputedStyle(fill()).backgroundColor).toBe('rgb(255, 0, 0)');
 	});
+
+	// `solid` overrides the translucent track with the theme's base surface.
+	test('solid paints a white track in Samaritan', () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: ProgressBar,
+			componentProps: { value: 50, solid: true }
+		});
+		expect(getComputedStyle(bar()).backgroundColor).toBe('rgb(255, 255, 255)');
+	});
 });

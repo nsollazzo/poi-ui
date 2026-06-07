@@ -6,9 +6,11 @@
 		text: string;
 		/** Milliseconds between words. */
 		speed?: number;
+		/** Paint a solid surface-base fill so the banner reads cleanly over the <Backdrop> grid. */
+		solid?: boolean;
 	}
 
-	let { text, speed = 500 }: Props = $props();
+	let { text, speed = 500, solid = false }: Props = $props();
 
 	const words = $derived(text.split(' '));
 	let shown = $state(0);
@@ -30,7 +32,7 @@
 	});
 </script>
 
-<p class="poi-banner">
+<p class="poi-banner" data-solid={solid || undefined}>
 	<!-- Full text for assistive tech; the animated words are decorative. -->
 	<span class="poi-sr-only">{text}</span>
 	<span aria-hidden="true">
@@ -51,6 +53,10 @@
 		text-align: center;
 		text-transform: uppercase;
 		letter-spacing: var(--poi-tracking-display);
+	}
+
+	.poi-banner[data-solid] {
+		background-color: var(--poi-surface-base);
 	}
 
 	.poi-banner__word {

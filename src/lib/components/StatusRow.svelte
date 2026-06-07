@@ -10,12 +10,14 @@
 		accent?: boolean;
 		/** Rich value content; overrides `value`. */
 		children?: Snippet;
+		/** Paint a solid surface-base fill so the row reads cleanly over the <Backdrop> grid. */
+		solid?: boolean;
 	}
 
-	let { label, value, accent = false, children }: Props = $props();
+	let { label, value, accent = false, children, solid = false }: Props = $props();
 </script>
 
-<div class="poi-status-row">
+<div class="poi-status-row" data-solid={solid || undefined}>
 	<span class="poi-status-row__label">{label}</span>
 	<span class="poi-status-row__value" class:accent>
 		{#if children}{@render children()}{:else}{value}{/if}
@@ -32,6 +34,10 @@
 		border-bottom: var(--poi-hairline-width) solid var(--poi-line);
 		font-family: var(--poi-font-mono);
 		font-size: var(--poi-font-size-2);
+	}
+
+	.poi-status-row[data-solid] {
+		background-color: var(--poi-surface-base);
 	}
 
 	.poi-status-row__label {

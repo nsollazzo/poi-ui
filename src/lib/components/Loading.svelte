@@ -2,12 +2,14 @@
 	interface Props {
 		/** Accessible label announced while loading. */
 		label?: string;
+		/** Paint a solid surface-base fill so the loader reads cleanly over the <Backdrop> grid. */
+		solid?: boolean;
 	}
 
-	let { label = 'Loading' }: Props = $props();
+	let { label = 'Loading', solid = false }: Props = $props();
 </script>
 
-<div class="poi-loading" role="status" aria-label={label}>
+<div class="poi-loading" role="status" aria-label={label} data-solid={solid || undefined}>
 	<span class="poi-loading__cube" aria-hidden="true"></span>
 </div>
 
@@ -15,6 +17,9 @@
 	.poi-loading {
 		display: inline-flex;
 		perspective: 200px;
+	}
+	.poi-loading[data-solid] {
+		background-color: var(--poi-surface-base);
 	}
 	.poi-loading__cube {
 		width: 2rem;

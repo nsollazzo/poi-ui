@@ -7,6 +7,8 @@
 		disabled?: boolean;
 		/** Rotate the content 180° on hover — a POI flourish (gated by reduced-motion). */
 		rotateOnHover?: boolean;
+		/** Paint a solid surface-base fill so the button reads cleanly over the <Backdrop> grid. */
+		solid?: boolean;
 		onclick?: (event: MouseEvent) => void;
 		children: Snippet;
 	}
@@ -16,6 +18,7 @@
 		tone = 'neutral',
 		disabled = false,
 		rotateOnHover = false,
+		solid = false,
 		onclick,
 		children
 	}: Props = $props();
@@ -25,6 +28,7 @@
 	class="poi-button"
 	class:rotate={rotateOnHover}
 	data-tone={tone}
+	data-solid={solid || undefined}
 	{type}
 	{disabled}
 	{onclick}
@@ -52,6 +56,10 @@
 			box-shadow 0.15s var(--poi-ease),
 			color 0.15s,
 			border-color 0.15s;
+	}
+
+	.poi-button[data-solid] {
+		background-color: var(--poi-surface-base);
 	}
 
 	.poi-button[data-tone='threat'] {

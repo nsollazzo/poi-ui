@@ -8,9 +8,11 @@
 		label?: string;
 		/** Track height. */
 		size?: 'sm' | 'md' | 'lg';
+		/** Paint a solid surface-base track so the bar reads cleanly over the <Backdrop> grid. */
+		solid?: boolean;
 	}
 
-	let { value, max = 100, label, size = 'md' }: Props = $props();
+	let { value, max = 100, label, size = 'md', solid = false }: Props = $props();
 
 	const pct = $derived(Math.max(0, Math.min(100, (value / max) * 100)));
 </script>
@@ -18,6 +20,7 @@
 <div
 	class="poi-progress"
 	data-size={size}
+	data-solid={solid || undefined}
 	role="progressbar"
 	aria-valuenow={value}
 	aria-valuemin={0}
@@ -33,6 +36,9 @@
 		background: var(--poi-surface-2);
 		border: var(--poi-hairline-width) solid var(--poi-line);
 		border-radius: var(--poi-radius);
+	}
+	.poi-progress[data-solid] {
+		background-color: var(--poi-surface-base);
 	}
 	.poi-progress[data-size='sm'] {
 		height: 0.5rem;

@@ -47,4 +47,27 @@ describe('Button', () => {
 			'rgb(255, 0, 0)'
 		);
 	});
+
+	// `solid` covers the Backdrop grid with the theme's base surface (white/black).
+	test('solid paints a white fill in Samaritan', () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: Button,
+			componentProps: { solid: true, children: label('SOLID') }
+		});
+		expect(
+			getComputedStyle(document.querySelector('.poi-button') as HTMLElement).backgroundColor
+		).toBe('rgb(255, 255, 255)');
+	});
+
+	test('solid paints a black fill in The Machine', () => {
+		render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Button,
+			componentProps: { solid: true, children: label('SOLID') }
+		});
+		expect(
+			getComputedStyle(document.querySelector('.poi-button') as HTMLElement).backgroundColor
+		).toBe('rgb(0, 0, 0)');
+	});
 });
