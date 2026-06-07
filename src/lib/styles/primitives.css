@@ -15,6 +15,12 @@
 	--poi-radius: 0px;
 	--poi-hairline-width: 1px;
 
+	/* Graph-paper backdrop geometry (theme-independent) */
+	--poi-grid-cell: 24px;
+	--poi-grid-major-every: 5;
+	--poi-grid-minor-width: 1px;
+	--poi-grid-major-width: 1px;
+
 	/* Spacing */
 	--poi-space-1: 0.25rem;
 	--poi-space-2: 0.5rem;

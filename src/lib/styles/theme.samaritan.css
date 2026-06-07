@@ -13,6 +13,10 @@
 	--poi-ink-dim: rgba(0, 0, 0, 0.55);
 	--poi-line: rgba(0, 0, 0, 0.45);
 
+	/* Graph-paper backdrop — faint black grid on white */
+	--poi-grid-line-minor: rgba(0, 0, 0, 0.05);
+	--poi-grid-line-major: rgba(0, 0, 0, 0.1);
+
 	--poi-accent: var(--poi-raw-red-samaritan);
 	--poi-accent-ink: var(--poi-raw-white);
 

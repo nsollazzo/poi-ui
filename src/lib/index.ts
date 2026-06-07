@@ -12,6 +12,7 @@ export {
 } from './theme/designations.js';
 
 // Components
+export { default as Backdrop } from './components/Backdrop.svelte';
 export { default as Banner } from './components/Banner.svelte';
 export { default as Block } from './components/Block.svelte';
 export { default as Box } from './components/Box.svelte';
