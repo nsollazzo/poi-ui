@@ -1,5 +1,11 @@
 # @nsollazzo/poi-ui
 
+## 0.2.0
+
+### Minor Changes
+
+- [#3](https://github.com/nsollazzo/poi-ui/pull/3) [`98b64ed`](https://github.com/nsollazzo/poi-ui/commit/98b64ede9024747fac1c02eaaf5e323906a30979) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Add a page-level `Backdrop` component that paints a theme-aware engineering graph-paper grid behind page content, and an opt-in `solid` prop on the see-through components (`Banner`, `Button`, `DesignationTag`, `Loading`, `ProgressBar`, `StatusRow`, `SubjectFrame`) so they read cleanly over the grid.
+
 ## 0.1.0
 
 ### Minor Changes
