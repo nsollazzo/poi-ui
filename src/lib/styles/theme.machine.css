@@ -26,6 +26,9 @@
 	/* Focus ring: surface-colored inner gap + accent outer ring (visible on any surface) */
 	--poi-focus-ring: 0 0 0 2px var(--poi-surface-base), 0 0 0 4px var(--poi-accent);
 
+	/* Modal scrim — a Dialog/Sheet darkens the page beneath it regardless of theme polarity */
+	--poi-overlay-bg: rgba(0, 0, 0, 0.7);
+
 	/* Selection */
 	--poi-selection-bg: rgba(134, 0, 0, 0.6);
 	--poi-selection-ink: rgba(255, 0, 0, 0.95);
@@ -38,6 +41,12 @@
 	--poi-box-amber: var(--poi-raw-amber);
 	--poi-box-blue: var(--poi-raw-blue);
 	--poi-box-green: var(--poi-raw-green);
+
+	/* Status (toast) accents — map onto the box/accent palette */
+	--poi-status-info: var(--poi-box-blue);
+	--poi-status-success: var(--poi-box-green);
+	--poi-status-warning: var(--poi-box-amber);
+	--poi-status-error: var(--poi-accent);
 
 	/* SubjectFrame motif: solid corner brackets (glowing), no full edge, no reticle */
 	--poi-frame-edge: transparent;
