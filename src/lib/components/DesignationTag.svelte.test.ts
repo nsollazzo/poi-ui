@@ -45,4 +45,14 @@ describe('DesignationTag', () => {
 		});
 		expect(getComputedStyle(tagEl()).color).toBe('rgb(232, 0, 13)');
 	});
+
+	// `solid` covers the Backdrop grid with the theme's base surface.
+	test('solid paints a white fill in Samaritan', () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: DesignationTag,
+			componentProps: { label: 'SOLID', solid: true }
+		});
+		expect(getComputedStyle(tagEl()).backgroundColor).toBe('rgb(255, 255, 255)');
+	});
 });

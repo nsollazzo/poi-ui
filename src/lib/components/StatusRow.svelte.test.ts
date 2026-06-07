@@ -53,4 +53,16 @@ describe('StatusRow', () => {
 		expect(cs.color).toBe('rgb(232, 0, 13)');
 		expect(cs.textShadow).toBe('none');
 	});
+
+	// `solid` covers the Backdrop grid with the theme's base surface.
+	test('solid paints a white fill in Samaritan', () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: StatusRow,
+			componentProps: { label: 'A', value: 'B', solid: true }
+		});
+		expect(
+			getComputedStyle(document.querySelector('.poi-status-row') as HTMLElement).backgroundColor
+		).toBe('rgb(255, 255, 255)');
+	});
 });

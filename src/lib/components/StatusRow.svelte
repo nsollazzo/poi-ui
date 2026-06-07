@@ -10,12 +10,14 @@
 		accent?: boolean;
 		/** Rich value content; overrides `value`. */
 		children?: Snippet;
+		/** Paint a solid surface-base fill so the row reads cleanly over the <Backdrop> grid. */
+		solid?: boolean;
 	}
 
-	let { label, value, accent = false, children }: Props = $props();
+	let { label, value, accent = false, children, solid = false }: Props = $props();
 </script>
 
-<div class="poi-status-row">
+<div class="poi-status-row" data-solid={solid || undefined}>
 	<span class="poi-status-row__label">{label}</span>
 	<span class="poi-status-row__value" class:accent>
 		{#if children}{@render children()}{:else}{value}{/if}

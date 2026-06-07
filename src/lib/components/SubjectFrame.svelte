@@ -7,14 +7,16 @@
 		designation?: string;
 		/** Tone applied to the brackets and the designation tag. */
 		tone?: 'neutral' | 'threat' | 'asset';
+		/** Paint a solid surface-base fill so the frame reads cleanly over the <Backdrop> grid. */
+		solid?: boolean;
 		/** The framed subject. */
 		children: Snippet;
 	}
 
-	let { designation, tone = 'neutral', children }: Props = $props();
+	let { designation, tone = 'neutral', solid = false, children }: Props = $props();
 </script>
 
-<div class="poi-frame" data-tone={tone}>
+<div class="poi-frame" data-tone={tone} data-solid={solid || undefined}>
 	<span class="poi-frame__corner poi-frame__corner--tl" aria-hidden="true"></span>
 	<span class="poi-frame__corner poi-frame__corner--tr" aria-hidden="true"></span>
 	<span class="poi-frame__corner poi-frame__corner--bl" aria-hidden="true"></span>

@@ -20,3 +20,13 @@
 	background: var(--poi-selection-bg);
 	color: var(--poi-selection-ink);
 }
+
+/* Opt-in solid fill: any element marked `data-solid` gets an opaque base surface
+   so it reads cleanly over the <Backdrop> grid. Defined once here instead of being
+   repeated in every component's scoped <style>. The `.poi-root[data-theme]` prefix
+   (always present — ThemeProvider renders both) raises specificity above each
+   component's own scoped background rule, so this wins regardless of stylesheet
+   order. Components opt in via `solid` -> `data-solid={solid || undefined}`. */
+.poi-root[data-theme] [data-solid] {
+	background-color: var(--poi-surface-base);
+}

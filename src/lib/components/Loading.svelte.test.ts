@@ -19,4 +19,12 @@ describe('Loading', () => {
 		expect(cs.borderTopColor).toBe('rgb(255, 0, 0)');
 		expect(cs.animationName).not.toBe('none');
 	});
+
+	// `solid` covers the Backdrop grid with the theme's base surface.
+	test('solid paints a white fill in Samaritan', () => {
+		render(ThemedHarness, { theme: 'samaritan', Comp: Loading, componentProps: { solid: true } });
+		expect(
+			getComputedStyle(document.querySelector('.poi-loading') as HTMLElement).backgroundColor
+		).toBe('rgb(255, 255, 255)');
+	});
 });

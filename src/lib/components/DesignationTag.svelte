@@ -4,12 +4,14 @@
 		label: string;
 		/** Visual tone. 'threat' uses the accent; 'asset' uses the asset token. */
 		tone?: 'neutral' | 'threat' | 'asset';
+		/** Paint a solid surface-base fill so the tag reads cleanly over the <Backdrop> grid. */
+		solid?: boolean;
 	}
 
-	let { label, tone = 'neutral' }: Props = $props();
+	let { label, tone = 'neutral', solid = false }: Props = $props();
 </script>
 
-<span class="poi-designation" data-tone={tone}>{label}</span>
+<span class="poi-designation" data-tone={tone} data-solid={solid || undefined}>{label}</span>
 
 <style>
 	.poi-designation {

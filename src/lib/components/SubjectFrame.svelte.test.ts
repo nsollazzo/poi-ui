@@ -69,4 +69,16 @@ describe('SubjectFrame', () => {
 		});
 		expect(getComputedStyle(corner()).borderTopColor).toBe('rgb(255, 0, 0)');
 	});
+
+	// `solid` covers the Backdrop grid with the theme's base surface.
+	test('solid paints a white fill in Samaritan', () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: SubjectFrame,
+			componentProps: { solid: true, children: body }
+		});
+		expect(
+			getComputedStyle(document.querySelector('.poi-frame') as HTMLElement).backgroundColor
+		).toBe('rgb(255, 255, 255)');
+	});
 });
