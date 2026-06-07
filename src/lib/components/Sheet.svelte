@@ -8,6 +8,8 @@
 		side?: 'left' | 'right';
 		/** Optional title; when set it labels the sheet (aria-labelledby). */
 		title?: string;
+		/** Accessible name when no `title` is rendered (e.g. a custom header). */
+		'aria-label'?: string;
 		/** Called after the sheet closes (Escape, backdrop click, or open=false). */
 		onclose?: () => void;
 		/** Sheet body. */
@@ -20,6 +22,7 @@
 		open = $bindable(false),
 		side = 'right',
 		title,
+		'aria-label': ariaLabel,
 		onclose,
 		children,
 		class: className = ''
@@ -40,6 +43,12 @@
 		}
 	});
 
+	// Restore focus on teardown if unmounted while open (no native `close` fires).
+	$effect(() => () => {
+		if (previouslyFocused?.isConnected) previouslyFocused.focus({ preventScroll: true });
+	});
+
+	// Closing always routes through the native `close` event so this fires once.
 	function handleClose() {
 		open = false;
 		onclose?.();
@@ -54,9 +63,11 @@
 	data-side={side}
 	aria-modal="true"
 	aria-labelledby={title ? titleId : undefined}
+	aria-label={title ? undefined : ariaLabel}
 	onclose={handleClose}
 	onclick={(e) => {
-		if (e.target === dialog) handleClose();
+		// Close natively so the `close` event is the single dismissal path.
+		if (e.target === dialog) dialog?.close();
 	}}
 >
 	<div class="poi-sheet__content">

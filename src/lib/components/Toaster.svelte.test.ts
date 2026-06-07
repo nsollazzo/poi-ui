@@ -9,15 +9,18 @@ import { store } from '../toast/store.svelte.js';
 afterEach(() => store.items.splice(0));
 
 describe('Toaster', () => {
-	test('renders a posted toast as a polite status with its level', async () => {
+	test('announces non-error toasts via the persistent polite live region', async () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Toaster });
+		// The container is a pre-existing live region (so insertions are announced);
+		// non-error toasts rely on it rather than a per-toast role=status.
+		expect(document.querySelector('.poi-toaster')!.getAttribute('aria-live')).toBe('polite');
 		toast('Target acquired', { level: 'success', duration: 0 });
 		await expect
 			.poll(() => document.querySelector('.poi-toast')?.textContent?.includes('Target acquired'))
 			.toBe(true);
 		const el = document.querySelector('.poi-toast') as HTMLElement;
 		expect(el.getAttribute('data-level')).toBe('success');
-		expect(el.getAttribute('role')).toBe('status');
+		expect(el.getAttribute('role')).toBeNull();
 	});
 
 	test('an error toast is an assertive alert', async () => {

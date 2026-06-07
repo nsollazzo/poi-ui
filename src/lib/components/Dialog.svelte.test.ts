@@ -33,7 +33,7 @@ describe('Dialog', () => {
 		expect(el.open).toBe(false);
 	});
 
-	test('clicking the backdrop closes it', async () => {
+	test('clicking the backdrop closes it and reports onclose exactly once', async () => {
 		let closed = 0;
 		render(ThemedHarness, {
 			theme: 'machine',
@@ -42,7 +42,22 @@ describe('Dialog', () => {
 		});
 		const el = document.querySelector('dialog.poi-dialog') as HTMLDialogElement;
 		el.dispatchEvent(new MouseEvent('click', { bubbles: true })); // target === dialog
-		await expect.poll(() => closed).toBe(1);
+		await expect.poll(() => el.open).toBe(false);
+		// Wait for any queued $effect to flush, then assert onclose did NOT re-fire
+		// (regression guard: backdrop click used to fire onclose twice).
+		await new Promise((r) => setTimeout(r, 50));
+		expect(closed).toBe(1);
+	});
+
+	test('a titleless dialog is named by aria-label', async () => {
+		const screen = render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Dialog,
+			componentProps: { open: true, 'aria-label': 'Subject dossier', children: body }
+		});
+		await expect
+			.element(screen.getByRole('dialog', { name: 'Subject dossier' }))
+			.toBeInTheDocument();
 	});
 
 	test('exposes the overlay token on the theme root', () => {

@@ -5,7 +5,8 @@
 	// native attributes lets every input prop (type, placeholder, aria-*, etc.)
 	// pass straight through via {...rest}.
 	interface Props extends HTMLInputAttributes {
-		/** Current value (two-way bindable). */
+		/** Current value (two-way bindable). For text-like inputs; checkbox/radio
+		 *  (use bind:checked) and file (read-only) are not supported by this primitive. */
 		value?: string;
 		/** Extra class(es) forwarded to the element. */
 		class?: string;

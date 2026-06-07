@@ -13,10 +13,16 @@
 <style>
 	.poi-skeleton {
 		display: block;
-		min-width: 1rem;
-		min-height: 1rem;
 		background: var(--poi-surface-2);
 		animation: poi-skeleton-pulse var(--poi-dur-pulse) var(--poi-ease) infinite;
+	}
+
+	/* Sensible default size so a bare <Skeleton /> is visible, but at zero
+	   specificity (:where) so any consumer width/height set via `class` wins —
+	   including sizes smaller than this default. */
+	:where(.poi-skeleton) {
+		width: 100%;
+		height: 1rem;
 	}
 
 	@keyframes poi-skeleton-pulse {

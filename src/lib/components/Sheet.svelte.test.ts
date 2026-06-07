@@ -53,4 +53,19 @@ describe('Sheet', () => {
 		await expect.poll(() => closed).toBe(1);
 		expect(el.open).toBe(false);
 	});
+
+	test('clicking the backdrop reports onclose exactly once', async () => {
+		let closed = 0;
+		render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Sheet,
+			componentProps: { open: true, title: 'T', onclose: () => (closed += 1), children: body }
+		});
+		const el = document.querySelector('dialog.poi-sheet') as HTMLDialogElement;
+		el.dispatchEvent(new MouseEvent('click', { bubbles: true })); // target === dialog
+		await expect.poll(() => el.open).toBe(false);
+		// Regression guard: backdrop click used to fire onclose twice via the $effect.
+		await new Promise((r) => setTimeout(r, 50));
+		expect(closed).toBe(1);
+	});
 });

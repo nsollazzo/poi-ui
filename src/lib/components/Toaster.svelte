@@ -9,9 +9,11 @@
 		closeIcon?: Snippet;
 		/** Override the per-level icon; receives the toast level. */
 		icon?: Snippet<[ToastItem['level']]>;
+		/** Extra class(es) forwarded to the container. */
+		class?: string;
 	}
 
-	let { closeIcon, icon }: Props = $props();
+	let { closeIcon, icon, class: className = '' }: Props = $props();
 
 	// Motion is opt-out under prefers-reduced-motion.
 	const inParams = $derived(reducedMotion.current ? { duration: 0 } : { y: -8, duration: 300 });
@@ -26,14 +28,16 @@
 	};
 </script>
 
-<!-- Plain container; each toast carries its own politeness via role
-     (alert = assertive for errors, status = polite otherwise). -->
-<div class="poi-toaster">
+<!-- The container is a persistent polite live region: toasts inserted into a
+     region that already exists are announced reliably, whereas a freshly inserted
+     role="status" node is not. Errors additionally carry role="alert" so they
+     interrupt assertively. -->
+<div class="poi-toaster {className}" aria-live="polite">
 	{#each store.items as item (item.id)}
 		<div
 			class="poi-toast"
 			data-level={item.level}
-			role={item.level === 'error' ? 'alert' : 'status'}
+			role={item.level === 'error' ? 'alert' : undefined}
 			aria-atomic="true"
 			in:fly={inParams}
 			out:fade={outParams}
@@ -50,7 +54,7 @@
 			>
 				{#if closeIcon}{@render closeIcon()}{:else}×{/if}
 			</button>
-			{#if item.duration > 0}
+			{#if item.duration > 0 && !reducedMotion.current}
 				<span
 					class="poi-toast__progress"
 					style:animation-duration="{item.duration}ms"
@@ -149,10 +153,6 @@
 			transform: scaleX(0);
 		}
 	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.poi-toast__progress {
-			display: none;
-		}
-	}
+	/* The progress bar isn't rendered at all under reduced motion (gated in JS),
+	   so no @media override is needed here. */
 </style>

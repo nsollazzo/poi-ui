@@ -1,6 +1,6 @@
-// Internal reactive toast store. This is a .svelte.ts module (it uses runes) and
-// does NOT emit .d.ts — it is NOT part of the public type surface. Consumers use
-// the plain-.ts public API in ./index.ts; <Toaster> reads this store directly.
+// Internal reactive toast store (runes-based). Not part of the public API — only
+// the package root ('.') is exported, so this stays internal. Consumers use the
+// typed public API in ./index.ts; <Toaster> reads this store directly.
 import type { ToastLevel } from './index.js';
 
 export interface ToastItem {
@@ -20,7 +20,9 @@ export const store = $state<{ items: ToastItem[] }>({ items: [] });
 export function add(message: string, level: ToastLevel, duration: number): string {
 	const id = `poi-toast-${++counter}`;
 	store.items.push({ id, message, level, duration });
-	if (duration > 0) {
+	// Only schedule auto-dismiss in the browser — a timer on the server would fire
+	// into a request that has already been sent. (Toasts are client-triggered.)
+	if (duration > 0 && typeof window !== 'undefined') {
 		timers[id] = setTimeout(() => remove(id), duration);
 	}
 	return id;

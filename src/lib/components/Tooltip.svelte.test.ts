@@ -14,12 +14,15 @@ describe('Tooltip', () => {
 			componentProps: { text: 'Subject under surveillance', children: trigger }
 		});
 		expect(document.querySelector('[role="tooltip"]')).toBeNull();
+		// The describedby link lives on the focusable trigger, not the wrapper.
 		expect(
-			(document.querySelector('.poi-tooltip') as HTMLElement).getAttribute('aria-describedby')
+			(document.querySelector('.poi-tooltip button') as HTMLElement).getAttribute(
+				'aria-describedby'
+			)
 		).toBeNull();
 	});
 
-	test('opens on pointer enter and links the trigger via aria-describedby', async () => {
+	test('opens on pointer enter and links the focusable trigger via aria-describedby', async () => {
 		render(ThemedHarness, {
 			theme: 'machine',
 			Comp: Tooltip,
@@ -31,7 +34,10 @@ describe('Tooltip', () => {
 			.poll(() => document.querySelector('[role="tooltip"]')?.textContent)
 			.toBe('Subject under surveillance');
 		const bubbleId = document.querySelector('[role="tooltip"]')!.id;
-		expect(wrapper.getAttribute('aria-describedby')).toBe(bubbleId);
+		// aria-describedby must be on the trigger (the focused control), not the
+		// non-focusable wrapper, or assistive tech never announces the tip.
+		expect(wrapper.querySelector('button')!.getAttribute('aria-describedby')).toBe(bubbleId);
+		expect(wrapper.getAttribute('aria-describedby')).toBeNull();
 	});
 
 	test('Escape dismisses it', async () => {

@@ -6,6 +6,8 @@
 		open?: boolean;
 		/** Optional title; when set it labels the dialog (aria-labelledby). */
 		title?: string;
+		/** Accessible name when no `title` is rendered (e.g. a custom header). */
+		'aria-label'?: string;
 		/** Called after the dialog closes (Escape, backdrop click, or open=false). */
 		onclose?: () => void;
 		/** Dialog body. */
@@ -17,6 +19,7 @@
 	let {
 		open = $bindable(false),
 		title,
+		'aria-label': ariaLabel,
 		onclose,
 		children,
 		class: className = ''
@@ -26,8 +29,9 @@
 	let dialog = $state<HTMLDialogElement | null>(null);
 	let previouslyFocused: HTMLElement | null = null;
 
-	// Drive the native dialog imperatively. We never set the `open` attribute —
-	// showModal() puts it in the top layer with a focus trap + inert background.
+	// Drive the native dialog imperatively. We never set the `open` attribute in
+	// markup; showModal() reflects it, puts the dialog in the top layer, and adds
+	// a focus trap + inert background.
 	$effect(() => {
 		const d = dialog;
 		if (!d) return;
@@ -39,8 +43,16 @@
 		}
 	});
 
-	// Single close handler covers all three paths (Escape and backdrop both end in
-	// the native `close` event): sync the binding, notify, and restore focus.
+	// If the dialog is unmounted while still open, the native `close` event never
+	// fires, so handleClose() never runs — restore focus on teardown so it isn't
+	// stranded on a now-removed element.
+	$effect(() => () => {
+		if (previouslyFocused?.isConnected) previouslyFocused.focus({ preventScroll: true });
+	});
+
+	// The single source of truth for closing is the native `close` event; every
+	// dismissal path (Escape, backdrop click, open=false) routes through d.close()
+	// so this fires exactly once. Sync the binding, notify, and restore focus.
 	function handleClose() {
 		open = false;
 		onclose?.();
@@ -54,11 +66,13 @@
 	class="poi-dialog {className}"
 	aria-modal="true"
 	aria-labelledby={title ? titleId : undefined}
+	aria-label={title ? undefined : ariaLabel}
 	onclose={handleClose}
 	onclick={(e) => {
 		// Clicks on the dialog element itself = the backdrop region (content is a child).
-		// Escape (native) provides the keyboard-dismiss path.
-		if (e.target === dialog) handleClose();
+		// Close natively so the `close` event stays the single dismissal path
+		// (calling handleClose() directly would double-fire via the effect).
+		if (e.target === dialog) dialog?.close();
 	}}
 >
 	<div class="poi-dialog__content">

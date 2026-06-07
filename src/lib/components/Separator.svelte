@@ -9,12 +9,7 @@
 	let { orientation = 'horizontal', class: className = '' }: Props = $props();
 </script>
 
-<div
-	class="poi-separator {className}"
-	role="separator"
-	aria-orientation={orientation}
-	data-orientation={orientation}
-></div>
+<div class="poi-separator {className}" role="separator" aria-orientation={orientation}></div>
 
 <style>
 	.poi-separator {
@@ -22,11 +17,11 @@
 		border: 0;
 		background: var(--poi-line);
 	}
-	.poi-separator[data-orientation='horizontal'] {
+	.poi-separator[aria-orientation='horizontal'] {
 		width: 100%;
 		height: var(--poi-hairline-width);
 	}
-	.poi-separator[data-orientation='vertical'] {
+	.poi-separator[aria-orientation='vertical'] {
 		align-self: stretch;
 		width: var(--poi-hairline-width);
 		height: 100%;

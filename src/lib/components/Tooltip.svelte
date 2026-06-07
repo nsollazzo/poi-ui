@@ -18,6 +18,7 @@
 
 	const bubbleId = $props.id();
 	let open = $state(false);
+	let wrapper = $state<HTMLElement | null>(null);
 	let timer: ReturnType<typeof setTimeout> | undefined;
 
 	function show() {
@@ -29,26 +30,54 @@
 		clearTimeout(timer);
 		open = false;
 	}
-	function onkeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape') hide();
+	// Hide only when focus leaves the wrapper entirely — moving focus between
+	// multiple focusable children inside the trigger must not flicker the bubble.
+	function handleFocusOut(event: FocusEvent) {
+		if (!wrapper?.contains(event.relatedTarget as Node | null)) hide();
 	}
+
+	// aria-describedby must live on the focused trigger, not this wrapper, or AT
+	// won't announce the tip when the control is focused. Point it at the first
+	// focusable descendant (the trigger), falling back to the wrapper.
+	$effect(() => {
+		const host = wrapper;
+		if (!host) return;
+		const target =
+			host.querySelector<HTMLElement>(
+				'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+			) ?? host;
+		if (open) target.setAttribute('aria-describedby', bubbleId);
+		else target.removeAttribute('aria-describedby');
+	});
+
+	// Escape must dismiss even when the tip was opened by hover (focus is then
+	// elsewhere, so a wrapper keydown handler would never see it). Listen at the
+	// document level only while open.
+	$effect(() => {
+		if (!open) return;
+		const onKeydown = (event: KeyboardEvent) => {
+			if (event.key === 'Escape') hide();
+		};
+		document.addEventListener('keydown', onKeydown);
+		return () => document.removeEventListener('keydown', onKeydown);
+	});
 
 	// Clear any pending show timer if the component is destroyed mid-delay.
 	$effect(() => () => clearTimeout(timer));
 </script>
 
-<!-- Wrapper carries the description link + hover/focus/escape handling. aria-describedby
-     is set only while open so it never dangles. (svelte-ignore: a plain span hosting
-     mouse/focus/key handlers; the trigger inside stays the focusable element.) -->
+<!-- Wrapper hosts hover/focus handling and positions the bubble; the
+     aria-describedby link is applied to the focusable trigger inside (see effect
+     above). (svelte-ignore: a plain span hosting mouse/focus handlers; the
+     trigger inside stays the focusable element.) -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <span
+	bind:this={wrapper}
 	class="poi-tooltip {className}"
-	aria-describedby={open ? bubbleId : undefined}
 	onmouseenter={show}
 	onmouseleave={hide}
 	onfocusin={show}
-	onfocusout={hide}
-	{onkeydown}
+	onfocusout={handleFocusOut}
 >
 	{@render children()}
 	{#if open}
