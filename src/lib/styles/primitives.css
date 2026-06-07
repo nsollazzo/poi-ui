@@ -15,11 +15,13 @@
 	--poi-radius: 0px;
 	--poi-hairline-width: 1px;
 
-	/* Graph-paper backdrop geometry (theme-independent) */
+	/* Graph-paper backdrop geometry (theme-independent). Major lines read heavier
+	   than minor via BOTH a thicker stroke (width below) and a higher alpha (the
+	   per-theme --poi-grid-line-* tokens) — alpha alone was too subtle on white. */
 	--poi-grid-cell: 24px;
 	--poi-grid-major-every: 5;
 	--poi-grid-minor-width: 1px;
-	--poi-grid-major-width: 1px;
+	--poi-grid-major-width: 2px;
 
 	/* Spacing */
 	--poi-space-1: 0.25rem;

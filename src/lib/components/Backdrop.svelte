@@ -23,10 +23,14 @@
 <style>
 	.poi-backdrop {
 		position: relative;
+		/* Own stacking context so the __layer/__content z-indexes (0/1) stay scoped
+		   here and never compete with app chrome (portals, toasts) mounted elsewhere. */
+		isolation: isolate;
 		/* Fill the viewport so wrapping the whole app in one <Backdrop> covers the
 		   page. Viewport-relative (not 100%) so it works regardless of ancestor
 		   height — .poi-root has none. Grows past the viewport with tall content;
 		   the absolute __layer then extends the grid down the full page. */
+		min-height: 100vh; /* fallback for UAs without dvh support */
 		min-height: 100dvh;
 		width: 100%;
 		background-color: var(--poi-surface-base);

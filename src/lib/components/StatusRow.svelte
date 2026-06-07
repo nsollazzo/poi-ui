@@ -36,10 +36,6 @@
 		font-size: var(--poi-font-size-2);
 	}
 
-	.poi-status-row[data-solid] {
-		background-color: var(--poi-surface-base);
-	}
-
 	.poi-status-row__label {
 		color: var(--poi-ink-dim);
 		text-transform: uppercase;

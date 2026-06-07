@@ -55,10 +55,6 @@
 		letter-spacing: var(--poi-tracking-display);
 	}
 
-	.poi-banner[data-solid] {
-		background-color: var(--poi-surface-base);
-	}
-
 	.poi-banner__word {
 		opacity: 0;
 		transition: opacity var(--poi-dur-fade) var(--poi-ease);

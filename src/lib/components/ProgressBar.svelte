@@ -37,9 +37,6 @@
 		border: var(--poi-hairline-width) solid var(--poi-line);
 		border-radius: var(--poi-radius);
 	}
-	.poi-progress[data-solid] {
-		background-color: var(--poi-surface-base);
-	}
 	.poi-progress[data-size='sm'] {
 		height: 0.5rem;
 	}

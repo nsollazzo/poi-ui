@@ -58,10 +58,6 @@
 			border-color 0.15s;
 	}
 
-	.poi-button[data-solid] {
-		background-color: var(--poi-surface-base);
-	}
-
 	.poi-button[data-tone='threat'] {
 		color: var(--poi-accent);
 		border-color: var(--poi-accent);

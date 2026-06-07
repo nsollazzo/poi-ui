@@ -18,9 +18,6 @@
 		display: inline-flex;
 		perspective: 200px;
 	}
-	.poi-loading[data-solid] {
-		background-color: var(--poi-surface-base);
-	}
 	.poi-loading__cube {
 		width: 2rem;
 		height: 2rem;

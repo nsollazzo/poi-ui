@@ -29,10 +29,6 @@
 		white-space: nowrap;
 	}
 
-	.poi-designation[data-solid] {
-		background-color: var(--poi-surface-base);
-	}
-
 	.poi-designation[data-tone='threat'] {
 		color: var(--poi-accent);
 		border-color: var(--poi-accent);

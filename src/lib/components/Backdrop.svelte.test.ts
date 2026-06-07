@@ -34,8 +34,10 @@ describe('Backdrop', () => {
 		});
 		const root = document.querySelector<HTMLElement>('.poi-backdrop');
 		if (!root) throw new Error('.poi-backdrop not found');
-		// 100dvh resolves to a positive px height; the old min-height:100% computed to 0.
-		expect(parseFloat(getComputedStyle(root).minHeight)).toBeGreaterThan(0);
+		// With short content, min-height:100dvh makes the backdrop at least fill the
+		// viewport. (The old min-height:100% computed to 0 because .poi-root has no
+		// height, collapsing the backdrop to its content — a mere >0 check missed that.)
+		expect(root.getBoundingClientRect().height).toBeGreaterThanOrEqual(window.innerHeight);
 	});
 
 	test('paints a four-layer graph-paper grid', () => {
@@ -60,18 +62,34 @@ describe('Backdrop', () => {
 		expect(size).toContain('24px 24px');
 	});
 
+	test('major grid lines are heavier (2px) than minor (1px)', () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: Backdrop,
+			componentProps: { children: body }
+		});
+		// The every-5th major stroke is thicker than the minor stroke, so the heavier
+		// engineering-paper rhythm reads as more than an alpha difference.
+		const bg = getComputedStyle(layer()).backgroundImage;
+		expect(bg).toContain('2px'); // major line width
+		expect(bg).toContain('1px'); // minor line width
+	});
+
 	test('Samaritan grid lines are faint black', () => {
 		render(ThemedHarness, {
 			theme: 'samaritan',
 			Comp: Backdrop,
 			componentProps: { children: body }
 		});
-		expect(getComputedStyle(layer()).backgroundImage).toContain('rgba(0, 0, 0,');
+		// Black with fractional alpha — a real faint line. NOT the transparent gradient
+		// stops, which serialize to `rgba(0, 0, 0, 0)` and would satisfy a naive
+		// `toContain('rgba(0, 0, 0,')` even if the line tokens were broken.
+		expect(getComputedStyle(layer()).backgroundImage).toMatch(/rgba\(0, 0, 0, 0\.\d+\)/);
 	});
 
 	test('The Machine grid lines are faint white (theme-aware)', () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Backdrop, componentProps: { children: body } });
-		expect(getComputedStyle(layer()).backgroundImage).toContain('rgba(255, 255, 255,');
+		expect(getComputedStyle(layer()).backgroundImage).toMatch(/rgba\(255, 255, 255, 0\.\d+\)/);
 	});
 
 	test('grid layer is non-interactive', () => {

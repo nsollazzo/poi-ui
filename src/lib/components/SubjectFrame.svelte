@@ -43,10 +43,6 @@
 		color: var(--poi-ink);
 	}
 
-	.poi-frame[data-solid] {
-		background-color: var(--poi-surface-base);
-	}
-
 	.poi-frame__corner {
 		position: absolute;
 		width: 16px;
