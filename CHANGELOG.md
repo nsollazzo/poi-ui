@@ -1,5 +1,11 @@
 # @nsollazzo/poi-ui
 
+## 0.3.0
+
+### Minor Changes
+
+- [#5](https://github.com/nsollazzo/poi-ui/pull/5) [`89a13ae`](https://github.com/nsollazzo/poi-ui/commit/89a13aee2fb2eea9954ac010c135681f043efb6f) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Add eleven generic primitives — Dialog, Sheet, Tooltip, Input, Separator, Skeleton, a Toaster (with `toast`/`dismiss`), and a filter family built on a single `Chip` brick (toggle/link/menu-trigger): `ChipGroup` (single-select row), `SegmentedControl` (connected one-of-N), and a chip-triggered single-select `Dropdown` (closes on select/outside-click/Escape). All are pure vanilla CSS over the existing token system (no Tailwind, no runtime deps), accessible (native `<dialog>` focus-trap + focus-return that also survives unmount-while-open, `aria-labelledby`/`aria-label`, Escape; Tooltip links its description to the focusable trigger and dismisses on Escape even when hover-opened; Toaster announces via a persistent polite live region with assertive `role="alert"` errors), and verified in both themes. Adds semantic tokens `--poi-overlay-bg` (modal scrim) and `--poi-status-{info,success,warning,error}`. The `svelte` peer floor is now `^5.20.0` (the new components use `$props.id()`).
+
 ## 0.2.0
 
 ### Minor Changes
