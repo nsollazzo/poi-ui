@@ -1,0 +1,45 @@
+version: 2
+updates:
+  # npm dependencies — weekly, grouped to keep PR noise low.
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    reviewers:
+      - nsollazzo
+    labels:
+      - dependencies
+    # Quarantine freshly-published versions so a malicious release is likely
+    # yanked before a bump PR opens (anti-supply-chain-worm).
+    cooldown:
+      default-days: 5
+    groups:
+      # One PR for all non-major dev/runtime bumps.
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+      # Storybook ships many lockstep packages; group its majors too.
+      storybook:
+        patterns:
+          - '@storybook/*'
+          - 'storybook'
+          - 'eslint-plugin-storybook'
+          - '@chromatic-com/storybook'
+
+  # GitHub Actions — keeps the SHA pins fresh (Dependabot bumps SHA + comment).
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: monday
+    labels:
+      - ci
+    cooldown:
+      default-days: 5
+    groups:
+      actions:
+        patterns:
+          - '*'
