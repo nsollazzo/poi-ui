@@ -26,6 +26,9 @@
 
 	--poi-focus-ring: 0 0 0 2px var(--poi-surface-base), 0 0 0 4px var(--poi-accent);
 
+	/* Modal scrim — a Dialog/Sheet darkens the page beneath it regardless of theme polarity */
+	--poi-overlay-bg: rgba(0, 0, 0, 0.7);
+
 	--poi-selection-bg: var(--poi-accent);
 	--poi-selection-ink: var(--poi-raw-white);
 
@@ -36,6 +39,13 @@
 	--poi-box-amber: var(--poi-accent);
 	--poi-box-blue: var(--poi-ink);
 	--poi-box-green: var(--poi-ink);
+
+	/* Status (toast) accents — collapse with the monochrome box set; level is also
+	   conveyed non-visually (role + icon), so identical hues here are acceptable */
+	--poi-status-info: var(--poi-box-blue);
+	--poi-status-success: var(--poi-box-green);
+	--poi-status-warning: var(--poi-box-amber);
+	--poi-status-error: var(--poi-accent);
 
 	/* SubjectFrame motif: thin full edge + visible crosshair reticle, crisp (no glow) */
 	--poi-frame-edge: var(--poi-line);
