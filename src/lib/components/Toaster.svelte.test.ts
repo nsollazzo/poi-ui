@@ -45,6 +45,14 @@ describe('Toaster', () => {
 		await expect.poll(() => document.querySelector('.poi-toast'), { timeout: 2000 }).toBeNull();
 	});
 
+	test('a negative duration falls back to the default, not a permanent toast', () => {
+		// A negative computed duration must not slip past the finite-check and become
+		// a countdown-less, permanent toast; it falls back to the 5000ms default so it
+		// still auto-dismisses.
+		toast('Computed glitch', { duration: -100 });
+		expect(store.items[0].duration).toBe(5000);
+	});
+
 	test('uses the success status accent in The Machine', async () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Toaster });
 		toast('ok', { level: 'success', duration: 0 });
