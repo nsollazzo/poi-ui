@@ -44,5 +44,15 @@ export default defineConfig(
 		// Override or add rule settings here, such as:
 		// 'svelte/button-has-type': 'error'
 		rules: {}
+	},
+	{
+		// poi-ui is a framework-agnostic component LIBRARY: <a href> in components must
+		// pass consumer-provided hrefs through verbatim. resolve() is a SvelteKit
+		// app-route concern that doesn't apply to library link components. (The demo
+		// app under src/routes keeps the rule.)
+		files: ['src/lib/**/*.svelte'],
+		rules: {
+			'svelte/no-navigation-without-resolve': 'off'
+		}
 	}
 );
