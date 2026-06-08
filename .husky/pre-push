@@ -1,0 +1,2 @@
+# Strict pre-push gate: full tests + package build + publish validation.
+pnpm test && pnpm prepack && pnpm check:package && pnpm check:exports
