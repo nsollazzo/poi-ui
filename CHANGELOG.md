@@ -1,5 +1,11 @@
 # @nsollazzo/poi-ui
 
+## 0.3.1
+
+### Patch Changes
+
+- [#7](https://github.com/nsollazzo/poi-ui/pull/7) [`1e9fbcc`](https://github.com/nsollazzo/poi-ui/commit/1e9fbcc7034473699cbee7785d4cb1f5e9cc486a) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Declare supported `engines` in `package.json` (Node >= 22.12, pnpm >= 10). This is the only consumer-visible change in a larger internal CI/CD and supply-chain hardening pass.
+
 ## 0.3.0
 
 ### Minor Changes
