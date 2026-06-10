@@ -12,9 +12,10 @@ updates:
     labels:
       - dependencies
     # Quarantine freshly-published versions so a malicious release is likely
-    # yanked before a bump PR opens (anti-supply-chain-worm).
+    # yanked before a bump PR opens (anti-supply-chain-worm). 7 days satisfies
+    # zizmor's cooldown audit.
     cooldown:
-      default-days: 5
+      default-days: 7
     groups:
       # One PR for all non-major dev/runtime bumps.
       minor-and-patch:
@@ -38,7 +39,7 @@ updates:
     labels:
       - ci
     cooldown:
-      default-days: 5
+      default-days: 7
     groups:
       actions:
         patterns:
