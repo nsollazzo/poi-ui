@@ -36,4 +36,5 @@ compiled components and CSS, runs no install scripts, and makes no network calls
 The most relevant risks are supply-chain integrity (build/publish pipeline) and
 issues in the published output. Releases are published from CI with
 [npm provenance](https://docs.npmjs.com/generating-provenance-statements); you can
-verify a published version with `npm audit signatures`.
+verify a published version with `npm audit signatures`. Dependency-update PRs are
+automatically reviewed by [Socket](https://socket.dev) for supply-chain risk.
