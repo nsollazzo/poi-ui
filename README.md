@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@nsollazzo/poi-ui)](https://www.npmjs.com/package/@nsollazzo/poi-ui)
 [![CI](https://github.com/nsollazzo/poi-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/nsollazzo/poi-ui/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/nsollazzo/poi-ui/badge.svg?branch=main)](https://coveralls.io/github/nsollazzo/poi-ui?branch=main)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/nsollazzo/poi-ui/badge)](https://scorecard.dev/viewer/?uri=github.com/nsollazzo/poi-ui)
 [![license](https://img.shields.io/npm/l/@nsollazzo/poi-ui)](./LICENSE)
 
 > An AI's point of view, rendered as UI.

@@ -1,0 +1,9 @@
+# Default owner for everything.
+*                       @nsollazzo
+
+# Publish / CI / supply-chain config — changes here affect what ships to npm.
+/.github/               @nsollazzo
+/package.json           @nsollazzo
+/pnpm-lock.yaml         @nsollazzo
+/.changeset/            @nsollazzo
+/.npmrc                 @nsollazzo
