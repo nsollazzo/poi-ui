@@ -35,7 +35,9 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: pnpm install --frozen-lockfile
       # npm trusted publishing (OIDC) needs npm >= 11.5.1; provenance is automatic.
-      - run: npm install -g npm@latest
+      # Pinned (not @latest): this job holds id-token + write tokens, so a
+      # compromised npm release must not be able to walk straight into it.
+      - run: npm install -g npm@11.16.0
       - name: Create Release PR or publish to npm
         uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1.9.0
         with:

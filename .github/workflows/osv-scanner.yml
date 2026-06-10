@@ -1,11 +1,10 @@
 name: OSV-Scanner
 
-# Scans the lockfile against the OSV database + OpenSSF Malicious Packages feed.
-# Non-blocking by design: results land in Security → Code scanning and feed the
-# Scorecard. PRs are gated on `pnpm audit --prod` in ci.yml instead, so a low-
-# severity dev-dependency advisory never blocks a feature PR. To also block PRs
-# on newly-introduced vulnerabilities, add a pull_request job using
-# osv-scanner-reusable-pr.yml.
+# Full scheduled/push scan of the lockfile against the OSV database + OpenSSF
+# Malicious Packages feed. Non-blocking by design: results land in Security →
+# Code scanning and feed the Scorecard. The diff-based PR gate (fails only on
+# vulnerabilities a PR introduces) lives in osv-scanner-pr.yml; ci.yml's
+# `pnpm audit` additionally blocks on high/critical advisories.
 on:
   push:
     branches: [main]

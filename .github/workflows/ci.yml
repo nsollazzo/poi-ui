@@ -92,6 +92,8 @@ jobs:
         with:
           node-version: 22
       # Audit reads pnpm-lock.yaml directly — no install, so no install scripts run.
-      # Broader malicious-package scanning runs in osv-scanner.yml (OSV database).
-      - name: Audit runtime dependencies (fails on high/critical)
-        run: pnpm audit --prod --audit-level=high
+      # No --prod: this package has zero runtime dependencies, so the real attack
+      # surface is the devDependencies that run in CI and the release job.
+      # Diff-based PR gating runs in osv-scanner-pr.yml (OSV + malicious-packages feed).
+      - name: Audit dependencies (fails on high/critical)
+        run: pnpm audit --audit-level=high

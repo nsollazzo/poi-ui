@@ -1,10 +1,11 @@
 name: CodeQL
 
 # Code scanning (SAST). Analyzes .ts/.js (src/lib/actions/*.ts, theme context,
-# vite.config.ts) AND the GitHub Actions workflows. It does NOT parse .svelte
-# markup, so component templates aren't covered — value here is the TS logic +
-# workflow scanning + the Security-tab integration. Alerts surface in Security →
-# Code scanning (this job succeeds regardless; it is not a required merge gate).
+# vite.config.ts) AND the GitHub Actions workflows (the `actions` language).
+# It does NOT parse .svelte markup, so component templates aren't covered —
+# value here is the TS logic + workflow scanning + the Security-tab integration.
+# Alerts surface in Security → Code scanning (this job succeeds regardless; it
+# is not a required merge gate).
 on:
   push:
     branches: [main]
@@ -22,11 +23,15 @@ concurrency:
 
 jobs:
   analyze:
-    name: CodeQL analyze
+    name: CodeQL analyze (${{ matrix.language }})
     runs-on: ubuntu-latest
     permissions:
       contents: read
       security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [javascript-typescript, actions]
     steps:
       - uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
         with:
@@ -36,7 +41,7 @@ jobs:
           persist-credentials: false
       - uses: github/codeql-action/init@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4
         with:
-          languages: javascript-typescript
+          languages: ${{ matrix.language }}
       - uses: github/codeql-action/analyze@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4
         with:
-          category: '/language:javascript-typescript'
+          category: '/language:${{ matrix.language }}'

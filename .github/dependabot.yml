@@ -7,8 +7,8 @@ updates:
       interval: weekly
       day: monday
     open-pull-requests-limit: 10
-    reviewers:
-      - nsollazzo
+    # Review routing comes from CODEOWNERS (Dependabot's `reviewers` key was
+    # removed by GitHub in May 2025).
     labels:
       - dependencies
     # Quarantine freshly-published versions so a malicious release is likely
