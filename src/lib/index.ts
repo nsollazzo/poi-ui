@@ -23,6 +23,7 @@ export { default as ChipGroup } from './components/ChipGroup.svelte';
 export { default as DesignationTag } from './components/DesignationTag.svelte';
 export { default as Dialog } from './components/Dialog.svelte';
 export { default as Dropdown } from './components/Dropdown.svelte';
+export { default as FilterToolbar } from './components/FilterToolbar.svelte';
 export { default as Input } from './components/Input.svelte';
 export { default as Loading } from './components/Loading.svelte';
 export { default as ProgressBar } from './components/ProgressBar.svelte';
