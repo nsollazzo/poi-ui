@@ -106,7 +106,6 @@
 		color: var(--poi-ink);
 		border: var(--poi-hairline-width) solid var(--poi-line);
 		border-radius: var(--poi-radius);
-		box-shadow: var(--poi-emphasis-shadow);
 	}
 	/* Fallback literal covers browsers where ::backdrop doesn't inherit the custom property. */
 	.poi-dialog::backdrop {

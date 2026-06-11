@@ -101,7 +101,6 @@
 		color: var(--poi-ink);
 		border: 0;
 		border-radius: var(--poi-radius);
-		box-shadow: var(--poi-emphasis-shadow);
 	}
 	.poi-sheet[data-side='right'] {
 		margin-left: auto;

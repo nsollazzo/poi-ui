@@ -128,7 +128,6 @@
 		border-radius: var(--poi-radius);
 		font-family: var(--poi-font-mono);
 		font-size: var(--poi-font-size-1);
-		box-shadow: var(--poi-emphasis-shadow);
 	}
 
 	/* Pure-CSS placement. No collision detection / flipping — a tooltip near a

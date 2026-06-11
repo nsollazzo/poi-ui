@@ -97,27 +97,19 @@ describe('Dialog', () => {
 		expect(document.querySelector('dialog.poi-dialog')!.getAttribute('data-theme')).toBeNull();
 	});
 
-	// Inversion flips the emphasis treatment: the dialog renders in the OPPOSITE
-	// theme of the page, so the Machine glow now appears on a Samaritan page.
-	test('an inverted dialog on a Samaritan page carries the Machine glow', () => {
-		render(ThemedHarness, {
-			theme: 'samaritan',
-			Comp: Dialog,
-			componentProps: { open: true, title: 'T', children: body }
-		});
-		expect(
-			getComputedStyle(document.querySelector('.poi-dialog') as HTMLElement).boxShadow
-		).toContain('rgb(255, 0, 0)');
-	});
-
-	test('an inverted dialog on a Machine page is crisp Samaritan (no glow)', () => {
-		render(ThemedHarness, {
-			theme: 'machine',
-			Comp: Dialog,
-			componentProps: { open: true, title: 'T', children: body }
-		});
-		expect(getComputedStyle(document.querySelector('.poi-dialog') as HTMLElement).boxShadow).toBe(
-			'none'
-		);
+	// Polarity inversion alone is the dialog's figure-ground cue — no neon glow,
+	// even when the inverted surface is Machine-themed.
+	test('no glow in either polarity', () => {
+		for (const theme of ['samaritan', 'machine'] as const) {
+			render(ThemedHarness, {
+				theme,
+				Comp: Dialog,
+				componentProps: { open: true, title: 'T', children: body }
+			});
+			expect(getComputedStyle(document.querySelector('.poi-dialog') as HTMLElement).boxShadow).toBe(
+				'none'
+			);
+			document.querySelector('.poi-root')?.remove();
+		}
 	});
 });
