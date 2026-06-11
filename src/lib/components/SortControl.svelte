@@ -81,10 +81,6 @@
 	.poi-sort__track :global(.poi-chip[data-active]) {
 		position: relative;
 		z-index: 1;
-		/* Inside a track the outline stays line-colored even on the filled segment,
-		   so the control reads as one continuous box (accent-on-accent makes the
-		   border vanish and the fill look like it bleeds past its neighbours). */
-		border-color: var(--poi-line);
 	}
 	.poi-sort__track :global(.poi-chip:focus-visible) {
 		position: relative;
