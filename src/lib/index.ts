@@ -31,6 +31,9 @@ export { default as SegmentedControl } from './components/SegmentedControl.svelt
 export { default as Separator } from './components/Separator.svelte';
 export { default as Sheet } from './components/Sheet.svelte';
 export { default as Skeleton } from './components/Skeleton.svelte';
+export { default as SortControl } from './components/SortControl.svelte';
+/** Sort direction used by SortControl. */
+export type SortDir = 'asc' | 'desc';
 export { default as StatusRow } from './components/StatusRow.svelte';
 export { default as SubjectFrame } from './components/SubjectFrame.svelte';
 export { default as Terminal } from './components/Terminal.svelte';
