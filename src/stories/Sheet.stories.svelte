@@ -11,6 +11,7 @@
 <script lang="ts">
 	let machineOpen = $state(false);
 	let samaritanOpen = $state(false);
+	let matchingOpen = $state(false);
 </script>
 
 <Story name="The Machine" asChild>
@@ -32,6 +33,20 @@
 			<Sheet bind:open={samaritanOpen} side="left" title="Directives">
 				<p style="margin: 0 0 1rem;">Active directives and assets.</p>
 				<Button onclick={() => (samaritanOpen = false)}>Close</Button>
+			</Sheet>
+		</div>
+	</ThemeProvider>
+</Story>
+
+<!-- By default a sheet inverts to the opposite theme polarity; invert={false}
+     keeps it in the surrounding theme. -->
+<Story name="Matching theme (invert false)" asChild>
+	<ThemeProvider theme="machine">
+		<div style="padding: 1.5rem;">
+			<Button onclick={() => (matchingOpen = true)}>Open panel</Button>
+			<Sheet bind:open={matchingOpen} invert={false} side="right" title="System controls">
+				<p style="margin: 0 0 1rem;">Relevance filters and overrides.</p>
+				<Button onclick={() => (matchingOpen = false)}>Close</Button>
 			</Sheet>
 		</div>
 	</ThemeProvider>

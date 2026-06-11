@@ -29,3 +29,18 @@
 <Story name="Samaritan" asChild>
 	<ThemeProvider theme="samaritan">{@render demo()}</ThemeProvider>
 </Story>
+
+<!-- By default the bubble inverts to the opposite theme polarity; invert={false}
+     keeps it in the surrounding theme. -->
+<Story name="Matching theme (invert false)" asChild>
+	<ThemeProvider theme="samaritan">
+		<div style="display: flex; gap: 2rem; padding: 3rem; justify-content: center;">
+			<Tooltip text="Acquire target" side="top" invert={false}>
+				<Button>Top</Button>
+			</Tooltip>
+			<Tooltip text="System relevance" side="bottom" invert={false}>
+				<Button>Bottom</Button>
+			</Tooltip>
+		</div>
+	</ThemeProvider>
+</Story>

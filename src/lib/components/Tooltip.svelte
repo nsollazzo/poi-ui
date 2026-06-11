@@ -1,9 +1,14 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { oppositeTheme, useThemeOptional } from '../theme/context.js';
 
 	interface Props {
 		/** Tooltip text. */
 		text: string;
+		/** Render the bubble in the opposite theme polarity (machine ↔ samaritan)
+		 *  for contrast against the page; the trigger keeps the page theme. No-op
+		 *  outside a <ThemeProvider>. Default true. */
+		invert?: boolean;
 		/** Which side of the trigger the bubble appears on. */
 		side?: 'top' | 'bottom' | 'left' | 'right';
 		/** Show delay in ms (hover/focus). */
@@ -14,7 +19,19 @@
 		class?: string;
 	}
 
-	let { text, side = 'top', delay = 0, children, class: className = '' }: Props = $props();
+	let {
+		text,
+		invert = true,
+		side = 'top',
+		delay = 0,
+		children,
+		class: className = ''
+	}: Props = $props();
+
+	const themeContext = useThemeOptional();
+	const overlayTheme = $derived(
+		invert && themeContext ? oppositeTheme(themeContext.theme) : undefined
+	);
 
 	const bubbleId = $props.id();
 	let open = $state(false);
@@ -81,7 +98,13 @@
 >
 	{@render children()}
 	{#if open}
-		<span class="poi-tooltip__bubble" role="tooltip" id={bubbleId} data-side={side}>{text}</span>
+		<span
+			class="poi-tooltip__bubble"
+			role="tooltip"
+			id={bubbleId}
+			data-theme={overlayTheme}
+			data-side={side}>{text}</span
+		>
 	{/if}
 </span>
 
@@ -97,7 +120,9 @@
 		pointer-events: none;
 		white-space: nowrap;
 		padding: var(--poi-space-1) var(--poi-space-2);
-		background: var(--poi-surface-2);
+		/* surface-2 is a translucent lift; composite it over the opaque base so an
+		   inverted bubble doesn't see through to the opposite-polarity page. */
+		background: linear-gradient(var(--poi-surface-2), var(--poi-surface-2)) var(--poi-surface-base);
 		color: var(--poi-ink);
 		border: var(--poi-hairline-width) solid var(--poi-line);
 		border-radius: var(--poi-radius);

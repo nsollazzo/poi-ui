@@ -72,9 +72,36 @@ describe('Dialog', () => {
 		);
 	});
 
-	test('emphasis glow in The Machine', () => {
+	test('inverts to the opposite theme polarity by default', () => {
 		render(ThemedHarness, {
 			theme: 'machine',
+			Comp: Dialog,
+			componentProps: { open: true, title: 'T', children: body }
+		});
+		expect(document.querySelector('dialog.poi-dialog')!.getAttribute('data-theme')).toBe(
+			'samaritan'
+		);
+	});
+
+	test('invert={false} keeps the surrounding theme', () => {
+		render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Dialog,
+			componentProps: { open: true, invert: false, title: 'T', children: body }
+		});
+		expect(document.querySelector('dialog.poi-dialog')!.getAttribute('data-theme')).toBeNull();
+	});
+
+	test('outside a ThemeProvider it mounts with no inversion (no crash)', () => {
+		render(Dialog, { open: true, title: 'T', children: body });
+		expect(document.querySelector('dialog.poi-dialog')!.getAttribute('data-theme')).toBeNull();
+	});
+
+	// Inversion flips the emphasis treatment: the dialog renders in the OPPOSITE
+	// theme of the page, so the Machine glow now appears on a Samaritan page.
+	test('an inverted dialog on a Samaritan page carries the Machine glow', () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
 			Comp: Dialog,
 			componentProps: { open: true, title: 'T', children: body }
 		});
@@ -83,9 +110,9 @@ describe('Dialog', () => {
 		).toContain('rgb(255, 0, 0)');
 	});
 
-	test('no glow in Samaritan', () => {
+	test('an inverted dialog on a Machine page is crisp Samaritan (no glow)', () => {
 		render(ThemedHarness, {
-			theme: 'samaritan',
+			theme: 'machine',
 			Comp: Dialog,
 			componentProps: { open: true, title: 'T', children: body }
 		});

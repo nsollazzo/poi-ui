@@ -54,6 +54,29 @@ describe('Sheet', () => {
 		expect(el.open).toBe(false);
 	});
 
+	test('inverts to the opposite theme polarity by default', () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: Sheet,
+			componentProps: { open: true, title: 'T', children: body }
+		});
+		expect(document.querySelector('dialog.poi-sheet')!.getAttribute('data-theme')).toBe('machine');
+	});
+
+	test('invert={false} keeps the surrounding theme', () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: Sheet,
+			componentProps: { open: true, invert: false, title: 'T', children: body }
+		});
+		expect(document.querySelector('dialog.poi-sheet')!.getAttribute('data-theme')).toBeNull();
+	});
+
+	test('outside a ThemeProvider it mounts with no inversion (no crash)', () => {
+		render(Sheet, { open: true, title: 'T', children: body });
+		expect(document.querySelector('dialog.poi-sheet')!.getAttribute('data-theme')).toBeNull();
+	});
+
 	test('clicking the backdrop reports onclose exactly once', async () => {
 		let closed = 0;
 		render(ThemedHarness, {

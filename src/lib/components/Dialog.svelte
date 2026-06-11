@@ -1,9 +1,16 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { oppositeTheme, useThemeOptional } from '../theme/context.js';
 
 	interface Props {
 		/** Open state (two-way bindable). */
 		open?: boolean;
+		/** Render in the opposite theme polarity (machine ↔ samaritan) for contrast
+		 *  against the page — the UI is flat, so polarity is its depth cue. No-op
+		 *  outside a <ThemeProvider>. A dialog nested inside another overlay's content
+		 *  still inverts relative to the app theme (never double-inverts); pass
+		 *  `invert={false}` to match the surroundings instead. Default true. */
+		invert?: boolean;
 		/** Optional title; when set it labels the dialog (aria-labelledby). */
 		title?: string;
 		/** Accessible name when no `title` is rendered (e.g. a custom header). */
@@ -18,12 +25,18 @@
 
 	let {
 		open = $bindable(false),
+		invert = true,
 		title,
 		'aria-label': ariaLabel,
 		onclose,
 		children,
 		class: className = ''
 	}: Props = $props();
+
+	const themeContext = useThemeOptional();
+	const overlayTheme = $derived(
+		invert && themeContext ? oppositeTheme(themeContext.theme) : undefined
+	);
 
 	const titleId = $props.id();
 	let dialog = $state<HTMLDialogElement | null>(null);
@@ -64,6 +77,7 @@
 <dialog
 	bind:this={dialog}
 	class="poi-dialog {className}"
+	data-theme={overlayTheme}
 	aria-modal="true"
 	aria-labelledby={title ? titleId : undefined}
 	aria-label={title ? undefined : ariaLabel}

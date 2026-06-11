@@ -1,9 +1,13 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { oppositeTheme, useThemeOptional } from '../theme/context.js';
 
 	interface Props {
 		/** Open state (two-way bindable). */
 		open?: boolean;
+		/** Render in the opposite theme polarity (machine ↔ samaritan) for contrast
+		 *  against the page. No-op outside a <ThemeProvider>. Default true. */
+		invert?: boolean;
 		/** Edge the sheet slides in from. */
 		side?: 'left' | 'right';
 		/** Optional title; when set it labels the sheet (aria-labelledby). */
@@ -20,6 +24,7 @@
 
 	let {
 		open = $bindable(false),
+		invert = true,
 		side = 'right',
 		title,
 		'aria-label': ariaLabel,
@@ -27,6 +32,11 @@
 		children,
 		class: className = ''
 	}: Props = $props();
+
+	const themeContext = useThemeOptional();
+	const overlayTheme = $derived(
+		invert && themeContext ? oppositeTheme(themeContext.theme) : undefined
+	);
 
 	const titleId = $props.id();
 	let dialog = $state<HTMLDialogElement | null>(null);
@@ -60,6 +70,7 @@
 <dialog
 	bind:this={dialog}
 	class="poi-sheet {className}"
+	data-theme={overlayTheme}
 	data-side={side}
 	aria-modal="true"
 	aria-labelledby={title ? titleId : undefined}
