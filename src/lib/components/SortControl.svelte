@@ -73,11 +73,13 @@
 		display: flex;
 		align-items: center;
 	}
-	/* Collapse the shared borders so the segments read as one connected control. */
+	/* Drop the doubled border so the segments read as one connected control.
+	   (A -1px margin overlap leaves subpixel gaps at fractional zoom levels;
+	   flush boxes can't.) */
 	.poi-sort__track :global(.poi-chip + .poi-chip) {
-		margin-left: -1px;
+		border-left: none;
 	}
-	/* Keep the active / focused segment's border above its neighbours. */
+	/* Keep the focused segment's ring above its neighbours. */
 	.poi-sort__track :global(.poi-chip[data-active]) {
 		position: relative;
 		z-index: 1;
