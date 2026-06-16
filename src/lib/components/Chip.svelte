@@ -10,11 +10,15 @@
 		href?: string;
 		/** Click handler (button mode). */
 		onclick?: () => void;
-		/** Turns the chip into a menu trigger: sets aria-haspopup and uses aria-expanded
-		 *  instead of aria-pressed (see Dropdown). */
+		/** Turns the chip into a menu/listbox trigger: sets aria-haspopup. Only for
+		 *  popups whose items carry real menu/listbox roles; a popup of plain buttons
+		 *  is a disclosure — use `expanded` alone (see Dropdown). */
 		hasPopup?: 'menu' | 'listbox' | 'true';
-		/** Expanded state for the menu-trigger mode. */
+		/** Disclosure state. When set (with or without `hasPopup`) the chip renders
+		 *  aria-expanded instead of aria-pressed. */
 		expanded?: boolean;
+		/** id of the popup element this chip controls (renders aria-controls). */
+		ariaControls?: string;
 		/** Accessible name override. */
 		ariaLabel?: string;
 		/** Native title tooltip. */
@@ -32,15 +36,17 @@
 		onclick,
 		hasPopup,
 		expanded,
+		ariaControls,
 		ariaLabel,
 		title,
 		class: className = '',
 		children
 	}: Props = $props();
 
-	// Visual "selected" hook, decoupled from ARIA (a menu trigger is selected when it
-	// holds a value but is not an aria-pressed toggle).
+	// Visual "selected" hook, decoupled from ARIA (a popup trigger is selected when
+	// it holds a value but is not an aria-pressed toggle).
 	const active = $derived(href ? current : pressed);
+	const isTrigger = $derived(hasPopup !== undefined || expanded !== undefined);
 </script>
 
 {#if href}
@@ -58,9 +64,10 @@
 		{title}
 		class="poi-chip {className}"
 		data-active={active || undefined}
-		aria-pressed={hasPopup ? undefined : pressed}
+		aria-pressed={isTrigger ? undefined : pressed}
 		aria-haspopup={hasPopup}
-		aria-expanded={hasPopup ? expanded : undefined}
+		aria-expanded={isTrigger ? expanded : undefined}
+		aria-controls={ariaControls}
 		aria-label={ariaLabel}
 		{onclick}>{@render children()}</button
 	>

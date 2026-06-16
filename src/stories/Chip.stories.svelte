@@ -19,6 +19,8 @@
 		<Chip href="#" current>Link / current</Chip>
 		<Chip href="#">Link</Chip>
 		<Chip hasPopup="menu" expanded={false}>Menu ▾</Chip>
+		<!-- expanded without hasPopup: an honest disclosure trigger (popup of plain buttons) -->
+		<Chip expanded={false} ariaControls="disclosure-popup">Disclosure ▾</Chip>
 	</div>
 {/snippet}
 

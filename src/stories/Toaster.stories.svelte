@@ -26,3 +26,18 @@
 <Story name="Samaritan" asChild>
 	<ThemeProvider theme="samaritan">{@render demo()}</ThemeProvider>
 </Story>
+
+<!-- Toasts invert to the opposite theme polarity by default (mount the Toaster
+     inside a ThemeProvider for this to apply); invert={false} keeps them in the
+     surrounding theme. -->
+<Story name="Matching theme (invert false)" asChild>
+	<ThemeProvider theme="samaritan">
+		<div style="padding: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+			<Button onclick={() => toast('Target acquired', { level: 'success' })}>Success</Button>
+			<Button tone="threat" onclick={() => toast('Threat detected', { level: 'error' })}
+				>Error</Button
+			>
+		</div>
+		<Toaster invert={false} />
+	</ThemeProvider>
+</Story>

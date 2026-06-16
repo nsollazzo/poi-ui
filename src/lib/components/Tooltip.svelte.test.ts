@@ -80,7 +80,7 @@ describe('Tooltip', () => {
 		await expect.poll(() => document.querySelector('[role="tooltip"]')).not.toBeNull();
 	});
 
-	test('the bubble uses the surface-2 lift in Samaritan', async () => {
+	test('the bubble inverts to the opposite polarity; the trigger keeps the page theme', async () => {
 		render(ThemedHarness, {
 			theme: 'samaritan',
 			Comp: Tooltip,
@@ -89,9 +89,46 @@ describe('Tooltip', () => {
 		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
 		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
 		await expect.poll(() => document.querySelector('.poi-tooltip__bubble')).not.toBeNull();
+		expect(document.querySelector('.poi-tooltip__bubble')!.getAttribute('data-theme')).toBe(
+			'machine'
+		);
+		// Inversion is scoped to the bubble — the wrapper (and trigger) stay unthemed.
+		expect(wrapper.getAttribute('data-theme')).toBeNull();
+	});
+
+	test('the inverted bubble is opaque, not a translucent lift over the page', async () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: Tooltip,
+			componentProps: { text: 'Tip', children: trigger }
+		});
+		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+		await expect.poll(() => document.querySelector('.poi-tooltip__bubble')).not.toBeNull();
+		// Machine surface-base under the surface-2 lift: fully opaque black.
 		expect(
 			getComputedStyle(document.querySelector('.poi-tooltip__bubble') as HTMLElement)
 				.backgroundColor
-		).toBe('rgba(0, 0, 0, 0.06)');
+		).toBe('rgb(0, 0, 0)');
+	});
+
+	test('invert={false} keeps the bubble in the surrounding theme', async () => {
+		render(ThemedHarness, {
+			theme: 'samaritan',
+			Comp: Tooltip,
+			componentProps: { text: 'Tip', invert: false, children: trigger }
+		});
+		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+		await expect.poll(() => document.querySelector('.poi-tooltip__bubble')).not.toBeNull();
+		expect(document.querySelector('.poi-tooltip__bubble')!.getAttribute('data-theme')).toBeNull();
+	});
+
+	test('outside a ThemeProvider it mounts with no inversion (no crash)', async () => {
+		render(Tooltip, { text: 'Tip', children: trigger });
+		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+		await expect.poll(() => document.querySelector('.poi-tooltip__bubble')).not.toBeNull();
+		expect(document.querySelector('.poi-tooltip__bubble')!.getAttribute('data-theme')).toBeNull();
 	});
 });

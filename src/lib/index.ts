@@ -2,7 +2,7 @@
 
 // Theme
 export { default as ThemeProvider } from './theme/ThemeProvider.svelte';
-export { useTheme, type PoiTheme, type ThemeContext } from './theme/context.js';
+export { useTheme, oppositeTheme, type PoiTheme, type ThemeContext } from './theme/context.js';
 export {
 	MACHINE_DESIGNATIONS,
 	SAMARITAN_DESIGNATIONS,
@@ -23,6 +23,7 @@ export { default as ChipGroup } from './components/ChipGroup.svelte';
 export { default as DesignationTag } from './components/DesignationTag.svelte';
 export { default as Dialog } from './components/Dialog.svelte';
 export { default as Dropdown } from './components/Dropdown.svelte';
+export { default as FilterToolbar } from './components/FilterToolbar.svelte';
 export { default as Input } from './components/Input.svelte';
 export { default as Loading } from './components/Loading.svelte';
 export { default as ProgressBar } from './components/ProgressBar.svelte';
@@ -31,6 +32,9 @@ export { default as SegmentedControl } from './components/SegmentedControl.svelt
 export { default as Separator } from './components/Separator.svelte';
 export { default as Sheet } from './components/Sheet.svelte';
 export { default as Skeleton } from './components/Skeleton.svelte';
+export { default as SortControl } from './components/SortControl.svelte';
+/** Sort direction used by SortControl. */
+export type SortDir = 'asc' | 'desc';
 export { default as StatusRow } from './components/StatusRow.svelte';
 export { default as SubjectFrame } from './components/SubjectFrame.svelte';
 export { default as Terminal } from './components/Terminal.svelte';

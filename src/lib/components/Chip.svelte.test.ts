@@ -76,4 +76,31 @@ describe('Chip', () => {
 		// still visually active because a value is held
 		expect(btn.getAttribute('data-active')).toBe('true');
 	});
+
+	test('expanded alone makes an honest disclosure trigger (no aria-haspopup)', () => {
+		// A popup of plain buttons is a disclosure, not an ARIA menu — `expanded`
+		// without `hasPopup` must not imply menu semantics, and the trigger is not
+		// an aria-pressed toggle while it is a disclosure.
+		render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Chip,
+			componentProps: { expanded: false, pressed: true, children: label('FILTER') }
+		});
+		const btn = document.querySelector('.poi-chip') as HTMLElement;
+		expect(btn.getAttribute('aria-expanded')).toBe('false');
+		expect(btn.getAttribute('aria-haspopup')).toBeNull();
+		expect(btn.getAttribute('aria-pressed')).toBeNull();
+		expect(btn.getAttribute('data-active')).toBe('true');
+	});
+
+	test('ariaControls links the trigger to its popup', () => {
+		render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Chip,
+			componentProps: { expanded: true, ariaControls: 'popup-1', children: label('FILTER') }
+		});
+		expect((document.querySelector('.poi-chip') as HTMLElement).getAttribute('aria-controls')).toBe(
+			'popup-1'
+		);
+	});
 });

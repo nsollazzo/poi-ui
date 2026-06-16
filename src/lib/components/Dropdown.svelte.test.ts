@@ -11,11 +11,14 @@ const options = [
 const props = (value: string | null = null) => ({ value, options, label: 'Framework' });
 
 describe('Dropdown', () => {
-	test('is a collapsed menu trigger with no menu shown', () => {
+	test('is a collapsed disclosure trigger with no menu shown', () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Dropdown, componentProps: props() });
 		const trigger = document.querySelector('.poi-dropdown .poi-chip') as HTMLElement;
-		expect(trigger.getAttribute('aria-haspopup')).toBe('menu');
+		// Honest disclosure: the popup contains plain buttons, not menuitems, so the
+		// trigger must not claim aria-haspopup="menu".
+		expect(trigger.getAttribute('aria-haspopup')).toBeNull();
 		expect(trigger.getAttribute('aria-expanded')).toBe('false');
+		expect(trigger.getAttribute('aria-controls')).toBeNull();
 		expect(document.querySelector('.poi-dropdown__menu')).toBeNull();
 	});
 
@@ -70,5 +73,57 @@ describe('Dropdown', () => {
 		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).not.toBeNull();
 		window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
 		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).toBeNull();
+	});
+
+	test('the open trigger is wired to the menu via aria-controls', async () => {
+		const screen = render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Dropdown,
+			componentProps: props()
+		});
+		await screen.getByRole('button', { name: 'Framework' }).click();
+		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).not.toBeNull();
+		const trigger = document.querySelector('.poi-dropdown .poi-chip') as HTMLElement;
+		const menu = document.querySelector('.poi-dropdown__menu') as HTMLElement;
+		expect(menu.id).not.toBe('');
+		expect(trigger.getAttribute('aria-controls')).toBe(menu.id);
+	});
+
+	test('focuses the first option on open', async () => {
+		const screen = render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Dropdown,
+			componentProps: props()
+		});
+		await screen.getByRole('button', { name: 'Framework' }).click();
+		// Keyboard users land in the popup, not stranded on the trigger.
+		await expect
+			.poll(() => (document.activeElement as HTMLElement | null)?.className)
+			.toContain('poi-dropdown__item');
+	});
+
+	test('Escape returns focus to the trigger', async () => {
+		const screen = render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Dropdown,
+			componentProps: props()
+		});
+		await screen.getByRole('button', { name: 'Framework' }).click();
+		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).not.toBeNull();
+		window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).toBeNull();
+		expect(document.activeElement).toBe(document.querySelector('.poi-dropdown .poi-chip'));
+	});
+
+	test('selecting an option returns focus to the trigger', async () => {
+		const screen = render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Dropdown,
+			componentProps: props()
+		});
+		await screen.getByRole('button', { name: 'Framework' }).click();
+		await screen.getByRole('button', { name: 'Svelte' }).click();
+		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).toBeNull();
+		expect(document.activeElement).toBe(document.querySelector('.poi-dropdown .poi-chip'));
 	});
 });

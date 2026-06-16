@@ -1,4 +1,5 @@
 <script lang="ts" generics="T extends string">
+	import { tick } from 'svelte';
 	import Chip from './Chip.svelte';
 
 	interface Props {
@@ -18,12 +19,26 @@
 
 	let open = $state(false);
 	let root = $state<HTMLDivElement>();
+	const menuId = $props.id();
 
 	const selectedLabel = $derived(options.find((o) => o.value === value)?.label);
+
+	const trigger = () => root?.querySelector<HTMLButtonElement>('button.poi-chip');
+
+	// Honest disclosure focus contract: focus lands on the first option when the
+	// popup opens, and returns to the trigger on keyboard close or selection.
+	async function toggle() {
+		open = !open;
+		if (open) {
+			await tick();
+			root?.querySelector<HTMLElement>('.poi-dropdown__item')?.focus();
+		}
+	}
 
 	function choose(v: T | null) {
 		value = v;
 		open = false;
+		trigger()?.focus();
 	}
 
 	$effect(() => {
@@ -32,7 +47,10 @@
 			if (root && !root.contains(e.target as Node)) open = false;
 		};
 		const onKey = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') open = false;
+			if (e.key === 'Escape') {
+				open = false;
+				trigger()?.focus();
+			}
 		};
 		// Capture phase so an outside click closes before other handlers run.
 		window.addEventListener('click', onPointer, true);
@@ -47,10 +65,10 @@
 <div class="poi-dropdown {className}" bind:this={root}>
 	<Chip
 		pressed={value !== null}
-		hasPopup="menu"
 		expanded={open}
+		ariaControls={open ? menuId : undefined}
 		ariaLabel={ariaLabel ?? label}
-		onclick={() => (open = !open)}
+		onclick={toggle}
 	>
 		{label}{#if selectedLabel}: {selectedLabel}{/if}<span
 			class="poi-dropdown__caret"
@@ -59,7 +77,7 @@
 	</Chip>
 
 	{#if open}
-		<div class="poi-dropdown__menu">
+		<div class="poi-dropdown__menu" id={menuId}>
 			<button
 				type="button"
 				class="poi-dropdown__item"

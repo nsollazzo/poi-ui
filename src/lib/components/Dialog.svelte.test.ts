@@ -72,25 +72,44 @@ describe('Dialog', () => {
 		);
 	});
 
-	test('emphasis glow in The Machine', () => {
+	test('inverts to the opposite theme polarity by default', () => {
 		render(ThemedHarness, {
 			theme: 'machine',
 			Comp: Dialog,
 			componentProps: { open: true, title: 'T', children: body }
 		});
-		expect(
-			getComputedStyle(document.querySelector('.poi-dialog') as HTMLElement).boxShadow
-		).toContain('rgb(255, 0, 0)');
+		expect(document.querySelector('dialog.poi-dialog')!.getAttribute('data-theme')).toBe(
+			'samaritan'
+		);
 	});
 
-	test('no glow in Samaritan', () => {
+	test('invert={false} keeps the surrounding theme', () => {
 		render(ThemedHarness, {
-			theme: 'samaritan',
+			theme: 'machine',
 			Comp: Dialog,
-			componentProps: { open: true, title: 'T', children: body }
+			componentProps: { open: true, invert: false, title: 'T', children: body }
 		});
-		expect(getComputedStyle(document.querySelector('.poi-dialog') as HTMLElement).boxShadow).toBe(
-			'none'
-		);
+		expect(document.querySelector('dialog.poi-dialog')!.getAttribute('data-theme')).toBeNull();
+	});
+
+	test('outside a ThemeProvider it mounts with no inversion (no crash)', () => {
+		render(Dialog, { open: true, title: 'T', children: body });
+		expect(document.querySelector('dialog.poi-dialog')!.getAttribute('data-theme')).toBeNull();
+	});
+
+	// Polarity inversion alone is the dialog's figure-ground cue — no neon glow,
+	// even when the inverted surface is Machine-themed.
+	test('no glow in either polarity', () => {
+		for (const theme of ['samaritan', 'machine'] as const) {
+			render(ThemedHarness, {
+				theme,
+				Comp: Dialog,
+				componentProps: { open: true, title: 'T', children: body }
+			});
+			expect(getComputedStyle(document.querySelector('.poi-dialog') as HTMLElement).boxShadow).toBe(
+				'none'
+			);
+			document.querySelector('.poi-root')?.remove();
+		}
 	});
 });

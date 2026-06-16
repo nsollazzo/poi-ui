@@ -53,8 +53,25 @@ describe('Toaster', () => {
 		expect(store.items[0].duration).toBe(5000);
 	});
 
-	test('uses the success status accent in The Machine', async () => {
-		render(ThemedHarness, { theme: 'machine', Comp: Toaster });
+	test('inverts to the opposite theme polarity by default', () => {
+		render(ThemedHarness, { theme: 'samaritan', Comp: Toaster });
+		expect(document.querySelector('.poi-toaster')!.getAttribute('data-theme')).toBe('machine');
+	});
+
+	test('invert={false} keeps the surrounding theme', () => {
+		render(ThemedHarness, { theme: 'samaritan', Comp: Toaster, componentProps: { invert: false } });
+		expect(document.querySelector('.poi-toaster')!.getAttribute('data-theme')).toBeNull();
+	});
+
+	test('outside a ThemeProvider it mounts with no inversion (no crash)', () => {
+		render(Toaster, {});
+		expect(document.querySelector('.poi-toaster')!.getAttribute('data-theme')).toBeNull();
+	});
+
+	// Inversion means toasts render in the OPPOSITE theme of the page, so the
+	// Machine status palette appears on a Samaritan page and vice versa.
+	test('toasts on a Samaritan page use the Machine success accent', async () => {
+		render(ThemedHarness, { theme: 'samaritan', Comp: Toaster });
 		toast('ok', { level: 'success', duration: 0 });
 		await expect.poll(() => document.querySelector('.poi-toast')).not.toBeNull();
 		expect(
@@ -62,8 +79,8 @@ describe('Toaster', () => {
 		).toBe('rgba(71, 255, 86, 0.85)');
 	});
 
-	test('status accents collapse to ink in Samaritan', async () => {
-		render(ThemedHarness, { theme: 'samaritan', Comp: Toaster });
+	test('toasts on a Machine page collapse to Samaritan monochrome ink', async () => {
+		render(ThemedHarness, { theme: 'machine', Comp: Toaster });
 		toast('ok', { level: 'success', duration: 0 });
 		await expect.poll(() => document.querySelector('.poi-toast')).not.toBeNull();
 		expect(
