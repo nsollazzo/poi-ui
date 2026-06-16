@@ -102,7 +102,7 @@
 		"@sveltejs/kit": "^2.57.0",
 		"@sveltejs/package": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
-		"@types/node": "^24",
+		"@types/node": "^25",
 		"@vitest/browser-playwright": "^4.1.9",
 		"@vitest/coverage-v8": "^4.1.9",
 		"eslint": "^10.2.0",
