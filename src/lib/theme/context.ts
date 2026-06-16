@@ -41,3 +41,20 @@ export function useThemeOptional(): ThemeContext | undefined {
 export function oppositeTheme(theme: PoiTheme): PoiTheme {
 	return theme === 'machine' ? 'samaritan' : 'machine';
 }
+
+/**
+ * Polarity helper for overlays (Dialog, Sheet, Tooltip, Toaster). `.current` is
+ * the opposite of the active theme when `invert()` is true and a
+ * `<ThemeProvider>` is present, else `undefined` — so binding it to `data-theme`
+ * omits the attribute and the overlay inherits its surroundings. Single-sources
+ * the "overlays render in the opposite polarity" rule. Read `.current` reactively
+ * (mirrors the `reducedMotion.current` convention); call during component init.
+ */
+export function useOverlayTheme(invert: () => boolean): { readonly current: PoiTheme | undefined } {
+	const context = useThemeOptional();
+	return {
+		get current() {
+			return invert() && context ? oppositeTheme(context.theme) : undefined;
+		}
+	};
+}

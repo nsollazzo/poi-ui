@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { oppositeTheme, useThemeOptional } from '../theme/context.js';
+	import { useOverlayTheme } from '../theme/context.js';
 
 	interface Props {
 		/** Open state (two-way bindable). */
@@ -33,10 +33,7 @@
 		class: className = ''
 	}: Props = $props();
 
-	const themeContext = useThemeOptional();
-	const overlayTheme = $derived(
-		invert && themeContext ? oppositeTheme(themeContext.theme) : undefined
-	);
+	const overlayTheme = useOverlayTheme(() => invert);
 
 	const titleId = $props.id();
 	let dialog = $state<HTMLDialogElement | null>(null);
@@ -70,7 +67,7 @@
 <dialog
 	bind:this={dialog}
 	class="poi-sheet {className}"
-	data-theme={overlayTheme}
+	data-theme={overlayTheme.current}
 	data-side={side}
 	aria-modal="true"
 	aria-labelledby={title ? titleId : undefined}

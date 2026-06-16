@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { oppositeTheme, useThemeOptional } from '../theme/context.js';
+	import { useOverlayTheme } from '../theme/context.js';
 
 	interface Props {
 		/** Tooltip text. */
@@ -28,10 +28,7 @@
 		class: className = ''
 	}: Props = $props();
 
-	const themeContext = useThemeOptional();
-	const overlayTheme = $derived(
-		invert && themeContext ? oppositeTheme(themeContext.theme) : undefined
-	);
+	const overlayTheme = useOverlayTheme(() => invert);
 
 	const bubbleId = $props.id();
 	let open = $state(false);
@@ -102,7 +99,7 @@
 			class="poi-tooltip__bubble"
 			role="tooltip"
 			id={bubbleId}
-			data-theme={overlayTheme}
+			data-theme={overlayTheme.current}
 			data-side={side}>{text}</span
 		>
 	{/if}

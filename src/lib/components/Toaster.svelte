@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 	import { fly, fade } from 'svelte/transition';
 	import { reducedMotion } from '../actions/reducedMotion.js';
-	import { oppositeTheme, useThemeOptional } from '../theme/context.js';
+	import { useOverlayTheme } from '../theme/context.js';
 	import { store, remove, type ToastItem } from '../toast/store.svelte.js';
 
 	interface Props {
@@ -20,10 +20,7 @@
 
 	let { invert = true, closeIcon, icon, class: className = '' }: Props = $props();
 
-	const themeContext = useThemeOptional();
-	const overlayTheme = $derived(
-		invert && themeContext ? oppositeTheme(themeContext.theme) : undefined
-	);
+	const overlayTheme = useOverlayTheme(() => invert);
 
 	// Motion is opt-out under prefers-reduced-motion.
 	const inParams = $derived(reducedMotion.current ? { duration: 0 } : { y: -8, duration: 300 });
@@ -42,7 +39,7 @@
      region that already exists are announced reliably, whereas a freshly inserted
      role="status" node is not. Errors additionally carry role="alert" so they
      interrupt assertively. -->
-<div class="poi-toaster {className}" data-theme={overlayTheme} aria-live="polite">
+<div class="poi-toaster {className}" data-theme={overlayTheme.current} aria-live="polite">
 	{#each store.items as item (item.id)}
 		<div
 			class="poi-toast"
