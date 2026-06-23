@@ -1,8 +1,8 @@
 # @nsollazzo/poi-ui
 
-## 0.5.0
+## 0.4.1
 
-### Minor Changes
+### Patch Changes
 
 - [#18](https://github.com/nsollazzo/poi-ui/pull/18) [`4b08f41`](https://github.com/nsollazzo/poi-ui/commit/4b08f411d02c832edb709ee12d45d25d05f893d2) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Terminal: lead with the prompt sigil, add a copy button, and gate the cursor
   - The prompt sigil (e.g. `$`) now **leads** the command on a single line instead of sitting on a separate line below it.
