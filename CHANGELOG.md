@@ -1,5 +1,14 @@
 # @nsollazzo/poi-ui
 
+## 0.4.1
+
+### Patch Changes
+
+- [#18](https://github.com/nsollazzo/poi-ui/pull/18) [`4b08f41`](https://github.com/nsollazzo/poi-ui/commit/4b08f411d02c832edb709ee12d45d25d05f893d2) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Terminal: lead with the prompt sigil, add a copy button, and gate the cursor
+  - The prompt sigil (e.g. `$`) now **leads** the command on a single line instead of sitting on a separate line below it.
+  - Added a **copy-to-clipboard button** in the top-right that copies the command text only (the sigil is never included); its glyph flips `⧉` → `✓` on success and announces via an `aria-live` region.
+  - Added a **`cursor` prop** (default `true`) to toggle the trailing blinking cursor.
+
 ## 0.4.0
 
 ### Minor Changes
