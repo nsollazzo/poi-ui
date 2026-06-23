@@ -22,8 +22,9 @@ describe('component branch coverage', () => {
 
 	test('Terminal renders with no body content', () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Terminal, componentProps: {} });
-		expect(document.querySelector('.poi-terminal__body')).toBeNull();
-		expect(document.querySelector('.poi-terminal__prompt')).not.toBeNull();
+		// No children → no copy button, but the prompt line still renders (the empty-prompt state).
+		expect(document.querySelector('.poi-terminal__copy')).toBeNull();
+		expect(document.querySelector('.poi-terminal__line')).not.toBeNull();
 	});
 
 	test('Window can start collapsed', () => {
