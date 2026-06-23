@@ -12,6 +12,9 @@
 	<div style="display: grid; gap: 1.5rem; width: 420px; padding: 1.5rem;">
 		<Banner text="Threat detected" />
 		<Terminal prompt="root@samaritan:~#">access --override</Terminal>
+		<Terminal prompt="$"
+			>curl https://positronick.com/api/souls/socratic-tutor.md > ~/.hermes/SOUL.md</Terminal
+		>
 		<Loading label="Acquiring target" />
 	</div>
 {/snippet}
