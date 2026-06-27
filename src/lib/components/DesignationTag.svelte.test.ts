@@ -4,8 +4,8 @@ import ThemedHarness from '../../test-support/ThemedHarness.svelte';
 import DesignationTag from './DesignationTag.svelte';
 
 function tagEl(): HTMLElement {
-	const el = document.querySelector<HTMLElement>('.poi-designation');
-	if (!el) throw new Error('.poi-designation not found');
+	const el = document.querySelector<HTMLElement>('.pn-designation');
+	if (!el) throw new Error('.pn-designation not found');
 	return el;
 }
 

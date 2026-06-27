@@ -13,7 +13,7 @@ describe('Sheet', () => {
 			Comp: Sheet,
 			componentProps: { open: true, title: 'Controls', children: body }
 		});
-		const el = document.querySelector('dialog.poi-sheet') as HTMLDialogElement;
+		const el = document.querySelector('dialog.pn-sheet') as HTMLDialogElement;
 		expect(el.open).toBe(true);
 		await expect.element(screen.getByRole('dialog', { name: 'Controls' })).toBeInTheDocument();
 	});
@@ -24,7 +24,7 @@ describe('Sheet', () => {
 			Comp: Sheet,
 			componentProps: { open: true, title: 'T', children: body }
 		});
-		const el = document.querySelector('.poi-sheet') as HTMLElement;
+		const el = document.querySelector('.pn-sheet') as HTMLElement;
 		expect(el.getAttribute('data-side')).toBe('right');
 		// Right sheet is bordered on its left edge.
 		expect(getComputedStyle(el).borderLeftWidth).toBe('1px');
@@ -36,7 +36,7 @@ describe('Sheet', () => {
 			Comp: Sheet,
 			componentProps: { open: true, side: 'left', title: 'T', children: body }
 		});
-		const el = document.querySelector('.poi-sheet') as HTMLElement;
+		const el = document.querySelector('.pn-sheet') as HTMLElement;
 		expect(el.getAttribute('data-side')).toBe('left');
 		expect(getComputedStyle(el).borderRightWidth).toBe('1px');
 	});
@@ -48,7 +48,7 @@ describe('Sheet', () => {
 			Comp: Sheet,
 			componentProps: { open: true, title: 'T', onclose: () => (closed += 1), children: body }
 		});
-		const el = document.querySelector('dialog.poi-sheet') as HTMLDialogElement;
+		const el = document.querySelector('dialog.pn-sheet') as HTMLDialogElement;
 		el.close();
 		await expect.poll(() => closed).toBe(1);
 		expect(el.open).toBe(false);
@@ -60,7 +60,7 @@ describe('Sheet', () => {
 			Comp: Sheet,
 			componentProps: { open: true, title: 'T', children: body }
 		});
-		expect(document.querySelector('dialog.poi-sheet')!.getAttribute('data-theme')).toBe('machine');
+		expect(document.querySelector('dialog.pn-sheet')!.getAttribute('data-theme')).toBe('machine');
 	});
 
 	test('invert={false} keeps the surrounding theme', () => {
@@ -69,12 +69,12 @@ describe('Sheet', () => {
 			Comp: Sheet,
 			componentProps: { open: true, invert: false, title: 'T', children: body }
 		});
-		expect(document.querySelector('dialog.poi-sheet')!.getAttribute('data-theme')).toBeNull();
+		expect(document.querySelector('dialog.pn-sheet')!.getAttribute('data-theme')).toBeNull();
 	});
 
 	test('outside a ThemeProvider it mounts with no inversion (no crash)', () => {
 		render(Sheet, { open: true, title: 'T', children: body });
-		expect(document.querySelector('dialog.poi-sheet')!.getAttribute('data-theme')).toBeNull();
+		expect(document.querySelector('dialog.pn-sheet')!.getAttribute('data-theme')).toBeNull();
 	});
 
 	test('clicking the backdrop reports onclose exactly once', async () => {
@@ -84,7 +84,7 @@ describe('Sheet', () => {
 			Comp: Sheet,
 			componentProps: { open: true, title: 'T', onclose: () => (closed += 1), children: body }
 		});
-		const el = document.querySelector('dialog.poi-sheet') as HTMLDialogElement;
+		const el = document.querySelector('dialog.pn-sheet') as HTMLDialogElement;
 		el.dispatchEvent(new MouseEvent('click', { bubbles: true })); // target === dialog
 		await expect.poll(() => el.open).toBe(false);
 		// Regression guard: backdrop click used to fire onclose twice via the $effect.

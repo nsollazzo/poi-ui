@@ -21,11 +21,11 @@
 {#snippet demo()}
 	<div style="padding: 2rem; min-height: 220px;">
 		<h2
-			style="margin: 0 0 1rem; text-transform: uppercase; letter-spacing: var(--poi-tracking-display);"
+			style="margin: 0 0 1rem; text-transform: uppercase; letter-spacing: var(--pn-tracking-display);"
 		>
-			POI-UI
+			positronick-ui
 		</h2>
-		<p style="font-family: var(--poi-font-mono); color: var(--poi-ink-dim); margin: 0;">
+		<p style="font-family: var(--pn-font-mono); color: var(--pn-ink-dim); margin: 0;">
 			The same component set, re-skinned by a single data-theme attribute.
 		</p>
 	</div>

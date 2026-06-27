@@ -13,7 +13,7 @@ describe('Dialog', () => {
 			Comp: Dialog,
 			componentProps: { open: true, title: 'Subject dossier', children: body }
 		});
-		const el = document.querySelector('dialog.poi-dialog') as HTMLDialogElement;
+		const el = document.querySelector('dialog.pn-dialog') as HTMLDialogElement;
 		expect(el.open).toBe(true);
 		await expect
 			.element(screen.getByRole('dialog', { name: 'Subject dossier' }))
@@ -27,7 +27,7 @@ describe('Dialog', () => {
 			Comp: Dialog,
 			componentProps: { open: true, title: 'T', onclose: () => (closed += 1), children: body }
 		});
-		const el = document.querySelector('dialog.poi-dialog') as HTMLDialogElement;
+		const el = document.querySelector('dialog.pn-dialog') as HTMLDialogElement;
 		el.close(); // native close — same path Escape takes
 		await expect.poll(() => closed).toBe(1);
 		expect(el.open).toBe(false);
@@ -40,7 +40,7 @@ describe('Dialog', () => {
 			Comp: Dialog,
 			componentProps: { open: true, title: 'T', onclose: () => (closed += 1), children: body }
 		});
-		const el = document.querySelector('dialog.poi-dialog') as HTMLDialogElement;
+		const el = document.querySelector('dialog.pn-dialog') as HTMLDialogElement;
 		el.dispatchEvent(new MouseEvent('click', { bubbles: true })); // target === dialog
 		await expect.poll(() => el.open).toBe(false);
 		// Wait for any queued $effect to flush, then assert onclose did NOT re-fire
@@ -66,8 +66,8 @@ describe('Dialog', () => {
 			Comp: Dialog,
 			componentProps: { open: true, title: 'T', children: body }
 		});
-		const root = document.querySelector('.poi-root') as HTMLElement;
-		expect(getComputedStyle(root).getPropertyValue('--poi-overlay-bg').trim()).toBe(
+		const root = document.querySelector('.pn-root') as HTMLElement;
+		expect(getComputedStyle(root).getPropertyValue('--pn-overlay-bg').trim()).toBe(
 			'rgba(0, 0, 0, 0.7)'
 		);
 	});
@@ -78,7 +78,7 @@ describe('Dialog', () => {
 			Comp: Dialog,
 			componentProps: { open: true, title: 'T', children: body }
 		});
-		expect(document.querySelector('dialog.poi-dialog')!.getAttribute('data-theme')).toBe(
+		expect(document.querySelector('dialog.pn-dialog')!.getAttribute('data-theme')).toBe(
 			'samaritan'
 		);
 	});
@@ -89,12 +89,12 @@ describe('Dialog', () => {
 			Comp: Dialog,
 			componentProps: { open: true, invert: false, title: 'T', children: body }
 		});
-		expect(document.querySelector('dialog.poi-dialog')!.getAttribute('data-theme')).toBeNull();
+		expect(document.querySelector('dialog.pn-dialog')!.getAttribute('data-theme')).toBeNull();
 	});
 
 	test('outside a ThemeProvider it mounts with no inversion (no crash)', () => {
 		render(Dialog, { open: true, title: 'T', children: body });
-		expect(document.querySelector('dialog.poi-dialog')!.getAttribute('data-theme')).toBeNull();
+		expect(document.querySelector('dialog.pn-dialog')!.getAttribute('data-theme')).toBeNull();
 	});
 
 	// Polarity inversion alone is the dialog's figure-ground cue — no neon glow,
@@ -106,10 +106,10 @@ describe('Dialog', () => {
 				Comp: Dialog,
 				componentProps: { open: true, title: 'T', children: body }
 			});
-			expect(getComputedStyle(document.querySelector('.poi-dialog') as HTMLElement).boxShadow).toBe(
+			expect(getComputedStyle(document.querySelector('.pn-dialog') as HTMLElement).boxShadow).toBe(
 				'none'
 			);
-			document.querySelector('.poi-root')?.remove();
+			document.querySelector('.pn-root')?.remove();
 		}
 	});
 });

@@ -2,10 +2,10 @@
 	// Test-only harness: renders a component inside a <ThemeProvider> so its
 	// theme tokens resolve. Lives outside src/lib so it is never packaged.
 	import type { Component } from 'svelte';
-	import { ThemeProvider, type PoiTheme } from '$lib/index.js';
+	import { ThemeProvider, type PositronickTheme } from '$lib/index.js';
 
 	interface Props {
-		theme?: PoiTheme;
+		theme?: PositronickTheme;
 		// Any component under test.
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		Comp: Component<any>;

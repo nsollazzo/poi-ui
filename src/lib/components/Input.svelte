@@ -13,50 +13,50 @@
 	}
 
 	// `class` is pulled out of rest so a consumer's class extends ours instead of
-	// clobbering `poi-input`. Accessible name (aria-label / aria-labelledby) and
+	// clobbering `pn-input`. Accessible name (aria-label / aria-labelledby) and
 	// validity (aria-invalid) flow through {...rest}.
 	let { value = $bindable(''), class: className = '', ...rest }: Props = $props();
 </script>
 
-<input class="poi-input {className}" {...rest} bind:value />
+<input class="pn-input {className}" {...rest} bind:value />
 
 <style>
-	.poi-input {
+	.pn-input {
 		width: 100%;
-		padding: var(--poi-space-2) var(--poi-space-3);
-		background: var(--poi-surface-1);
-		color: var(--poi-ink);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-2);
+		padding: var(--pn-space-2) var(--pn-space-3);
+		background: var(--pn-surface-1);
+		color: var(--pn-ink);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-2);
 		outline: none;
 		transition:
-			border-color 0.15s var(--poi-ease),
-			box-shadow 0.15s var(--poi-ease);
+			border-color 0.15s var(--pn-ease),
+			box-shadow 0.15s var(--pn-ease);
 	}
 
-	.poi-input::placeholder {
-		color: var(--poi-ink-dim);
+	.pn-input::placeholder {
+		color: var(--pn-ink-dim);
 	}
 
-	.poi-input:focus-visible {
-		border-color: var(--poi-accent);
-		box-shadow: var(--poi-focus-ring);
+	.pn-input:focus-visible {
+		border-color: var(--pn-accent);
+		box-shadow: var(--pn-focus-ring);
 	}
 
 	/* Invalid reads as the threat/red state (red in both themes). */
-	.poi-input[aria-invalid='true'] {
-		border-color: var(--poi-accent);
+	.pn-input[aria-invalid='true'] {
+		border-color: var(--pn-accent);
 	}
 
-	.poi-input:disabled {
+	.pn-input:disabled {
 		opacity: 0.4;
 		cursor: not-allowed;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.poi-input {
+		.pn-input {
 			transition: none;
 		}
 	}

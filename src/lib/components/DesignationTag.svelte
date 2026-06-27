@@ -11,32 +11,32 @@
 	let { label, tone = 'neutral', solid = false }: Props = $props();
 </script>
 
-<span class="poi-designation" data-tone={tone} data-solid={solid || undefined}>{label}</span>
+<span class="pn-designation" data-tone={tone} data-solid={solid || undefined}>{label}</span>
 
 <style>
-	.poi-designation {
+	.pn-designation {
 		display: inline-flex;
 		align-items: center;
-		padding: 0 var(--poi-space-2);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
-		color: var(--poi-ink);
-		font-family: var(--poi-font-display);
-		font-size: var(--poi-font-size-1);
+		padding: 0 var(--pn-space-2);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
+		color: var(--pn-ink);
+		font-family: var(--pn-font-display);
+		font-size: var(--pn-font-size-1);
 		text-transform: uppercase;
-		letter-spacing: var(--poi-tracking-display);
+		letter-spacing: var(--pn-tracking-display);
 		line-height: 1.7;
 		white-space: nowrap;
 	}
 
-	.poi-designation[data-tone='threat'] {
-		color: var(--poi-accent);
-		border-color: var(--poi-accent);
-		text-shadow: var(--poi-emphasis-text-shadow);
+	.pn-designation[data-tone='threat'] {
+		color: var(--pn-accent);
+		border-color: var(--pn-accent);
+		text-shadow: var(--pn-emphasis-text-shadow);
 	}
 
-	.poi-designation[data-tone='asset'] {
-		color: var(--poi-asset);
-		border-color: var(--poi-asset);
+	.pn-designation[data-tone='asset'] {
+		color: var(--pn-asset);
+		border-color: var(--pn-asset);
 	}
 </style>

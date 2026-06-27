@@ -32,10 +32,10 @@
 	$effect(() => () => clearTimeout(resetTimer));
 </script>
 
-<div class="poi-terminal">
+<div class="pn-terminal">
 	{#if children}
 		<button
-			class="poi-terminal__copy"
+			class="pn-terminal__copy"
 			type="button"
 			data-copied={copied || undefined}
 			aria-label={copied ? 'Copied' : 'Copy command'}
@@ -44,81 +44,81 @@
 			<span aria-hidden="true">{copied ? '✓' : '⧉'}</span>
 		</button>
 	{/if}
-	<div class="poi-terminal__line">
-		<span class="poi-terminal__sigil">{prompt}</span><span
-			class="poi-terminal__command"
+	<div class="pn-terminal__line">
+		<span class="pn-terminal__sigil">{prompt}</span><span
+			class="pn-terminal__command"
 			bind:this={commandEl}>{@render children?.()}</span
-		>{#if cursor}<span class="poi-terminal__cursor" aria-hidden="true"></span>{/if}
+		>{#if cursor}<span class="pn-terminal__cursor" aria-hidden="true"></span>{/if}
 	</div>
 	{#if children}
-		<span class="poi-terminal__live" aria-live="polite">{copied ? 'Copied' : ''}</span>
+		<span class="pn-terminal__live" aria-live="polite">{copied ? 'Copied' : ''}</span>
 	{/if}
 </div>
 
 <style>
-	.poi-terminal {
+	.pn-terminal {
 		position: relative;
-		padding: var(--poi-space-3);
-		background: var(--poi-surface-base);
-		color: var(--poi-ink);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-2);
+		padding: var(--pn-space-3);
+		background: var(--pn-surface-base);
+		color: var(--pn-ink);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-2);
 		text-transform: none;
 	}
 
-	.poi-terminal__line {
+	.pn-terminal__line {
 		/* Reserve room on the right so a wrapping command never collides with the copy button. */
-		padding-right: var(--poi-space-6);
+		padding-right: var(--pn-space-6);
 	}
-	.poi-terminal__sigil {
-		margin-right: var(--poi-space-2);
-		color: var(--poi-accent);
+	.pn-terminal__sigil {
+		margin-right: var(--pn-space-2);
+		color: var(--pn-accent);
 	}
-	.poi-terminal__command {
+	.pn-terminal__command {
 		/* Preserve the command's own whitespace/newlines; keep it off the line so the
 		   source-formatting whitespace around the sigil/cursor stays collapsible. */
 		white-space: pre-wrap;
 	}
-	.poi-terminal__cursor {
+	.pn-terminal__cursor {
 		display: inline-block;
 		width: 0.5rem;
 		height: 1rem;
 		vertical-align: text-bottom;
-		background: var(--poi-ink);
-		animation: poi-blink 1s steps(1) infinite;
+		background: var(--pn-ink);
+		animation: pn-blink 1s steps(1) infinite;
 	}
 
-	.poi-terminal__copy {
+	.pn-terminal__copy {
 		position: absolute;
-		top: var(--poi-space-2);
-		right: var(--poi-space-2);
+		top: var(--pn-space-2);
+		right: var(--pn-space-2);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		padding: var(--poi-space-1);
+		padding: var(--pn-space-1);
 		background: transparent;
-		color: var(--poi-ink);
+		color: var(--pn-ink);
 		border: none;
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-2);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-2);
 		line-height: 1;
 		cursor: pointer;
-		transition: color 0.15s var(--poi-ease);
+		transition: color 0.15s var(--pn-ease);
 	}
-	.poi-terminal__copy:hover {
-		color: var(--poi-accent);
+	.pn-terminal__copy:hover {
+		color: var(--pn-accent);
 	}
-	.poi-terminal__copy:focus-visible {
+	.pn-terminal__copy:focus-visible {
 		outline: none;
-		box-shadow: var(--poi-focus-ring);
+		box-shadow: var(--pn-focus-ring);
 	}
-	.poi-terminal__copy[data-copied] {
-		color: var(--poi-accent);
+	.pn-terminal__copy[data-copied] {
+		color: var(--pn-accent);
 	}
 
-	.poi-terminal__live {
+	.pn-terminal__live {
 		position: absolute;
 		width: 1px;
 		height: 1px;
@@ -130,7 +130,7 @@
 		border: 0;
 	}
 
-	@keyframes poi-blink {
+	@keyframes pn-blink {
 		0%,
 		50% {
 			opacity: 1;
@@ -142,10 +142,10 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.poi-terminal__cursor {
+		.pn-terminal__cursor {
 			animation: none;
 		}
-		.poi-terminal__copy {
+		.pn-terminal__copy {
 			transition: none;
 		}
 	}

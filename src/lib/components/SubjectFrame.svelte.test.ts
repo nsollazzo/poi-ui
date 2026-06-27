@@ -9,13 +9,13 @@ const body = createRawSnippet(() => ({
 }));
 
 function corner(): HTMLElement {
-	const el = document.querySelector<HTMLElement>('.poi-frame__corner');
-	if (!el) throw new Error('.poi-frame__corner not found');
+	const el = document.querySelector<HTMLElement>('.pn-frame__corner');
+	if (!el) throw new Error('.pn-frame__corner not found');
 	return el;
 }
 function reticle(): HTMLElement {
-	const el = document.querySelector<HTMLElement>('.poi-frame__reticle');
-	if (!el) throw new Error('.poi-frame__reticle not found');
+	const el = document.querySelector<HTMLElement>('.pn-frame__reticle');
+	if (!el) throw new Error('.pn-frame__reticle not found');
 	return el;
 }
 
@@ -36,7 +36,7 @@ describe('SubjectFrame', () => {
 			Comp: SubjectFrame,
 			componentProps: { children: body }
 		});
-		expect(document.querySelectorAll('.poi-frame__corner')).toHaveLength(4);
+		expect(document.querySelectorAll('.pn-frame__corner')).toHaveLength(4);
 	});
 
 	// The motif is theme-driven: The Machine glows its brackets and hides the
@@ -78,7 +78,7 @@ describe('SubjectFrame', () => {
 			componentProps: { solid: true, children: body }
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-frame') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-frame') as HTMLElement).backgroundColor
 		).toBe('rgb(255, 255, 255)');
 	});
 });

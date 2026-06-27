@@ -1,58 +1,58 @@
-/* POI-UI — Layer 2 (semantic): SAMARITAN.
+/* positronick-ui — Layer 2 (semantic): SAMARITAN.
    Light: black + red on white, crisp and glow-free. Cold, total, authoritarian.
    Strictly monochrome — black + red only. */
 [data-theme='samaritan'] {
 	color-scheme: light;
 
-	--poi-surface-base: var(--poi-raw-white);
-	--poi-surface-1: rgba(0, 0, 0, 0.04);
-	--poi-surface-2: rgba(0, 0, 0, 0.06);
-	--poi-surface-3: rgba(0, 0, 0, 0.08);
+	--pn-surface-base: var(--pn-raw-white);
+	--pn-surface-1: rgba(0, 0, 0, 0.04);
+	--pn-surface-2: rgba(0, 0, 0, 0.06);
+	--pn-surface-3: rgba(0, 0, 0, 0.08);
 
-	--poi-ink: var(--poi-raw-black);
-	--poi-ink-dim: rgba(0, 0, 0, 0.55);
-	--poi-line: rgba(0, 0, 0, 0.45);
+	--pn-ink: var(--pn-raw-black);
+	--pn-ink-dim: rgba(0, 0, 0, 0.55);
+	--pn-line: rgba(0, 0, 0, 0.45);
 
 	/* Graph-paper backdrop — faint black grid on white */
-	--poi-grid-line-minor: rgba(0, 0, 0, 0.05);
-	--poi-grid-line-major: rgba(0, 0, 0, 0.1);
+	--pn-grid-line-minor: rgba(0, 0, 0, 0.05);
+	--pn-grid-line-major: rgba(0, 0, 0, 0.1);
 
-	--poi-accent: var(--poi-raw-red-samaritan);
-	--poi-accent-ink: var(--poi-raw-white);
+	--pn-accent: var(--pn-raw-red-samaritan);
+	--pn-accent-ink: var(--pn-raw-white);
 
 	/* Emphasis = crisp red, NO neon glow */
-	--poi-emphasis-shadow: none;
-	--poi-emphasis-text-shadow: none;
+	--pn-emphasis-shadow: none;
+	--pn-emphasis-text-shadow: none;
 
-	--poi-focus-ring: 0 0 0 2px var(--poi-surface-base), 0 0 0 4px var(--poi-accent);
+	--pn-focus-ring: 0 0 0 2px var(--pn-surface-base), 0 0 0 4px var(--pn-accent);
 
 	/* Modal scrim — a Dialog/Sheet darkens the page beneath it regardless of theme polarity */
-	--poi-overlay-bg: rgba(0, 0, 0, 0.7);
+	--pn-overlay-bg: rgba(0, 0, 0, 0.7);
 
-	--poi-selection-bg: var(--poi-accent);
-	--poi-selection-ink: var(--poi-raw-white);
+	--pn-selection-bg: var(--pn-accent);
+	--pn-selection-ink: var(--pn-raw-white);
 
-	--poi-threat: var(--poi-accent);
-	--poi-asset: var(--poi-raw-black);
+	--pn-threat: var(--pn-accent);
+	--pn-asset: var(--pn-raw-black);
 
 	/* Monochrome: "box" accents collapse onto the red/ink set */
-	--poi-box-amber: var(--poi-accent);
-	--poi-box-blue: var(--poi-ink);
-	--poi-box-green: var(--poi-ink);
+	--pn-box-amber: var(--pn-accent);
+	--pn-box-blue: var(--pn-ink);
+	--pn-box-green: var(--pn-ink);
 
 	/* Status (toast) accents — collapse with the monochrome box set; level is also
 	   conveyed non-visually (role + icon), so identical hues here are acceptable */
-	--poi-status-info: var(--poi-box-blue);
-	--poi-status-success: var(--poi-box-green);
-	--poi-status-warning: var(--poi-box-amber);
-	--poi-status-error: var(--poi-accent);
+	--pn-status-info: var(--pn-box-blue);
+	--pn-status-success: var(--pn-box-green);
+	--pn-status-warning: var(--pn-box-amber);
+	--pn-status-error: var(--pn-accent);
 
 	/* SubjectFrame motif: thin full edge + visible crosshair reticle, crisp (no glow) */
-	--poi-frame-edge: var(--poi-line);
-	--poi-frame-reticle: block;
+	--pn-frame-edge: var(--pn-line);
+	--pn-frame-reticle: block;
 
 	/* Window chrome: severe red title bar, white title, no traffic-light dots */
-	--poi-window-bar-bg: var(--poi-accent);
-	--poi-window-bar-ink: var(--poi-accent-ink);
-	--poi-window-dots: none;
+	--pn-window-bar-bg: var(--pn-accent);
+	--pn-window-bar-ink: var(--pn-accent-ink);
+	--pn-window-dots: none;
 }

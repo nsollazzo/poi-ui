@@ -13,88 +13,88 @@
 </script>
 
 <details
-	class="poi-window"
+	class="pn-window"
 	open={!collapsed}
 	ontoggle={(event) => (collapsed = !(event.currentTarget as HTMLDetailsElement).open)}
 >
-	<summary class="poi-window__bar">
-		<span class="poi-window__dots" aria-hidden="true">
-			<span class="poi-window__dot poi-window__dot--min"></span>
-			<span class="poi-window__dot poi-window__dot--max"></span>
-			<span class="poi-window__dot poi-window__dot--close"></span>
+	<summary class="pn-window__bar">
+		<span class="pn-window__dots" aria-hidden="true">
+			<span class="pn-window__dot pn-window__dot--min"></span>
+			<span class="pn-window__dot pn-window__dot--max"></span>
+			<span class="pn-window__dot pn-window__dot--close"></span>
 		</span>
-		<span class="poi-window__title">{title}</span>
+		<span class="pn-window__title">{title}</span>
 	</summary>
-	<div class="poi-window__body">
+	<div class="pn-window__body">
 		{@render children()}
 	</div>
 </details>
 
 <style>
-	.poi-window {
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
-		background: var(--poi-surface-base);
-		color: var(--poi-ink);
+	.pn-window {
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
+		background: var(--pn-surface-base);
+		color: var(--pn-ink);
 	}
 
-	.poi-window__bar {
+	.pn-window__bar {
 		display: flex;
 		align-items: center;
-		gap: var(--poi-space-3);
-		padding: var(--poi-space-2) var(--poi-space-3);
-		background: var(--poi-window-bar-bg);
-		color: var(--poi-window-bar-ink);
-		border-bottom: var(--poi-hairline-width) solid var(--poi-line);
+		gap: var(--pn-space-3);
+		padding: var(--pn-space-2) var(--pn-space-3);
+		background: var(--pn-window-bar-bg);
+		color: var(--pn-window-bar-ink);
+		border-bottom: var(--pn-hairline-width) solid var(--pn-line);
 		cursor: pointer;
 		list-style: none;
 		user-select: none;
 	}
-	.poi-window__bar::-webkit-details-marker {
+	.pn-window__bar::-webkit-details-marker {
 		display: none;
 	}
-	.poi-window__bar:focus-visible {
+	.pn-window__bar:focus-visible {
 		outline: none;
-		box-shadow: var(--poi-focus-ring);
+		box-shadow: var(--pn-focus-ring);
 	}
 
-	.poi-window__title {
-		font-family: var(--poi-font-display);
+	.pn-window__title {
+		font-family: var(--pn-font-display);
 		text-transform: uppercase;
-		letter-spacing: var(--poi-tracking-display);
-		font-size: var(--poi-font-size-2);
+		letter-spacing: var(--pn-tracking-display);
+		font-size: var(--pn-font-size-2);
 	}
 
-	.poi-window__dots {
-		display: var(--poi-window-dots);
-		gap: var(--poi-space-1);
+	.pn-window__dots {
+		display: var(--pn-window-dots);
+		gap: var(--pn-space-1);
 	}
-	.poi-window__dot {
+	.pn-window__dot {
 		width: 0.7rem;
 		height: 0.7rem;
 		border-radius: 50%;
 		opacity: 0.3;
-		transition: opacity 0.15s var(--poi-ease);
+		transition: opacity 0.15s var(--pn-ease);
 	}
-	.poi-window__dot--min {
+	.pn-window__dot--min {
 		background: rgb(27, 201, 60);
 	}
-	.poi-window__dot--max {
+	.pn-window__dot--max {
 		background: rgb(254, 190, 0);
 	}
-	.poi-window__dot--close {
+	.pn-window__dot--close {
 		background: rgb(255, 93, 80);
 	}
-	.poi-window__bar:hover .poi-window__dot {
+	.pn-window__bar:hover .pn-window__dot {
 		opacity: 1;
 	}
 
-	.poi-window__body {
-		padding: var(--poi-space-4);
+	.pn-window__body {
+		padding: var(--pn-space-4);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.poi-window__dot {
+		.pn-window__dot {
 			transition: none;
 		}
 	}

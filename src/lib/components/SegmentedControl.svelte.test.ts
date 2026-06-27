@@ -17,7 +17,7 @@ describe('SegmentedControl', () => {
 			componentProps: { value: 'name', options, label: 'Sort', ariaLabel: 'Sort order' }
 		});
 		await expect.element(screen.getByRole('group', { name: 'Sort order' })).toBeInTheDocument();
-		expect(document.querySelectorAll('.poi-chip[data-active]')).toHaveLength(1);
+		expect(document.querySelectorAll('.pn-chip[data-active]')).toHaveLength(1);
 		await expect
 			.element(screen.getByRole('button', { name: 'A–Z' }))
 			.toHaveAttribute('aria-pressed', 'true');
@@ -38,6 +38,6 @@ describe('SegmentedControl', () => {
 		await expect
 			.element(screen.getByRole('button', { name: 'Newest' }))
 			.toHaveAttribute('aria-pressed', 'true');
-		expect(document.querySelectorAll('.poi-chip[data-active]')).toHaveLength(1);
+		expect(document.querySelectorAll('.pn-chip[data-active]')).toHaveLength(1);
 	});
 });

@@ -15,7 +15,7 @@ describe('Loading', () => {
 
 	test('the cube uses the accent and rotates (animation present)', () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Loading, componentProps: {} });
-		const cs = getComputedStyle(document.querySelector('.poi-loading__cube') as HTMLElement);
+		const cs = getComputedStyle(document.querySelector('.pn-loading__cube') as HTMLElement);
 		expect(cs.borderTopColor).toBe('rgb(255, 0, 0)');
 		expect(cs.animationName).not.toBe('none');
 	});
@@ -24,7 +24,7 @@ describe('Loading', () => {
 	test('solid paints a white fill in Samaritan', () => {
 		render(ThemedHarness, { theme: 'samaritan', Comp: Loading, componentProps: { solid: true } });
 		expect(
-			getComputedStyle(document.querySelector('.poi-loading') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-loading') as HTMLElement).backgroundColor
 		).toBe('rgb(255, 255, 255)');
 	});
 });

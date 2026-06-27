@@ -4,8 +4,8 @@ import ThemedHarness from '../../test-support/ThemedHarness.svelte';
 import StatusRow from './StatusRow.svelte';
 
 function valueEl(): HTMLElement {
-	const el = document.querySelector<HTMLElement>('.poi-status-row__value');
-	if (!el) throw new Error('.poi-status-row__value not found');
+	const el = document.querySelector<HTMLElement>('.pn-status-row__value');
+	if (!el) throw new Error('.pn-status-row__value not found');
 	return el;
 }
 
@@ -26,7 +26,7 @@ describe('StatusRow', () => {
 			Comp: StatusRow,
 			componentProps: { label: 'A', value: 'B' }
 		});
-		const cs = getComputedStyle(document.querySelector('.poi-status-row') as HTMLElement);
+		const cs = getComputedStyle(document.querySelector('.pn-status-row') as HTMLElement);
 		expect(cs.borderBottomStyle).toBe('solid');
 		expect(cs.borderBottomWidth).toBe('1px');
 	});
@@ -62,7 +62,7 @@ describe('StatusRow', () => {
 			componentProps: { label: 'A', value: 'B', solid: true }
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-status-row') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-status-row') as HTMLElement).backgroundColor
 		).toBe('rgb(255, 255, 255)');
 	});
 });

@@ -25,9 +25,9 @@ describe('Terminal', () => {
 			Comp: Terminal,
 			componentProps: { children: content }
 		});
-		const term = getComputedStyle(document.querySelector('.poi-terminal') as HTMLElement);
+		const term = getComputedStyle(document.querySelector('.pn-terminal') as HTMLElement);
 		expect(term.fontFamily.toLowerCase()).toContain('jetbrains mono');
-		const cursor = getComputedStyle(document.querySelector('.poi-terminal__cursor') as HTMLElement);
+		const cursor = getComputedStyle(document.querySelector('.pn-terminal__cursor') as HTMLElement);
 		expect(cursor.animationName).not.toBe('none');
 	});
 
@@ -54,7 +54,7 @@ describe('Terminal', () => {
 			Comp: Terminal,
 			componentProps: { prompt: '$' }
 		});
-		expect(document.querySelector('.poi-terminal__copy')).toBeNull();
+		expect(document.querySelector('.pn-terminal__copy')).toBeNull();
 	});
 
 	test('omits the cursor when cursor={false}', () => {
@@ -63,6 +63,6 @@ describe('Terminal', () => {
 			Comp: Terminal,
 			componentProps: { children: content, cursor: false }
 		});
-		expect(document.querySelector('.poi-terminal__cursor')).toBeNull();
+		expect(document.querySelector('.pn-terminal__cursor')).toBeNull();
 	});
 });

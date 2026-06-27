@@ -18,7 +18,7 @@ const timers: Record<string, ReturnType<typeof setTimeout>> = {};
 export const store = $state<{ items: ToastItem[] }>({ items: [] });
 
 export function add(message: string, level: ToastLevel, duration: number): string {
-	const id = `poi-toast-${++counter}`;
+	const id = `pn-toast-${++counter}`;
 	store.items.push({ id, message, level, duration });
 	// Only schedule auto-dismiss in the browser — a timer on the server would fire
 	// into a request that has already been sent. (Toasts are client-triggered.)

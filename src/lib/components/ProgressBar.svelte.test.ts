@@ -4,13 +4,13 @@ import ThemedHarness from '../../test-support/ThemedHarness.svelte';
 import ProgressBar from './ProgressBar.svelte';
 
 function bar(): HTMLElement {
-	const el = document.querySelector<HTMLElement>('.poi-progress');
-	if (!el) throw new Error('.poi-progress not found');
+	const el = document.querySelector<HTMLElement>('.pn-progress');
+	if (!el) throw new Error('.pn-progress not found');
 	return el;
 }
 function fill(): HTMLElement {
-	const el = document.querySelector<HTMLElement>('.poi-progress__fill');
-	if (!el) throw new Error('.poi-progress__fill not found');
+	const el = document.querySelector<HTMLElement>('.pn-progress__fill');
+	if (!el) throw new Error('.pn-progress__fill not found');
 	return el;
 }
 

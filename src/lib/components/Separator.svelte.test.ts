@@ -31,7 +31,7 @@ describe('Separator', () => {
 			Comp: Separator,
 			componentProps: { orientation: 'horizontal' }
 		});
-		expect(getComputedStyle(document.querySelector('.poi-separator') as HTMLElement).height).toBe(
+		expect(getComputedStyle(document.querySelector('.pn-separator') as HTMLElement).height).toBe(
 			'1px'
 		);
 	});
@@ -42,7 +42,7 @@ describe('Separator', () => {
 			Comp: Separator
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-separator') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-separator') as HTMLElement).backgroundColor
 		).toBe('rgb(170, 163, 163)');
 	});
 
@@ -52,7 +52,7 @@ describe('Separator', () => {
 			Comp: Separator
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-separator') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-separator') as HTMLElement).backgroundColor
 		).toBe('rgba(0, 0, 0, 0.45)');
 	});
 });

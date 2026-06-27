@@ -23,7 +23,7 @@
 	}: Props = $props();
 </script>
 
-<div class="poi-chip-group {className}" role="group" aria-label={ariaLabel}>
+<div class="pn-chip-group {className}" role="group" aria-label={ariaLabel}>
 	{#if allLabel}
 		<Chip pressed={value === null} onclick={() => (value = null)}>{allLabel}</Chip>
 	{/if}
@@ -35,10 +35,10 @@
 </div>
 
 <style>
-	.poi-chip-group {
+	.pn-chip-group {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: var(--poi-space-2);
+		gap: var(--pn-space-2);
 	}
 </style>

@@ -1,8 +1,13 @@
-// POI-UI — public entry point.
+// positronick-ui — public entry point.
 
 // Theme
 export { default as ThemeProvider } from './theme/ThemeProvider.svelte';
-export { useTheme, oppositeTheme, type PoiTheme, type ThemeContext } from './theme/context.js';
+export {
+	useTheme,
+	oppositeTheme,
+	type PositronickTheme,
+	type ThemeContext
+} from './theme/context.js';
 export {
 	MACHINE_DESIGNATIONS,
 	SAMARITAN_DESIGNATIONS,

@@ -18,7 +18,7 @@
 </script>
 
 <div
-	class="poi-progress"
+	class="pn-progress"
 	data-size={size}
 	data-solid={solid || undefined}
 	role="progressbar"
@@ -27,35 +27,35 @@
 	aria-valuemax={max}
 	aria-label={label}
 >
-	<div class="poi-progress__fill" style:width="{pct}%"></div>
+	<div class="pn-progress__fill" style:width="{pct}%"></div>
 </div>
 
 <style>
-	.poi-progress {
+	.pn-progress {
 		overflow: hidden;
-		background: var(--poi-surface-2);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
+		background: var(--pn-surface-2);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
 	}
-	.poi-progress[data-size='sm'] {
+	.pn-progress[data-size='sm'] {
 		height: 0.5rem;
 	}
-	.poi-progress[data-size='md'] {
+	.pn-progress[data-size='md'] {
 		height: 1rem;
 	}
-	.poi-progress[data-size='lg'] {
+	.pn-progress[data-size='lg'] {
 		height: 1.5rem;
 	}
 
-	.poi-progress__fill {
+	.pn-progress__fill {
 		height: 100%;
-		background: var(--poi-accent);
-		box-shadow: var(--poi-emphasis-shadow);
-		transition: width 0.3s var(--poi-ease);
+		background: var(--pn-accent);
+		box-shadow: var(--pn-emphasis-shadow);
+		transition: width 0.3s var(--pn-ease);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.poi-progress__fill {
+		.pn-progress__fill {
 			transition: none;
 		}
 	}

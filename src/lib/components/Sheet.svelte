@@ -66,7 +66,7 @@
 
 <dialog
 	bind:this={dialog}
-	class="poi-sheet {className}"
+	class="pn-sheet {className}"
 	data-theme={overlayTheme.current}
 	data-side={side}
 	aria-modal="true"
@@ -78,68 +78,68 @@
 		if (e.target === dialog) dialog?.close();
 	}}
 >
-	<div class="poi-sheet__content">
+	<div class="pn-sheet__content">
 		{#if title}
-			<h2 id={titleId} class="poi-sheet__title">{title}</h2>
+			<h2 id={titleId} class="pn-sheet__title">{title}</h2>
 		{/if}
 		{@render children()}
 	</div>
 </dialog>
 
 <style>
-	.poi-sheet {
+	.pn-sheet {
 		margin: 0;
 		width: min(90vw, 24rem);
 		max-width: 90vw;
 		height: 100dvh;
 		max-height: 100dvh;
 		padding: 0;
-		background: var(--poi-surface-base);
-		color: var(--poi-ink);
+		background: var(--pn-surface-base);
+		color: var(--pn-ink);
 		border: 0;
-		border-radius: var(--poi-radius);
+		border-radius: var(--pn-radius);
 	}
-	.poi-sheet[data-side='right'] {
+	.pn-sheet[data-side='right'] {
 		margin-left: auto;
-		border-left: var(--poi-hairline-width) solid var(--poi-line);
+		border-left: var(--pn-hairline-width) solid var(--pn-line);
 	}
-	.poi-sheet[data-side='left'] {
+	.pn-sheet[data-side='left'] {
 		margin-right: auto;
-		border-right: var(--poi-hairline-width) solid var(--poi-line);
+		border-right: var(--pn-hairline-width) solid var(--pn-line);
 	}
-	.poi-sheet::backdrop {
-		background: var(--poi-overlay-bg, rgba(0, 0, 0, 0.7));
+	.pn-sheet::backdrop {
+		background: var(--pn-overlay-bg, rgba(0, 0, 0, 0.7));
 	}
-	.poi-sheet__content {
+	.pn-sheet__content {
 		height: 100%;
 		overflow-y: auto;
-		padding: var(--poi-space-5);
+		padding: var(--pn-space-5);
 	}
-	.poi-sheet__title {
-		margin: 0 0 var(--poi-space-4);
-		color: var(--poi-accent);
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-1);
+	.pn-sheet__title {
+		margin: 0 0 var(--pn-space-4);
+		color: var(--pn-accent);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-1);
 		text-transform: uppercase;
-		letter-spacing: var(--poi-tracking-display);
+		letter-spacing: var(--pn-tracking-display);
 	}
 
 	/* Slide-in via @starting-style (Chromium); degrades to an instant show elsewhere. */
-	.poi-sheet[open] {
+	.pn-sheet[open] {
 		transform: translateX(0);
-		transition: transform 0.3s var(--poi-ease);
+		transition: transform 0.3s var(--pn-ease);
 	}
 	@starting-style {
-		.poi-sheet[data-side='right'][open] {
+		.pn-sheet[data-side='right'][open] {
 			transform: translateX(100%);
 		}
-		.poi-sheet[data-side='left'][open] {
+		.pn-sheet[data-side='left'][open] {
 			transform: translateX(-100%);
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.poi-sheet[open] {
+		.pn-sheet[open] {
 			transition: none;
 		}
 	}

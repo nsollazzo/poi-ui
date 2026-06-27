@@ -8,7 +8,7 @@ const baseProps = (overrides: Record<string, unknown> = {}) => ({
 	...overrides
 });
 
-const input = () => document.querySelector('.poi-toolbar__search') as HTMLInputElement;
+const input = () => document.querySelector('.pn-toolbar__search') as HTMLInputElement;
 
 describe('FilterToolbar', () => {
 	test('renders a search input named by its placeholder', async () => {
@@ -87,7 +87,7 @@ describe('FilterToolbar', () => {
 			Comp: FilterToolbar,
 			componentProps: baseProps({ filters: [] })
 		});
-		expect(document.querySelector('.poi-toolbar__tokens')).toBeNull();
+		expect(document.querySelector('.pn-toolbar__tokens')).toBeNull();
 	});
 
 	test('clicking a token removes that filter and refocuses the search input', async () => {
@@ -125,7 +125,7 @@ describe('FilterToolbar', () => {
 			Comp: FilterToolbar,
 			componentProps: baseProps({ filters: [{ label: 'F', remove: () => {} }] })
 		});
-		await expect.poll(() => document.querySelector('.poi-toolbar__tokens')).not.toBeNull();
-		expect(document.querySelector('.poi-toolbar__clear')).toBeNull();
+		await expect.poll(() => document.querySelector('.pn-toolbar__tokens')).not.toBeNull();
+		expect(document.querySelector('.pn-toolbar__clear')).toBeNull();
 	});
 });

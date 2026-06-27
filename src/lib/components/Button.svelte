@@ -25,7 +25,7 @@
 </script>
 
 <button
-	class="poi-button"
+	class="pn-button"
 	class:rotate={rotateOnHover}
 	data-tone={tone}
 	data-solid={solid || undefined}
@@ -33,65 +33,65 @@
 	{disabled}
 	{onclick}
 >
-	<span class="poi-button__content">{@render children()}</span>
+	<span class="pn-button__content">{@render children()}</span>
 </button>
 
 <style>
-	.poi-button {
+	.pn-button {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: var(--poi-space-2);
-		padding: var(--poi-space-2) var(--poi-space-4);
+		gap: var(--pn-space-2);
+		padding: var(--pn-space-2) var(--pn-space-4);
 		background: transparent;
-		color: var(--poi-ink);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
-		font-family: var(--poi-font-display);
-		font-size: var(--poi-font-size-2);
+		color: var(--pn-ink);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
+		font-family: var(--pn-font-display);
+		font-size: var(--pn-font-size-2);
 		text-transform: uppercase;
-		letter-spacing: var(--poi-tracking-display);
+		letter-spacing: var(--pn-tracking-display);
 		cursor: pointer;
 		transition:
-			box-shadow 0.15s var(--poi-ease),
+			box-shadow 0.15s var(--pn-ease),
 			color 0.15s,
 			border-color 0.15s;
 	}
 
-	.poi-button[data-tone='threat'] {
-		color: var(--poi-accent);
-		border-color: var(--poi-accent);
+	.pn-button[data-tone='threat'] {
+		color: var(--pn-accent);
+		border-color: var(--pn-accent);
 	}
 
-	.poi-button:hover:not(:disabled) {
-		color: var(--poi-accent);
-		border-color: var(--poi-accent);
-		box-shadow: var(--poi-emphasis-shadow);
+	.pn-button:hover:not(:disabled) {
+		color: var(--pn-accent);
+		border-color: var(--pn-accent);
+		box-shadow: var(--pn-emphasis-shadow);
 	}
 
-	.poi-button:focus-visible {
+	.pn-button:focus-visible {
 		outline: none;
-		box-shadow: var(--poi-focus-ring);
+		box-shadow: var(--pn-focus-ring);
 	}
 
-	.poi-button:disabled {
+	.pn-button:disabled {
 		opacity: 0.4;
 		cursor: not-allowed;
 	}
 
-	.poi-button.rotate .poi-button__content {
-		transition: transform var(--poi-dur-pulse) var(--poi-ease);
+	.pn-button.rotate .pn-button__content {
+		transition: transform var(--pn-dur-pulse) var(--pn-ease);
 	}
-	.poi-button.rotate:hover:not(:disabled) .poi-button__content {
+	.pn-button.rotate:hover:not(:disabled) .pn-button__content {
 		transform: rotate(180deg);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.poi-button,
-		.poi-button__content {
+		.pn-button,
+		.pn-button__content {
 			transition: none;
 		}
-		.poi-button.rotate:hover .poi-button__content {
+		.pn-button.rotate:hover .pn-button__content {
 			transform: none;
 		}
 	}

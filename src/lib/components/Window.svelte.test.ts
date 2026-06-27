@@ -7,8 +7,8 @@ import Window from './Window.svelte';
 const body = createRawSnippet(() => ({ render: () => `<p data-testid="win-body">ONLINE</p>` }));
 
 function details(): HTMLDetailsElement {
-	const el = document.querySelector<HTMLDetailsElement>('details.poi-window');
-	if (!el) throw new Error('details.poi-window not found');
+	const el = document.querySelector<HTMLDetailsElement>('details.pn-window');
+	if (!el) throw new Error('details.pn-window not found');
 	return el;
 }
 
@@ -43,7 +43,7 @@ describe('Window', () => {
 		});
 		// Visible (the exact flex/inline-flex value is blockified as a flex item).
 		expect(
-			getComputedStyle(document.querySelector('.poi-window__dots') as HTMLElement).display
+			getComputedStyle(document.querySelector('.pn-window__dots') as HTMLElement).display
 		).not.toBe('none');
 	});
 
@@ -54,10 +54,10 @@ describe('Window', () => {
 			componentProps: { title: 'S', children: body }
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-window__dots') as HTMLElement).display
+			getComputedStyle(document.querySelector('.pn-window__dots') as HTMLElement).display
 		).toBe('none');
 		expect(
-			getComputedStyle(document.querySelector('.poi-window__bar') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-window__bar') as HTMLElement).backgroundColor
 		).toBe('rgb(232, 0, 13)');
 	});
 });

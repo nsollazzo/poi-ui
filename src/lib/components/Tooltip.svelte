@@ -87,7 +87,7 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <span
 	bind:this={wrapper}
-	class="poi-tooltip {className}"
+	class="pn-tooltip {className}"
 	onmouseenter={show}
 	onmouseleave={hide}
 	onfocusin={show}
@@ -96,7 +96,7 @@
 	{@render children()}
 	{#if open}
 		<span
-			class="poi-tooltip__bubble"
+			class="pn-tooltip__bubble"
 			role="tooltip"
 			id={bubbleId}
 			data-theme={overlayTheme.current}
@@ -106,52 +106,52 @@
 </span>
 
 <style>
-	.poi-tooltip {
+	.pn-tooltip {
 		position: relative;
 		display: inline-flex;
 	}
 
-	.poi-tooltip__bubble {
+	.pn-tooltip__bubble {
 		position: absolute;
 		z-index: 1;
 		pointer-events: none;
 		white-space: nowrap;
-		padding: var(--poi-space-1) var(--poi-space-2);
+		padding: var(--pn-space-1) var(--pn-space-2);
 		/* surface-2 is a translucent lift; composite it over the opaque base so an
 		   inverted bubble doesn't see through to the opposite-polarity page. */
-		background: linear-gradient(var(--poi-surface-2), var(--poi-surface-2)) var(--poi-surface-base);
-		color: var(--poi-ink);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-1);
+		background: linear-gradient(var(--pn-surface-2), var(--pn-surface-2)) var(--pn-surface-base);
+		color: var(--pn-ink);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-1);
 	}
 
 	/* Pure-CSS placement. No collision detection / flipping — a tooltip near a
 	   viewport edge can overflow; that's an accepted limitation for a lightweight
 	   primitive. */
-	.poi-tooltip__bubble[data-side='top'] {
+	.pn-tooltip__bubble[data-side='top'] {
 		bottom: 100%;
 		left: 50%;
 		transform: translateX(-50%);
-		margin-bottom: var(--poi-space-2);
+		margin-bottom: var(--pn-space-2);
 	}
-	.poi-tooltip__bubble[data-side='bottom'] {
+	.pn-tooltip__bubble[data-side='bottom'] {
 		top: 100%;
 		left: 50%;
 		transform: translateX(-50%);
-		margin-top: var(--poi-space-2);
+		margin-top: var(--pn-space-2);
 	}
-	.poi-tooltip__bubble[data-side='left'] {
+	.pn-tooltip__bubble[data-side='left'] {
 		right: 100%;
 		top: 50%;
 		transform: translateY(-50%);
-		margin-right: var(--poi-space-2);
+		margin-right: var(--pn-space-2);
 	}
-	.poi-tooltip__bubble[data-side='right'] {
+	.pn-tooltip__bubble[data-side='right'] {
 		left: 100%;
 		top: 50%;
 		transform: translateY(-50%);
-		margin-left: var(--poi-space-2);
+		margin-left: var(--pn-space-2);
 	}
 </style>

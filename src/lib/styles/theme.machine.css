@@ -1,59 +1,59 @@
-/* POI-UI — Layer 2 (semantic): THE MACHINE.
+/* positronick-ui — Layer 2 (semantic): THE MACHINE.
    Dark: white + red on black, neon-glow emphasis. Watchful, benevolent. */
 [data-theme='machine'] {
 	color-scheme: dark;
 
-	--poi-surface-base: var(--poi-raw-black);
-	--poi-surface-1: rgba(255, 255, 255, 0.04);
-	--poi-surface-2: rgba(255, 255, 255, 0.07);
-	--poi-surface-3: rgba(255, 255, 255, 0.12);
+	--pn-surface-base: var(--pn-raw-black);
+	--pn-surface-1: rgba(255, 255, 255, 0.04);
+	--pn-surface-2: rgba(255, 255, 255, 0.07);
+	--pn-surface-3: rgba(255, 255, 255, 0.12);
 
-	--poi-ink: var(--poi-raw-white);
-	--poi-ink-dim: rgba(255, 255, 255, 0.6);
-	--poi-line: #aaa3a3;
+	--pn-ink: var(--pn-raw-white);
+	--pn-ink-dim: rgba(255, 255, 255, 0.6);
+	--pn-line: #aaa3a3;
 
 	/* Graph-paper backdrop — faint white grid on black */
-	--poi-grid-line-minor: rgba(255, 255, 255, 0.08);
-	--poi-grid-line-major: rgba(255, 255, 255, 0.16);
+	--pn-grid-line-minor: rgba(255, 255, 255, 0.08);
+	--pn-grid-line-major: rgba(255, 255, 255, 0.16);
 
-	--poi-accent: var(--poi-raw-red-machine);
-	--poi-accent-ink: var(--poi-raw-white);
+	--pn-accent: var(--pn-raw-red-machine);
+	--pn-accent-ink: var(--pn-raw-white);
 
 	/* Emphasis = outer neon glow */
-	--poi-emphasis-shadow: 0 0 12px var(--poi-accent);
-	--poi-emphasis-text-shadow: 0 0 8px var(--poi-accent);
+	--pn-emphasis-shadow: 0 0 12px var(--pn-accent);
+	--pn-emphasis-text-shadow: 0 0 8px var(--pn-accent);
 
 	/* Focus ring: surface-colored inner gap + accent outer ring (visible on any surface) */
-	--poi-focus-ring: 0 0 0 2px var(--poi-surface-base), 0 0 0 4px var(--poi-accent);
+	--pn-focus-ring: 0 0 0 2px var(--pn-surface-base), 0 0 0 4px var(--pn-accent);
 
 	/* Modal scrim — a Dialog/Sheet darkens the page beneath it regardless of theme polarity */
-	--poi-overlay-bg: rgba(0, 0, 0, 0.7);
+	--pn-overlay-bg: rgba(0, 0, 0, 0.7);
 
 	/* Selection */
-	--poi-selection-bg: rgba(134, 0, 0, 0.6);
-	--poi-selection-ink: rgba(255, 0, 0, 0.95);
+	--pn-selection-bg: rgba(134, 0, 0, 0.6);
+	--pn-selection-ink: rgba(255, 0, 0, 0.95);
 
 	/* Designation accents */
-	--poi-threat: var(--poi-accent);
-	--poi-asset: var(--poi-raw-white);
+	--pn-threat: var(--pn-accent);
+	--pn-asset: var(--pn-raw-white);
 
 	/* Opt-in canonical Machine "box" accents (default stays white + red) */
-	--poi-box-amber: var(--poi-raw-amber);
-	--poi-box-blue: var(--poi-raw-blue);
-	--poi-box-green: var(--poi-raw-green);
+	--pn-box-amber: var(--pn-raw-amber);
+	--pn-box-blue: var(--pn-raw-blue);
+	--pn-box-green: var(--pn-raw-green);
 
 	/* Status (toast) accents — map onto the box/accent palette */
-	--poi-status-info: var(--poi-box-blue);
-	--poi-status-success: var(--poi-box-green);
-	--poi-status-warning: var(--poi-box-amber);
-	--poi-status-error: var(--poi-accent);
+	--pn-status-info: var(--pn-box-blue);
+	--pn-status-success: var(--pn-box-green);
+	--pn-status-warning: var(--pn-box-amber);
+	--pn-status-error: var(--pn-accent);
 
 	/* SubjectFrame motif: solid corner brackets (glowing), no full edge, no reticle */
-	--poi-frame-edge: transparent;
-	--poi-frame-reticle: none;
+	--pn-frame-edge: transparent;
+	--pn-frame-reticle: none;
 
 	/* Window chrome: dark title bar, white title, mac-style traffic-light dots */
-	--poi-window-bar-bg: var(--poi-surface-2);
-	--poi-window-bar-ink: var(--poi-ink);
-	--poi-window-dots: inline-flex;
+	--pn-window-bar-bg: var(--pn-surface-2);
+	--pn-window-bar-ink: var(--pn-ink);
+	--pn-window-dots: inline-flex;
 }

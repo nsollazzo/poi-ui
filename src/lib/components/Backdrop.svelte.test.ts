@@ -9,8 +9,8 @@ const body = createRawSnippet(() => ({
 }));
 
 function layer(): HTMLElement {
-	const el = document.querySelector<HTMLElement>('.poi-backdrop__layer');
-	if (!el) throw new Error('.poi-backdrop__layer not found');
+	const el = document.querySelector<HTMLElement>('.pn-backdrop__layer');
+	if (!el) throw new Error('.pn-backdrop__layer not found');
 	return el;
 }
 
@@ -22,8 +22,8 @@ describe('Backdrop', () => {
 			componentProps: { children: body }
 		});
 		await expect.element(screen.getByTestId('bd-body')).toBeInTheDocument();
-		expect(document.querySelector('.poi-backdrop__content')).not.toBeNull();
-		expect(document.querySelector('.poi-backdrop__layer')).not.toBeNull();
+		expect(document.querySelector('.pn-backdrop__content')).not.toBeNull();
+		expect(document.querySelector('.pn-backdrop__layer')).not.toBeNull();
 	});
 
 	test('fills the viewport (does not collapse to content height)', () => {
@@ -32,10 +32,10 @@ describe('Backdrop', () => {
 			Comp: Backdrop,
 			componentProps: { children: body }
 		});
-		const root = document.querySelector<HTMLElement>('.poi-backdrop');
-		if (!root) throw new Error('.poi-backdrop not found');
+		const root = document.querySelector<HTMLElement>('.pn-backdrop');
+		if (!root) throw new Error('.pn-backdrop not found');
 		// With short content, min-height:100dvh makes the backdrop at least fill the
-		// viewport. (The old min-height:100% computed to 0 because .poi-root has no
+		// viewport. (The old min-height:100% computed to 0 because .pn-root has no
 		// height, collapsing the backdrop to its content — a mere >0 check missed that.)
 		expect(root.getBoundingClientRect().height).toBeGreaterThanOrEqual(window.innerHeight);
 	});

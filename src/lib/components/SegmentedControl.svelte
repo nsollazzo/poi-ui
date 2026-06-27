@@ -17,9 +17,9 @@
 	let { value = $bindable(), options, label, ariaLabel, class: className = '' }: Props = $props();
 </script>
 
-<div class="poi-segmented {className}">
-	{#if label}<span class="poi-segmented__label">{label}</span>{/if}
-	<div class="poi-segmented__track" role="group" aria-label={ariaLabel}>
+<div class="pn-segmented {className}">
+	{#if label}<span class="pn-segmented__label">{label}</span>{/if}
+	<div class="pn-segmented__track" role="group" aria-label={ariaLabel}>
 		{#each options as o (o.value)}
 			<Chip pressed={value === o.value} onclick={() => (value = o.value)}>{o.label}</Chip>
 		{/each}
@@ -27,34 +27,34 @@
 </div>
 
 <style>
-	.poi-segmented {
+	.pn-segmented {
 		display: inline-flex;
 		align-items: center;
-		gap: var(--poi-space-2);
+		gap: var(--pn-space-2);
 	}
-	.poi-segmented__label {
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-1);
+	.pn-segmented__label {
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-1);
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
-		color: var(--poi-ink-dim);
+		color: var(--pn-ink-dim);
 	}
-	.poi-segmented__track {
+	.pn-segmented__track {
 		display: flex;
 		align-items: center;
 	}
 	/* Drop the doubled border so the segments read as one connected control.
 	   (A -1px margin overlap leaves subpixel gaps at fractional zoom levels;
 	   flush boxes can't.) */
-	.poi-segmented__track :global(.poi-chip + .poi-chip) {
+	.pn-segmented__track :global(.pn-chip + .pn-chip) {
 		border-left: none;
 	}
 	/* Keep the focused segment's ring above its neighbours. */
-	.poi-segmented__track :global(.poi-chip[data-active]) {
+	.pn-segmented__track :global(.pn-chip[data-active]) {
 		position: relative;
 		z-index: 1;
 	}
-	.poi-segmented__track :global(.poi-chip:focus-visible) {
+	.pn-segmented__track :global(.pn-chip:focus-visible) {
 		position: relative;
 		z-index: 2;
 	}

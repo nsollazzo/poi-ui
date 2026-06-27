@@ -14,86 +14,86 @@
 	let { density, title, tone = 'neutral', children, footer }: Props = $props();
 </script>
 
-<section class="poi-panel" data-density={density} data-tone={tone}>
+<section class="pn-panel" data-density={density} data-tone={tone}>
 	{#if title}
-		<header class="poi-panel__title">{title}</header>
+		<header class="pn-panel__title">{title}</header>
 	{/if}
-	<div class="poi-panel__body">
+	<div class="pn-panel__body">
 		{@render children()}
 	</div>
 	{#if footer}
-		<footer class="poi-panel__footer">{@render footer()}</footer>
+		<footer class="pn-panel__footer">{@render footer()}</footer>
 	{/if}
 </section>
 
 <style>
 	/* Backgrounds stay on the base surface so dim/accent text keeps WCAG-AA
 	   contrast in both themes; depth comes from hairline dividers, not fills. */
-	.poi-panel {
-		background: var(--poi-surface-base);
-		color: var(--poi-ink);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
+	.pn-panel {
+		background: var(--pn-surface-base);
+		color: var(--pn-ink);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
 	}
-	.poi-panel[data-tone='threat'] {
-		border-color: var(--poi-accent);
-		box-shadow: var(--poi-emphasis-shadow);
+	.pn-panel[data-tone='threat'] {
+		border-color: var(--pn-accent);
+		box-shadow: var(--pn-emphasis-shadow);
 	}
-	.poi-panel[data-tone='asset'] {
-		border-color: var(--poi-asset);
+	.pn-panel[data-tone='asset'] {
+		border-color: var(--pn-asset);
 	}
 
-	.poi-panel__title {
-		border-bottom: var(--poi-hairline-width) solid var(--poi-line);
-		color: var(--poi-ink);
-		font-family: var(--poi-font-display);
+	.pn-panel__title {
+		border-bottom: var(--pn-hairline-width) solid var(--pn-line);
+		color: var(--pn-ink);
+		font-family: var(--pn-font-display);
 		text-transform: uppercase;
-		letter-spacing: var(--poi-tracking-display);
+		letter-spacing: var(--pn-tracking-display);
 	}
-	.poi-panel[data-tone='threat'] .poi-panel__title {
-		color: var(--poi-accent);
-		border-bottom-color: var(--poi-accent);
-		text-shadow: var(--poi-emphasis-text-shadow);
+	.pn-panel[data-tone='threat'] .pn-panel__title {
+		color: var(--pn-accent);
+		border-bottom-color: var(--pn-accent);
+		text-shadow: var(--pn-emphasis-text-shadow);
 	}
 
-	.poi-panel__footer {
-		border-top: var(--poi-hairline-width) solid var(--poi-line);
-		color: var(--poi-ink-dim);
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-1);
+	.pn-panel__footer {
+		border-top: var(--pn-hairline-width) solid var(--pn-line);
+		color: var(--pn-ink-dim);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-1);
 	}
 
 	/* Density = spacing + title prominence. */
-	.poi-panel[data-density='block'] .poi-panel__title {
-		padding: var(--poi-space-3) var(--poi-space-4);
-		font-size: var(--poi-font-size-4);
+	.pn-panel[data-density='block'] .pn-panel__title {
+		padding: var(--pn-space-3) var(--pn-space-4);
+		font-size: var(--pn-font-size-4);
 	}
-	.poi-panel[data-density='block'] .poi-panel__body {
-		padding: var(--poi-space-4);
+	.pn-panel[data-density='block'] .pn-panel__body {
+		padding: var(--pn-space-4);
 	}
-	.poi-panel[data-density='block'] .poi-panel__footer {
-		padding: var(--poi-space-3) var(--poi-space-4);
-	}
-
-	.poi-panel[data-density='card'] .poi-panel__title {
-		padding: var(--poi-space-2) var(--poi-space-3);
-		font-size: var(--poi-font-size-3);
-	}
-	.poi-panel[data-density='card'] .poi-panel__body {
-		padding: var(--poi-space-3);
-	}
-	.poi-panel[data-density='card'] .poi-panel__footer {
-		padding: var(--poi-space-2) var(--poi-space-3);
+	.pn-panel[data-density='block'] .pn-panel__footer {
+		padding: var(--pn-space-3) var(--pn-space-4);
 	}
 
-	.poi-panel[data-density='box'] .poi-panel__title {
-		padding: var(--poi-space-1) var(--poi-space-2);
-		font-size: var(--poi-font-size-1);
+	.pn-panel[data-density='card'] .pn-panel__title {
+		padding: var(--pn-space-2) var(--pn-space-3);
+		font-size: var(--pn-font-size-3);
 	}
-	.poi-panel[data-density='box'] .poi-panel__body {
-		padding: var(--poi-space-2);
+	.pn-panel[data-density='card'] .pn-panel__body {
+		padding: var(--pn-space-3);
 	}
-	.poi-panel[data-density='box'] .poi-panel__footer {
-		padding: var(--poi-space-1) var(--poi-space-2);
+	.pn-panel[data-density='card'] .pn-panel__footer {
+		padding: var(--pn-space-2) var(--pn-space-3);
+	}
+
+	.pn-panel[data-density='box'] .pn-panel__title {
+		padding: var(--pn-space-1) var(--pn-space-2);
+		font-size: var(--pn-font-size-1);
+	}
+	.pn-panel[data-density='box'] .pn-panel__body {
+		padding: var(--pn-space-2);
+	}
+	.pn-panel[data-density='box'] .pn-panel__footer {
+		padding: var(--pn-space-1) var(--pn-space-2);
 	}
 </style>
