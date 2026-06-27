@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a problem with POI-UI
+description: Report a problem with positronick-ui
 labels: ['bug']
 body:
   - type: markdown
@@ -8,7 +8,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: POI-UI version
+      label: positronick-ui version
       placeholder: e.g. 0.1.0
     validations:
       required: true

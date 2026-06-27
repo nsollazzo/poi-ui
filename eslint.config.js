@@ -46,7 +46,7 @@ export default defineConfig(
 		rules: {}
 	},
 	{
-		// poi-ui is a framework-agnostic component LIBRARY: <a href> in components must
+		// positronick-ui is a framework-agnostic component LIBRARY: <a href> in components must
 		// pass consumer-provided hrefs through verbatim. resolve() is a SvelteKit
 		// app-route concern that doesn't apply to library link components. (The demo
 		// app under src/routes keeps the rule.)

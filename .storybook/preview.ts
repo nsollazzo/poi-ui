@@ -11,7 +11,7 @@ const preview: Preview = {
 		},
 
 		a11y: {
-			// Accessibility is a core promise of POI-UI: fail CI on axe violations.
+			// Accessibility is a core promise of positronick-ui: fail CI on axe violations.
 			test: 'error'
 		}
 	}

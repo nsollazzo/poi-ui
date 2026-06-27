@@ -1,5 +1,5 @@
 {
-	"name": "@nsollazzo/poi-ui",
+	"name": "@positronick/ui",
 	"version": "0.4.1",
 	"description": "A Svelte 5 component library and design system styled after The Machine and Samaritan from Person of Interest. One component set, two runtime-switchable themes.",
 	"author": "Nicholas Sollazzo (https://nsollazzo.com)",
@@ -14,13 +14,13 @@
 		"node": ">=22.12",
 		"pnpm": ">=10"
 	},
-	"homepage": "https://github.com/nsollazzo/poi-ui#readme",
+	"homepage": "https://github.com/positronick/ui#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/nsollazzo/poi-ui.git"
+		"url": "git+https://github.com/positronick/ui.git"
 	},
 	"bugs": {
-		"url": "https://github.com/nsollazzo/poi-ui/issues"
+		"url": "https://github.com/positronick/ui/issues"
 	},
 	"scripts": {
 		"dev": "vite dev",
@@ -128,6 +128,7 @@
 		"vitest-browser-svelte": "^2.1.0"
 	},
 	"keywords": [
+		"positronick",
 		"svelte",
 		"svelte5",
 		"component-library",
