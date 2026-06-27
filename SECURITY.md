@@ -5,7 +5,7 @@
 **Please do not open a public issue for security vulnerabilities.**
 
 Report privately via GitHub's
-[**Report a vulnerability**](https://github.com/nsollazzo/poi-ui/security/advisories/new)
+[**Report a vulnerability**](https://github.com/positronick/ui/security/advisories/new)
 form (Security → Advisories). This opens a private channel with the maintainer.
 
 Please include:
@@ -31,7 +31,7 @@ security fixes. Pin a version and upgrade promptly when a patch ships.
 
 ## Scope
 
-`@nsollazzo/poi-ui` is a zero-runtime-dependency Svelte component library: it ships
+`@positronick/ui` is a zero-runtime-dependency Svelte component library: it ships
 compiled components and CSS, runs no install scripts, and makes no network calls.
 The most relevant risks are supply-chain integrity (build/publish pipeline) and
 issues in the published output. Releases are published from CI with
