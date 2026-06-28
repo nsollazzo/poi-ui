@@ -31,8 +31,11 @@ export { default as Dropdown } from './components/Dropdown.svelte';
 export { default as FilterToolbar } from './components/FilterToolbar.svelte';
 export { default as Input } from './components/Input.svelte';
 export { default as Loading } from './components/Loading.svelte';
+export { default as PositronickMark } from './components/PositronickMark.svelte';
 export { default as ProgressBar } from './components/ProgressBar.svelte';
+export { default as ProviderIcon } from './components/ProviderIcon.svelte';
 export { default as RecDot } from './components/RecDot.svelte';
+export { default as ScrollTopButton } from './components/ScrollTopButton.svelte';
 export { default as SegmentedControl } from './components/SegmentedControl.svelte';
 export { default as Separator } from './components/Separator.svelte';
 export { default as Sheet } from './components/Sheet.svelte';
@@ -43,8 +46,11 @@ export type SortDir = 'asc' | 'desc';
 export { default as StatusRow } from './components/StatusRow.svelte';
 export { default as SubjectFrame } from './components/SubjectFrame.svelte';
 export { default as Terminal } from './components/Terminal.svelte';
+export { default as ThemeToggle } from './components/ThemeToggle.svelte';
 export { default as Toaster } from './components/Toaster.svelte';
 export { default as Tooltip } from './components/Tooltip.svelte';
+export { default as UserAvatar } from './components/UserAvatar.svelte';
+export { default as VerifiedBadge } from './components/VerifiedBadge.svelte';
 export { default as Window } from './components/Window.svelte';
 
 // Toast
