@@ -35,6 +35,8 @@
 	--poi-dur-fade: 0.5s;
 	--poi-dur-pulse: 1.2s;
 	--poi-dur-cube: 1.8s;
+	--poi-dur-rain: 1s; /* base raindrop fall time; per-drop speed scales off this */
+	--poi-dur-lightning: 8s; /* base lightning cycle; per-strike cadence scales off this */
 	--poi-ease: ease-in-out;
 
 	/* Raw palette — referenced only by the semantic layer */

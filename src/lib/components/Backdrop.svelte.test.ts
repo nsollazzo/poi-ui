@@ -96,4 +96,72 @@ describe('Backdrop', () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Backdrop, componentProps: { children: body } });
 		expect(getComputedStyle(layer()).pointerEvents).toBe('none');
 	});
+
+	test('no rain layer by default (opt-in)', () => {
+		render(ThemedHarness, { theme: 'machine', Comp: Backdrop, componentProps: { children: body } });
+		expect(document.querySelector('.poi-rain')).toBeNull();
+	});
+
+	test('rain prop renders rain beneath the grid, keeping grid and content', () => {
+		render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Backdrop,
+			componentProps: { children: body, rain: true }
+		});
+		const rain = document.querySelector('.poi-rain');
+		const grid = document.querySelector('.poi-backdrop__layer');
+		expect(rain).not.toBeNull();
+		expect(grid).not.toBeNull();
+		expect(document.querySelector('.poi-backdrop__content')).not.toBeNull();
+		// Rain precedes the grid in the DOM so it paints behind it (both at stacking
+		// level 0, drawn in document order).
+		expect(rain!.compareDocumentPosition(grid!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+	});
+
+	test('rain options configure density', () => {
+		render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Backdrop,
+			componentProps: { children: body, rain: { density: 'downpour' } }
+		});
+		expect(document.querySelectorAll('.poi-rain__drop').length).toBe(140);
+	});
+
+	test('no lightning layer by default (opt-in)', () => {
+		render(ThemedHarness, { theme: 'machine', Comp: Backdrop, componentProps: { children: body } });
+		expect(document.querySelector('.poi-lightning')).toBeNull();
+	});
+
+	test('lightning prop renders lightning above the grid, below content', () => {
+		render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Backdrop,
+			componentProps: { children: body, lightning: true }
+		});
+		const grid = document.querySelector('.poi-backdrop__layer');
+		const bolt = document.querySelector('.poi-lightning');
+		expect(bolt).not.toBeNull();
+		// Lightning follows the grid in the DOM so it paints above it (both at stacking
+		// level 0, drawn in document order); content (z-index 1) still sits on top.
+		expect(grid!.compareDocumentPosition(bolt!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+		expect(document.querySelector('.poi-backdrop__content')).not.toBeNull();
+	});
+
+	test('rain + lightning renders the full storm (both layers)', () => {
+		render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Backdrop,
+			componentProps: { children: body, rain: true, lightning: true }
+		});
+		const rain = document.querySelector('.poi-rain');
+		const grid = document.querySelector('.poi-backdrop__layer');
+		const lightning = document.querySelector('.poi-lightning');
+		expect(rain).not.toBeNull();
+		expect(lightning).not.toBeNull();
+		// rain BEFORE grid (behind it), lightning AFTER grid (above it).
+		expect(rain!.compareDocumentPosition(grid!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+		expect(
+			grid!.compareDocumentPosition(lightning!) & Node.DOCUMENT_POSITION_FOLLOWING
+		).toBeTruthy();
+	});
 });
