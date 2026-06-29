@@ -14,13 +14,13 @@
 		"node": ">=22.12",
 		"pnpm": ">=10"
 	},
-	"homepage": "https://github.com/positronick/ui#readme",
+	"homepage": "https://github.com/Positronick/ui#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/positronick/ui.git"
+		"url": "git+https://github.com/Positronick/ui.git"
 	},
 	"bugs": {
-		"url": "https://github.com/positronick/ui/issues"
+		"url": "https://github.com/Positronick/ui/issues"
 	},
 	"scripts": {
 		"dev": "vite dev",
