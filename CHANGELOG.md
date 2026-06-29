@@ -17,6 +17,8 @@
 
   Theme names (The Machine / Samaritan), component APIs, and runtime behavior are unchanged — only identifiers were renamed. (Pre-1.0, so this lands as a minor bump per semver convention.)
 
+  These renames mostly break **silently** (CSS overrides no-op, selectors miss). See [MIGRATION.md](./MIGRATION.md) for the upgrade steps and a codemod (`scripts/migrate-0.4-to-0.5.mjs`).
+
 ## 0.4.1
 
 ### Patch Changes
