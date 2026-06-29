@@ -1,80 +1,67 @@
 name: Release
 
+# Tag-driven publishing. A maintainer runs the release ritual locally:
+#   1. pnpm changeset version   # consume .changeset/*.md → bump package.json + CHANGELOG.md
+#   2. git commit -am "chore: release vX.Y.Z"
+#   3. git tag vX.Y.Z && git push --follow-tags
+# Pushing the tag fires this workflow, which publishes to npm and cuts a GitHub
+# Release. No "Version Packages" PR is opened, so this needs no Actions
+# PR-create permission (the path that was blocked on #26/#27 — see POS-19).
 on:
   push:
-    branches: [main]
+    tags: ['v*']
 
-# Changesets opens/updates a "Version Packages" PR; merging it publishes to npm.
 permissions:
-  contents: write
-  pull-requests: write
+  contents: write # create the GitHub Release
   id-token: write # npm trusted publishing (OIDC) + provenance
 
 concurrency:
   group: release-${{ github.ref }}
 
-# Don't run git hooks (commitlint would reject the bot's "Version Packages" commit).
+# Skip git hooks (husky) during the CI install.
 env:
   HUSKY: '0'
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    # Surface the App id as an env var so the step below can test whether the
-    # GitHub App credentials are configured: the `secrets` context is not allowed
-    # in a step-level `if`, but `env` is.
-    env:
-      RELEASE_APP_ID: ${{ secrets.RELEASE_APP_ID }}
     steps:
       - uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
         with:
           egress-policy: audit
-      # Mint a short-lived, repo-scoped GitHub App token so the "Version Packages"
-      # PR is authored by the app rather than GITHUB_TOKEN. GitHub suppresses
-      # workflow runs on GITHUB_TOKEN-authored pushes (anti-recursion), which left
-      # that PR unable to satisfy the required CI checks; an app token triggers them.
-      #
-      # Optional by design: when RELEASE_APP_ID / RELEASE_APP_PRIVATE_KEY are not
-      # configured, this step is skipped and the steps below fall back to
-      # GITHUB_TOKEN. Publishing (OIDC) still works; only the Version PR's
-      # auto-CI-trigger is lost until the App secrets are added — at which point
-      # this self-upgrades with no further change. Without this guard the whole
-      # release job hard-fails at token minting and never reaches publish.
-      - if: ${{ env.RELEASE_APP_ID != '' }}
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        id: app-token
-        with:
-          app-id: ${{ secrets.RELEASE_APP_ID }}
-          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
-          # Scope the token to exactly what changesets needs (push the Version
-          # branch + open/update its PR); don't inherit blanket install perms.
-          permission-contents: write
-          permission-pull-requests: write
-      # changesets/action pushes the Version Packages branch with this persisted
-      # token; this job uploads no artifacts, so artipacked does not apply.
-      # Fall back to GITHUB_TOKEN when the App token wasn't minted.
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v6.0.3 # zizmor: ignore[artipacked]
-        with:
-          token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
+      # Checks out the tagged commit, whose package.json/CHANGELOG.md already
+      # carry the bumped version from `pnpm changeset version`. This job uploads
+      # no artifacts, so artipacked does not apply.
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0 # zizmor: ignore[artipacked]
       - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+      # No pnpm cache: this privileged publish job must not restore a store that a
+      # less-trusted workflow could have poisoned (zizmor cache-poisoning). A
+      # release runs rarely, so a clean install is the right trade.
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: 22
-          cache: pnpm
           registry-url: https://registry.npmjs.org
       - run: pnpm install --frozen-lockfile
       # npm trusted publishing (OIDC) needs npm >= 11.5.1; provenance is automatic.
       # Pinned (not @latest): this job holds id-token + write tokens, so a
       # compromised npm release must not be able to walk straight into it.
       - run: npm install -g npm@11.16.0
-      - name: Create Release PR or publish to npm
-        uses: changesets/action@a45c4d594aa4e2c509dc14a9f2b3b67ba3780d0d # v1.9.0
-        with:
-          publish: pnpm release
+      # `pnpm release` = `changeset publish`: builds via the package's prepack and
+      # publishes any version not yet on npm, authenticating through the existing
+      # OIDC trusted publisher (org positronick, repo ui, workflow release.yml) —
+      # no NPM_TOKEN. Idempotent: re-running a tag with nothing new is a no-op.
+      - name: Publish to npm
+        run: pnpm release
+      # Cut a GitHub Release for the tag. Idempotent: skip if one already exists.
+      - name: Create GitHub Release
+        # Pass the tag through env, never inline ${{ github.ref_name }} into the
+        # shell — that would be a template-injection sink (zizmor).
         env:
-          # No NPM_TOKEN: publishing authenticates via OIDC trusted publishing.
-          # Configure the trusted publisher on npmjs.com (org positronick, repo
-          # ui, workflow release.yml) before the first OIDC publish.
-          # Prefer the App token (so an opened Version PR's commits trigger the
-          # required CI checks); fall back to GITHUB_TOKEN when the App isn't set up.
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; skipping."
+          else
+            gh release create "$TAG" --verify-tag --generate-notes
+          fi

@@ -47,7 +47,20 @@ CI runs these on every PR; the same gates must be green.
   pnpm changeset
   ```
 
-  Pick the bump (patch/minor/major) and describe the change. Releases are automated from these via Changesets.
+  Pick the bump (patch/minor/major) and describe the change.
+
+## Releasing (maintainers)
+
+Releases are **tag-driven**: pushing a `vX.Y.Z` tag triggers [`release.yml`](./.github/workflows/release.yml), which publishes `@positronick/ui` to npm (via OIDC trusted publishing, with provenance) and cuts a GitHub Release. To cut one:
+
+```sh
+pnpm changeset version   # consume .changeset/*.md → bump package.json + CHANGELOG.md
+git commit -am "chore: release vX.Y.Z"
+git tag vX.Y.Z
+git push --follow-tags
+```
+
+`pnpm changeset version` decides `X.Y.Z` from the queued changesets. No "Version Packages" PR is involved.
 
 ## Code of Conduct
 
