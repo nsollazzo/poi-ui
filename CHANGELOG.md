@@ -1,5 +1,22 @@
 # @positronick/ui
 
+## 0.5.0
+
+### Minor Changes
+
+- [#20](https://github.com/Positronick/ui/pull/20) [`4ed1b71`](https://github.com/Positronick/ui/commit/4ed1b718be255acf1e09c42e784cc9ec52b0bb0b) Thanks [@nsollazzo](https://github.com/nsollazzo)! - feat: add six reusable primitives — `UserAvatar`, `ScrollTopButton`, `ThemeToggle`, `PositronickMark`, `VerifiedBadge`, and `ProviderIcon`
+
+  Ported from the Positronick app and generalised for the library: app-specific types are inlined, brand/icon SVGs are inlined (no asset or `~icons` dependency), tokens use `--pn-*`, and each ships with browser tests and Storybook stories. `ThemeToggle` pairs with the existing `ThemeProvider`/`useTheme` context; `PositronickMark` is the brand mark (with a `mono` tint mode).
+
+- [#20](https://github.com/Positronick/ui/pull/20) [`4ed1b71`](https://github.com/Positronick/ui/commit/4ed1b718be255acf1e09c42e784cc9ec52b0bb0b) Thanks [@nsollazzo](https://github.com/nsollazzo)! - ⚠️ BREAKING: rebrand `@nsollazzo/poi-ui` → `@positronick/ui`
+
+  The package is published under the new name `@positronick/ui`. Consumers must also update:
+  - **CSS custom properties:** `--poi-*` → `--pn-*`
+  - **BEM classes:** `.poi-*` → `.pn-*`
+  - **Exported type:** `PoiTheme` → `PositronickTheme`
+
+  Theme names (The Machine / Samaritan), component APIs, and runtime behavior are unchanged — only identifiers were renamed. (Pre-1.0, so this lands as a minor bump per semver convention.)
+
 ## 0.4.1
 
 ### Patch Changes
