@@ -51,12 +51,25 @@ jobs:
       # Pinned (not @latest): this job holds id-token + write tokens, so a
       # compromised npm release must not be able to walk straight into it.
       - run: npm install -g npm@11.16.0
-      # `pnpm release` = `changeset publish`: builds via the package's prepack and
-      # publishes any version not yet on npm, authenticating through the existing
-      # OIDC trusted publisher (org Positronick, repo ui, workflow release.yml) —
-      # no NPM_TOKEN. Idempotent: re-running a tag with nothing new is a no-op.
+      # Publish with `npm publish` directly (not `changeset publish`): npm has
+      # first-class OIDC trusted-publishing support, whereas changeset publish
+      # spawns npm in a way that doesn't trigger the OIDC handshake (it failed
+      # with ENEEDAUTH — see npm/cli#8976, #9088). The version is already set by
+      # the local `changeset version` ritual, so CI only needs to publish.
+      # Builds via the package's prepack; authenticates through the OIDC trusted
+      # publisher (org Positronick, repo ui, workflow release.yml) — no NPM_TOKEN.
+      # `--access public`/`--provenance` are also in publishConfig; passed
+      # explicitly to match npm's documented OIDC recipe. Idempotent: skip when
+      # this version is already on npm so re-running a tag is a no-op.
       - name: Publish to npm
-        run: pnpm release
+        run: |
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./package.json').version")
+          if npm view "$name@$version" version >/dev/null 2>&1; then
+            echo "$name@$version already published; skipping."
+          else
+            npm publish --access public --provenance
+          fi
       # Cut a GitHub Release for the tag. Idempotent: skip if one already exists.
       - name: Create GitHub Release
         # Pass the tag through env, never inline ${{ github.ref_name }} into the
