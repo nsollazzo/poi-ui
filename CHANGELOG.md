@@ -1,5 +1,25 @@
 # @positronick/ui
 
+## 0.6.0
+
+### Minor Changes
+
+- [#26](https://github.com/Positronick/ui/pull/26) [`899d46a`](https://github.com/Positronick/ui/commit/899d46a2488dce404ca9eba523cd450ebabdf942) Thanks [@nsollazzo](https://github.com/nsollazzo)! - feat: add two reusable components — `Prose` and `SectionNav`
+
+  - `Prose` — a styling wrapper that applies the design system's long-form typography to whatever markup is passed as `children`. It never calls `{@html}` itself, so sanitization stays the consumer's responsibility and no XSS surface ships in the library.
+  - `SectionNav` — a responsive section sub-navigation (horizontal scroll-row on mobile, sticky vertical sidebar on desktop) with active-item scroll-into-view. Route-agnostic via `{ items, current, label, isActive? }`; the `SectionNavItem` type is exported.
+
+### Patch Changes
+
+- [#27](https://github.com/Positronick/ui/pull/27) [`6c08af4`](https://github.com/Positronick/ui/commit/6c08af46960af73f8c619c485bc889db5375281a) Thanks [@nsollazzo](https://github.com/nsollazzo)! - docs: add a 0.4 → 0.5 migration guide + codemod for the silent `--poi-*` / `.poi-*` / `PoiTheme` renames
+
+  `0.5.0` renamed identifiers, not just the package, and most of those renames break **silently** for consumers (CSS custom-property overrides become no-ops, `.poi-*` selectors stop matching). This adds:
+
+  - **`MIGRATION.md`** — the 0.4 → 0.5 breaking renames and exact upgrade steps, linked from the README and CHANGELOG.
+  - **`scripts/migrate-0.4-to-0.5.mjs`** — a dependency-free, idempotent codemod (with `--dry-run`) that applies all renames across a consumer's `src/`, skipping `node_modules`, lockfiles, and build output.
+
+  No runtime or API changes.
+
 ## 0.5.0
 
 ### Minor Changes
