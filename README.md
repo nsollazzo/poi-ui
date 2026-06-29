@@ -35,6 +35,11 @@ pnpm add @positronick/ui svelte
 
 `svelte@^5` is a peer dependency.
 
+> **Upgrading from `0.4`?** `0.5.0` renamed the package _and_ its identifiers
+> (`--poi-*` → `--pn-*`, `.poi-*` → `.pn-*`, `PoiTheme` → `PositronickTheme`).
+> Most of these break **silently**. See **[MIGRATION.md](./MIGRATION.md)** for the
+> steps and a codemod.
+
 ## Usage
 
 ```svelte
