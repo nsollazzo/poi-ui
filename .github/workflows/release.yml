@@ -73,8 +73,8 @@ jobs:
           publish: pnpm release
         env:
           # No NPM_TOKEN: publishing authenticates via OIDC trusted publishing.
-          # Configure the trusted publisher on npmjs.com (org nsollazzo, repo
-          # poi-ui, workflow release.yml) before the first OIDC publish.
+          # Configure the trusted publisher on npmjs.com (org positronick, repo
+          # ui, workflow release.yml) before the first OIDC publish.
           # Prefer the App token (so an opened Version PR's commits trigger the
           # required CI checks); fall back to GITHUB_TOKEN when the App isn't set up.
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}

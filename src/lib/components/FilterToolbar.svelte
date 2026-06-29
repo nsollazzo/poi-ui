@@ -64,15 +64,15 @@
 	});
 </script>
 
-<div class="poi-toolbar {className}">
-	{#if primary}<div class="poi-toolbar__primary">{@render primary()}</div>{/if}
+<div class="pn-toolbar {className}">
+	{#if primary}<div class="pn-toolbar__primary">{@render primary()}</div>{/if}
 
-	<div class="poi-toolbar__bar">
-		<div class="poi-toolbar__field">
-			<span class="poi-toolbar__prompt" aria-hidden="true">›</span>
+	<div class="pn-toolbar__bar">
+		<div class="pn-toolbar__field">
+			<span class="pn-toolbar__prompt" aria-hidden="true">›</span>
 			<input
 				bind:this={inputEl}
-				class="poi-toolbar__search"
+				class="pn-toolbar__search"
 				type="search"
 				{placeholder}
 				bind:value
@@ -83,156 +83,156 @@
 			/>
 		</div>
 
-		<div class="poi-toolbar__controls">
+		<div class="pn-toolbar__controls">
 			{#if controls}{@render controls()}{/if}
-			{#if status}<p class="poi-toolbar__status" role="status">{status}</p>{/if}
+			{#if status}<p class="pn-toolbar__status" role="status">{status}</p>{/if}
 		</div>
 	</div>
 
 	{#if filters.length > 0}
-		<div class="poi-toolbar__tokens" transition:slide={slideParams}>
+		<div class="pn-toolbar__tokens" transition:slide={slideParams}>
 			{#each filters as f, i (i)}
 				<button
 					type="button"
-					class="poi-toolbar__token"
+					class="pn-toolbar__token"
 					onclick={() => {
 						f.remove();
 						inputEl?.focus();
 					}}
 					aria-label={`Remove filter: ${f.label}`}
 				>
-					{f.label}<span class="poi-toolbar__token-x" aria-hidden="true">✕</span>
+					{f.label}<span class="pn-toolbar__token-x" aria-hidden="true">✕</span>
 				</button>
 			{/each}
 			{#if onclear}
-				<button type="button" class="poi-toolbar__clear" onclick={onclear}>{clearLabel}</button>
+				<button type="button" class="pn-toolbar__clear" onclick={onclear}>{clearLabel}</button>
 			{/if}
 		</div>
 	{/if}
 </div>
 
 <style>
-	.poi-toolbar {
+	.pn-toolbar {
 		display: flex;
 		flex-direction: column;
-		gap: var(--poi-space-3);
+		gap: var(--pn-space-3);
 	}
-	.poi-toolbar__primary {
+	.pn-toolbar__primary {
 		display: flex;
 	}
-	.poi-toolbar__bar {
+	.pn-toolbar__bar {
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: var(--poi-space-3);
+		gap: var(--pn-space-3);
 	}
 	/* The command field grows to fill the row so the controls hug it (no dead gap). */
-	.poi-toolbar__field {
+	.pn-toolbar__field {
 		flex: 1 1 280px;
 		display: flex;
 		align-items: center;
-		gap: var(--poi-space-3);
+		gap: var(--pn-space-3);
 		box-sizing: border-box;
-		padding: var(--poi-space-3) var(--poi-space-4);
-		background: var(--poi-surface-base);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
+		padding: var(--pn-space-3) var(--pn-space-4);
+		background: var(--pn-surface-base);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
 	}
-	.poi-toolbar__field:focus-within {
-		border-color: var(--poi-accent);
+	.pn-toolbar__field:focus-within {
+		border-color: var(--pn-accent);
 	}
-	.poi-toolbar__prompt {
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-2);
+	.pn-toolbar__prompt {
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-2);
 		font-weight: 700;
 		line-height: 1;
-		color: var(--poi-accent);
+		color: var(--pn-accent);
 	}
-	.poi-toolbar__search {
+	.pn-toolbar__search {
 		flex: 1;
 		min-width: 0;
 		background: none;
 		border: none;
-		color: var(--poi-ink);
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-2);
+		color: var(--pn-ink);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-2);
 	}
-	.poi-toolbar__search:focus {
+	.pn-toolbar__search:focus {
 		outline: none;
 	}
-	.poi-toolbar__controls {
+	.pn-toolbar__controls {
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: var(--poi-space-4);
+		gap: var(--pn-space-4);
 	}
-	.poi-toolbar__status {
+	.pn-toolbar__status {
 		margin: 0;
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-1);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-1);
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
-		color: var(--poi-ink-dim);
+		color: var(--pn-ink-dim);
 		white-space: nowrap;
 		font-variant-numeric: tabular-nums;
 	}
-	.poi-toolbar__tokens {
+	.pn-toolbar__tokens {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: var(--poi-space-2);
+		gap: var(--pn-space-2);
 	}
 	/* Active filters read as console arguments — click anywhere on a token to drop it. */
-	.poi-toolbar__token {
+	.pn-toolbar__token {
 		display: inline-flex;
 		align-items: center;
-		gap: var(--poi-space-2);
-		padding: var(--poi-space-1) var(--poi-space-3);
-		background: var(--poi-surface-base);
-		color: var(--poi-ink-dim);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-1);
+		gap: var(--pn-space-2);
+		padding: var(--pn-space-1) var(--pn-space-3);
+		background: var(--pn-surface-base);
+		color: var(--pn-ink-dim);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-1);
 		cursor: pointer;
 		transition:
-			color 0.12s var(--poi-ease),
-			border-color 0.12s var(--poi-ease);
+			color 0.12s var(--pn-ease),
+			border-color 0.12s var(--pn-ease);
 	}
-	.poi-toolbar__token-x {
+	.pn-toolbar__token-x {
 		font-size: 0.85em;
 	}
-	.poi-toolbar__token:hover {
-		color: var(--poi-accent);
-		border-color: var(--poi-accent);
+	.pn-toolbar__token:hover {
+		color: var(--pn-accent);
+		border-color: var(--pn-accent);
 	}
-	.poi-toolbar__token:focus-visible {
+	.pn-toolbar__token:focus-visible {
 		outline: none;
-		box-shadow: var(--poi-focus-ring);
+		box-shadow: var(--pn-focus-ring);
 	}
-	.poi-toolbar__clear {
-		padding: var(--poi-space-1) var(--poi-space-2);
+	.pn-toolbar__clear {
+		padding: var(--pn-space-1) var(--pn-space-2);
 		background: none;
 		border: none;
-		color: var(--poi-ink-dim);
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-1);
+		color: var(--pn-ink-dim);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-1);
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
 		cursor: pointer;
-		transition: color 0.12s var(--poi-ease);
+		transition: color 0.12s var(--pn-ease);
 	}
-	.poi-toolbar__clear:hover {
-		color: var(--poi-accent);
+	.pn-toolbar__clear:hover {
+		color: var(--pn-accent);
 	}
-	.poi-toolbar__clear:focus-visible {
+	.pn-toolbar__clear:focus-visible {
 		outline: none;
-		box-shadow: var(--poi-focus-ring);
+		box-shadow: var(--pn-focus-ring);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.poi-toolbar__token,
-		.poi-toolbar__clear {
+		.pn-toolbar__token,
+		.pn-toolbar__clear {
 			transition: none;
 		}
 	}

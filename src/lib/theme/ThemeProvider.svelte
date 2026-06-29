@@ -1,11 +1,11 @@
 <script lang="ts">
 	import '../styles/tokens.css';
 	import type { Snippet } from 'svelte';
-	import { setThemeContext, type PoiTheme } from './context.js';
+	import { setThemeContext, type PositronickTheme } from './context.js';
 
 	interface Props {
 		/** Active theme. Bindable, so callers can drive a theme switcher. */
-		theme?: PoiTheme;
+		theme?: PositronickTheme;
 		/** Content rendered inside the themed root. */
 		children?: Snippet;
 	}
@@ -16,12 +16,12 @@
 		get theme() {
 			return theme;
 		},
-		setTheme: (next: PoiTheme) => {
+		setTheme: (next: PositronickTheme) => {
 			theme = next;
 		}
 	});
 </script>
 
-<div class="poi-root" data-theme={theme}>
+<div class="pn-root" data-theme={theme}>
 	{@render children?.()}
 </div>

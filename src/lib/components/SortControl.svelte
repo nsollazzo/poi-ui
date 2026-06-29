@@ -37,9 +37,9 @@
 	}
 </script>
 
-<div class="poi-sort {className}">
-	{#if label}<span class="poi-sort__label">{label}</span>{/if}
-	<div class="poi-sort__track" role="group" aria-label={ariaLabel}>
+<div class="pn-sort {className}">
+	{#if label}<span class="pn-sort__label">{label}</span>{/if}
+	<div class="pn-sort__track" role="group" aria-label={ariaLabel}>
 		{#each fields as f (f.value)}
 			<Chip
 				pressed={field === f.value}
@@ -48,7 +48,7 @@
 					? `Sort by ${f.label}, ${dir === 'asc' ? 'ascending' : 'descending'}`
 					: `Sort by ${f.label}`}
 			>
-				{f.label}{#if field === f.value}<span class="poi-sort__arrow" aria-hidden="true"
+				{f.label}{#if field === f.value}<span class="pn-sort__arrow" aria-hidden="true"
 						>{dir === 'asc' ? '↑' : '↓'}</span
 					>{/if}
 			</Chip>
@@ -57,38 +57,38 @@
 </div>
 
 <style>
-	.poi-sort {
+	.pn-sort {
 		display: inline-flex;
 		align-items: center;
-		gap: var(--poi-space-2);
+		gap: var(--pn-space-2);
 	}
-	.poi-sort__label {
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-1);
+	.pn-sort__label {
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-1);
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
-		color: var(--poi-ink-dim);
+		color: var(--pn-ink-dim);
 	}
-	.poi-sort__track {
+	.pn-sort__track {
 		display: flex;
 		align-items: center;
 	}
 	/* Drop the doubled border so the segments read as one connected control.
 	   (A -1px margin overlap leaves subpixel gaps at fractional zoom levels;
 	   flush boxes can't.) */
-	.poi-sort__track :global(.poi-chip + .poi-chip) {
+	.pn-sort__track :global(.pn-chip + .pn-chip) {
 		border-left: none;
 	}
 	/* Keep the focused segment's ring above its neighbours. */
-	.poi-sort__track :global(.poi-chip[data-active]) {
+	.pn-sort__track :global(.pn-chip[data-active]) {
 		position: relative;
 		z-index: 1;
 	}
-	.poi-sort__track :global(.poi-chip:focus-visible) {
+	.pn-sort__track :global(.pn-chip:focus-visible) {
 		position: relative;
 		z-index: 2;
 	}
-	.poi-sort__arrow {
+	.pn-sort__arrow {
 		font-size: 0.85em;
 	}
 </style>

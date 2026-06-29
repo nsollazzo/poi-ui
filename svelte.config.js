@@ -9,7 +9,7 @@ const config = {
 	kit: {
 		// The showcase app is a static, prerendered site (GitHub Pages / any static host).
 		adapter: adapter(),
-		// BASE_PATH lets CI serve the demo under a repo subpath, e.g. /poi-ui on GitHub Pages.
+		// BASE_PATH lets CI serve the demo under a repo subpath, e.g. /ui on GitHub Pages.
 		paths: {
 			base: process.env.BASE_PATH ?? ''
 		}

@@ -14,14 +14,14 @@
 		Banner,
 		Loading,
 		Window,
-		type PoiTheme
+		type PositronickTheme
 	} from '$lib/index.js';
 
-	let interactive = $state<PoiTheme>('machine');
+	let interactive = $state<PositronickTheme>('machine');
 </script>
 
 <svelte:head>
-	<title>POI-UI — Kitchen Sink</title>
+	<title>positronick-ui — Kitchen Sink</title>
 </svelte:head>
 
 {#snippet kitchenSink()}
@@ -73,7 +73,7 @@
 {/snippet}
 
 <header class="page-head">
-	<h1>POI-UI</h1>
+	<h1>positronick-ui</h1>
 	<p>One component set, two themes — The Machine (dark) and Samaritan (light).</p>
 </header>
 
@@ -157,7 +157,7 @@
 	.panel h2 {
 		margin: 0 0 1rem;
 		text-transform: uppercase;
-		letter-spacing: var(--poi-tracking-display);
+		letter-spacing: var(--pn-tracking-display);
 	}
 
 	.sink {

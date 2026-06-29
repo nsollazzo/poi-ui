@@ -4,8 +4,8 @@ import ThemedHarness from '../../test-support/ThemedHarness.svelte';
 import RecDot from './RecDot.svelte';
 
 function dot(): HTMLElement {
-	const el = document.querySelector<HTMLElement>('.poi-rec');
-	if (!el) throw new Error('.poi-rec not found');
+	const el = document.querySelector<HTMLElement>('.pn-rec');
+	if (!el) throw new Error('.pn-rec not found');
 	return el;
 }
 

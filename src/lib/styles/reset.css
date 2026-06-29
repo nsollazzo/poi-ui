@@ -1,32 +1,32 @@
-/* POI-UI — base appearance, applied only within a <ThemeProvider> root.
-   Deliberately scoped to .poi-root so the library never touches the global page. */
-.poi-root {
-	background-color: var(--poi-surface-base);
-	color: var(--poi-ink);
-	font-family: var(--poi-font-display);
-	font-size: var(--poi-font-size-3);
+/* positronick-ui — base appearance, applied only within a <ThemeProvider> root.
+   Deliberately scoped to .pn-root so the library never touches the global page. */
+.pn-root {
+	background-color: var(--pn-surface-base);
+	color: var(--pn-ink);
+	font-family: var(--pn-font-display);
+	font-size: var(--pn-font-size-3);
 	line-height: 1.4;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
 }
 
-.poi-root *,
-.poi-root *::before,
-.poi-root *::after {
+.pn-root *,
+.pn-root *::before,
+.pn-root *::after {
 	box-sizing: border-box;
 }
 
-.poi-root ::selection {
-	background: var(--poi-selection-bg);
-	color: var(--poi-selection-ink);
+.pn-root ::selection {
+	background: var(--pn-selection-bg);
+	color: var(--pn-selection-ink);
 }
 
 /* Opt-in solid fill: any element marked `data-solid` gets an opaque base surface
    so it reads cleanly over the <Backdrop> grid. Defined once here instead of being
-   repeated in every component's scoped <style>. The `.poi-root[data-theme]` prefix
+   repeated in every component's scoped <style>. The `.pn-root[data-theme]` prefix
    (always present — ThemeProvider renders both) raises specificity above each
    component's own scoped background rule, so this wins regardless of stylesheet
    order. Components opt in via `solid` -> `data-solid={solid || undefined}`. */
-.poi-root[data-theme] [data-solid] {
-	background-color: var(--poi-surface-base);
+.pn-root[data-theme] [data-solid] {
+	background-color: var(--pn-surface-base);
 }

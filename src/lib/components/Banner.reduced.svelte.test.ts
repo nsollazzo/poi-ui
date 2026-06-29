@@ -17,11 +17,11 @@ describe('Banner (reduced motion)', () => {
 		});
 		await expect
 			.poll(() =>
-				[...document.querySelectorAll('.poi-banner__word')].every((w) =>
+				[...document.querySelectorAll('.pn-banner__word')].every((w) =>
 					w.classList.contains('visible')
 				)
 			)
 			.toBe(true);
-		expect(document.querySelectorAll('.poi-banner__word')).toHaveLength(3);
+		expect(document.querySelectorAll('.pn-banner__word')).toHaveLength(3);
 	});
 });

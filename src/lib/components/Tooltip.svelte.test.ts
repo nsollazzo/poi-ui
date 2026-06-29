@@ -16,9 +16,7 @@ describe('Tooltip', () => {
 		expect(document.querySelector('[role="tooltip"]')).toBeNull();
 		// The describedby link lives on the focusable trigger, not the wrapper.
 		expect(
-			(document.querySelector('.poi-tooltip button') as HTMLElement).getAttribute(
-				'aria-describedby'
-			)
+			(document.querySelector('.pn-tooltip button') as HTMLElement).getAttribute('aria-describedby')
 		).toBeNull();
 	});
 
@@ -28,7 +26,7 @@ describe('Tooltip', () => {
 			Comp: Tooltip,
 			componentProps: { text: 'Subject under surveillance', children: trigger }
 		});
-		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		const wrapper = document.querySelector('.pn-tooltip') as HTMLElement;
 		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
 		await expect
 			.poll(() => document.querySelector('[role="tooltip"]')?.textContent)
@@ -46,7 +44,7 @@ describe('Tooltip', () => {
 			Comp: Tooltip,
 			componentProps: { text: 'Tip', children: trigger }
 		});
-		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		const wrapper = document.querySelector('.pn-tooltip') as HTMLElement;
 		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
 		await expect.poll(() => document.querySelector('[role="tooltip"]')).not.toBeNull();
 		wrapper.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
@@ -59,7 +57,7 @@ describe('Tooltip', () => {
 			Comp: Tooltip,
 			componentProps: { text: 'Tip', side: 'bottom', children: trigger }
 		});
-		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		const wrapper = document.querySelector('.pn-tooltip') as HTMLElement;
 		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
 		await expect
 			.poll(() => document.querySelector('[role="tooltip"]')?.getAttribute('data-side'))
@@ -72,7 +70,7 @@ describe('Tooltip', () => {
 			Comp: Tooltip,
 			componentProps: { text: 'Tip', delay: 80, children: trigger }
 		});
-		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		const wrapper = document.querySelector('.pn-tooltip') as HTMLElement;
 		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
 		// Not shown immediately…
 		expect(document.querySelector('[role="tooltip"]')).toBeNull();
@@ -86,10 +84,10 @@ describe('Tooltip', () => {
 			Comp: Tooltip,
 			componentProps: { text: 'Tip', children: trigger }
 		});
-		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		const wrapper = document.querySelector('.pn-tooltip') as HTMLElement;
 		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
-		await expect.poll(() => document.querySelector('.poi-tooltip__bubble')).not.toBeNull();
-		expect(document.querySelector('.poi-tooltip__bubble')!.getAttribute('data-theme')).toBe(
+		await expect.poll(() => document.querySelector('.pn-tooltip__bubble')).not.toBeNull();
+		expect(document.querySelector('.pn-tooltip__bubble')!.getAttribute('data-theme')).toBe(
 			'machine'
 		);
 		// Inversion is scoped to the bubble — the wrapper (and trigger) stay unthemed.
@@ -102,13 +100,12 @@ describe('Tooltip', () => {
 			Comp: Tooltip,
 			componentProps: { text: 'Tip', children: trigger }
 		});
-		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		const wrapper = document.querySelector('.pn-tooltip') as HTMLElement;
 		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
-		await expect.poll(() => document.querySelector('.poi-tooltip__bubble')).not.toBeNull();
+		await expect.poll(() => document.querySelector('.pn-tooltip__bubble')).not.toBeNull();
 		// Machine surface-base under the surface-2 lift: fully opaque black.
 		expect(
-			getComputedStyle(document.querySelector('.poi-tooltip__bubble') as HTMLElement)
-				.backgroundColor
+			getComputedStyle(document.querySelector('.pn-tooltip__bubble') as HTMLElement).backgroundColor
 		).toBe('rgb(0, 0, 0)');
 	});
 
@@ -118,17 +115,17 @@ describe('Tooltip', () => {
 			Comp: Tooltip,
 			componentProps: { text: 'Tip', invert: false, children: trigger }
 		});
-		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		const wrapper = document.querySelector('.pn-tooltip') as HTMLElement;
 		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
-		await expect.poll(() => document.querySelector('.poi-tooltip__bubble')).not.toBeNull();
-		expect(document.querySelector('.poi-tooltip__bubble')!.getAttribute('data-theme')).toBeNull();
+		await expect.poll(() => document.querySelector('.pn-tooltip__bubble')).not.toBeNull();
+		expect(document.querySelector('.pn-tooltip__bubble')!.getAttribute('data-theme')).toBeNull();
 	});
 
 	test('outside a ThemeProvider it mounts with no inversion (no crash)', async () => {
 		render(Tooltip, { text: 'Tip', children: trigger });
-		const wrapper = document.querySelector('.poi-tooltip') as HTMLElement;
+		const wrapper = document.querySelector('.pn-tooltip') as HTMLElement;
 		wrapper.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
-		await expect.poll(() => document.querySelector('.poi-tooltip__bubble')).not.toBeNull();
-		expect(document.querySelector('.poi-tooltip__bubble')!.getAttribute('data-theme')).toBeNull();
+		await expect.poll(() => document.querySelector('.pn-tooltip__bubble')).not.toBeNull();
+		expect(document.querySelector('.pn-tooltip__bubble')!.getAttribute('data-theme')).toBeNull();
 	});
 });

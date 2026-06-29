@@ -7,20 +7,20 @@
 	let { label = 'Recording' }: Props = $props();
 </script>
 
-<span class="poi-rec" role="img" aria-label={label}></span>
+<span class="pn-rec" role="img" aria-label={label}></span>
 
 <style>
-	.poi-rec {
+	.pn-rec {
 		display: inline-block;
 		width: 0.75rem;
 		height: 0.75rem;
 		border-radius: 50%;
-		background: var(--poi-accent);
-		box-shadow: var(--poi-emphasis-shadow);
-		animation: poi-rec-pulse var(--poi-dur-pulse) var(--poi-ease) infinite;
+		background: var(--pn-accent);
+		box-shadow: var(--pn-emphasis-shadow);
+		animation: pn-rec-pulse var(--pn-dur-pulse) var(--pn-ease) infinite;
 	}
 
-	@keyframes poi-rec-pulse {
+	@keyframes pn-rec-pulse {
 		0%,
 		100% {
 			opacity: 1;
@@ -32,7 +32,7 @@
 
 	/* No infinite pulse when the user prefers reduced motion. */
 	@media (prefers-reduced-motion: reduce) {
-		.poi-rec {
+		.pn-rec {
 			animation: none;
 		}
 	}

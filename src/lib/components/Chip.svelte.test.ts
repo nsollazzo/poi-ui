@@ -35,7 +35,7 @@ describe('Chip', () => {
 			Comp: Chip,
 			componentProps: { pressed: true, children: label('ON') }
 		});
-		const el = document.querySelector('.poi-chip') as HTMLElement;
+		const el = document.querySelector('.pn-chip') as HTMLElement;
 		expect(getComputedStyle(el).backgroundColor).toBe('rgb(255, 0, 0)');
 		// surface-base (black on Machine) keeps AA contrast on full red — see component note.
 		expect(getComputedStyle(el).color).toBe('rgb(0, 0, 0)');
@@ -48,7 +48,7 @@ describe('Chip', () => {
 			componentProps: { pressed: true, children: label('ON') }
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-chip') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-chip') as HTMLElement).backgroundColor
 		).toBe('rgb(232, 0, 13)');
 	});
 
@@ -69,7 +69,7 @@ describe('Chip', () => {
 			Comp: Chip,
 			componentProps: { hasPopup: 'menu', expanded: true, pressed: true, children: label('SORT') }
 		});
-		const btn = document.querySelector('.poi-chip') as HTMLElement;
+		const btn = document.querySelector('.pn-chip') as HTMLElement;
 		expect(btn.getAttribute('aria-haspopup')).toBe('menu');
 		expect(btn.getAttribute('aria-expanded')).toBe('true');
 		expect(btn.getAttribute('aria-pressed')).toBeNull();
@@ -86,7 +86,7 @@ describe('Chip', () => {
 			Comp: Chip,
 			componentProps: { expanded: false, pressed: true, children: label('FILTER') }
 		});
-		const btn = document.querySelector('.poi-chip') as HTMLElement;
+		const btn = document.querySelector('.pn-chip') as HTMLElement;
 		expect(btn.getAttribute('aria-expanded')).toBe('false');
 		expect(btn.getAttribute('aria-haspopup')).toBeNull();
 		expect(btn.getAttribute('aria-pressed')).toBeNull();
@@ -99,7 +99,7 @@ describe('Chip', () => {
 			Comp: Chip,
 			componentProps: { expanded: true, ariaControls: 'popup-1', children: label('FILTER') }
 		});
-		expect((document.querySelector('.poi-chip') as HTMLElement).getAttribute('aria-controls')).toBe(
+		expect((document.querySelector('.pn-chip') as HTMLElement).getAttribute('aria-controls')).toBe(
 			'popup-1'
 		);
 	});

@@ -1,50 +1,50 @@
-/* POI-UI — Layer 1: primitive tokens.
+/* positronick-ui — Layer 1: primitive tokens.
    Raw, theme-independent values. Components never read these directly; the
    semantic layer (theme.machine.css / theme.samaritan.css) maps them to intent. */
-.poi-root {
+.pn-root {
 	/* Type */
-	--poi-font-display: 'Barlow Semi Condensed', system-ui, -apple-system, sans-serif;
-	--poi-font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', 'Consolas', monospace;
-	--poi-font-size-1: 0.75rem;
-	--poi-font-size-2: 0.875rem;
-	--poi-font-size-3: 1rem;
-	--poi-font-size-4: 1.25rem;
-	--poi-tracking-display: 0.08em;
+	--pn-font-display: 'Barlow Semi Condensed', system-ui, -apple-system, sans-serif;
+	--pn-font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', 'Consolas', monospace;
+	--pn-font-size-1: 0.75rem;
+	--pn-font-size-2: 0.875rem;
+	--pn-font-size-3: 1rem;
+	--pn-font-size-4: 1.25rem;
+	--pn-tracking-display: 0.08em;
 
 	/* Geometry — sharp corners, hairline borders */
-	--poi-radius: 0px;
-	--poi-hairline-width: 1px;
+	--pn-radius: 0px;
+	--pn-hairline-width: 1px;
 
 	/* Graph-paper backdrop geometry (theme-independent). Major lines read heavier
 	   than minor via BOTH a thicker stroke (width below) and a higher alpha (the
-	   per-theme --poi-grid-line-* tokens) — alpha alone was too subtle on white. */
-	--poi-grid-cell: 24px;
-	--poi-grid-major-every: 5;
-	--poi-grid-minor-width: 1px;
-	--poi-grid-major-width: 2px;
+	   per-theme --pn-grid-line-* tokens) — alpha alone was too subtle on white. */
+	--pn-grid-cell: 24px;
+	--pn-grid-major-every: 5;
+	--pn-grid-minor-width: 1px;
+	--pn-grid-major-width: 2px;
 
 	/* Spacing */
-	--poi-space-1: 0.25rem;
-	--poi-space-2: 0.5rem;
-	--poi-space-3: 0.75rem;
-	--poi-space-4: 1rem;
-	--poi-space-5: 1.5rem;
-	--poi-space-6: 2rem;
+	--pn-space-1: 0.25rem;
+	--pn-space-2: 0.5rem;
+	--pn-space-3: 0.75rem;
+	--pn-space-4: 1rem;
+	--pn-space-5: 1.5rem;
+	--pn-space-6: 2rem;
 
 	/* Motion */
-	--poi-dur-fade: 0.5s;
-	--poi-dur-pulse: 1.2s;
-	--poi-dur-cube: 1.8s;
-	--poi-ease: ease-in-out;
+	--pn-dur-fade: 0.5s;
+	--pn-dur-pulse: 1.2s;
+	--pn-dur-cube: 1.8s;
+	--pn-ease: ease-in-out;
 
 	/* Raw palette — referenced only by the semantic layer */
-	--poi-raw-black: #000000;
-	--poi-raw-white: #ffffff;
+	--pn-raw-black: #000000;
+	--pn-raw-white: #ffffff;
 	/* Full-opacity neon red: the .85 alpha dimmed it to ~3.8:1 on black (fails WCAG
 	   AA for text); full red is ~4.7:1 with the glow and reads just as neon. */
-	--poi-raw-red-machine: #ff0000;
-	--poi-raw-red-samaritan: #e8000d;
-	--poi-raw-amber: #ffc400;
-	--poi-raw-blue: rgba(20, 140, 252, 0.85);
-	--poi-raw-green: rgba(71, 255, 86, 0.85);
+	--pn-raw-red-machine: #ff0000;
+	--pn-raw-red-samaritan: #e8000d;
+	--pn-raw-amber: #ffc400;
+	--pn-raw-blue: rgba(20, 140, 252, 0.85);
+	--pn-raw-green: rgba(71, 255, 86, 0.85);
 }

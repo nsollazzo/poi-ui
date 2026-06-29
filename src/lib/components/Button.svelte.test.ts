@@ -33,7 +33,7 @@ describe('Button', () => {
 			Comp: Button,
 			componentProps: { disabled: true, children: label('NO') }
 		});
-		const btn = document.querySelector<HTMLButtonElement>('button.poi-button');
+		const btn = document.querySelector<HTMLButtonElement>('button.pn-button');
 		expect(btn?.disabled).toBe(true);
 	});
 
@@ -43,7 +43,7 @@ describe('Button', () => {
 			Comp: Button,
 			componentProps: { tone: 'threat', children: label('THREAT') }
 		});
-		expect(getComputedStyle(document.querySelector('.poi-button') as HTMLElement).color).toBe(
+		expect(getComputedStyle(document.querySelector('.pn-button') as HTMLElement).color).toBe(
 			'rgb(255, 0, 0)'
 		);
 	});
@@ -56,7 +56,7 @@ describe('Button', () => {
 			componentProps: { solid: true, children: label('SOLID') }
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-button') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-button') as HTMLElement).backgroundColor
 		).toBe('rgb(255, 255, 255)');
 	});
 
@@ -67,7 +67,7 @@ describe('Button', () => {
 			componentProps: { solid: true, children: label('SOLID') }
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-button') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-button') as HTMLElement).backgroundColor
 		).toBe('rgb(0, 0, 0)');
 	});
 });

@@ -9,8 +9,8 @@ import Box from './Box.svelte';
 const body = createRawSnippet(() => ({ render: () => `<p data-testid="c-body">CONTENTS</p>` }));
 
 function panelBodyPadding(): string {
-	const el = document.querySelector<HTMLElement>('.poi-panel__body');
-	if (!el) throw new Error('.poi-panel__body not found');
+	const el = document.querySelector<HTMLElement>('.pn-panel__body');
+	if (!el) throw new Error('.pn-panel__body not found');
 	return getComputedStyle(el).paddingTop;
 }
 
@@ -47,7 +47,7 @@ describe('Block / Card / Box', () => {
 			Comp: Block,
 			componentProps: { title: 'T', tone: 'threat', children: body }
 		});
-		const cs = getComputedStyle(document.querySelector('.poi-panel') as HTMLElement);
+		const cs = getComputedStyle(document.querySelector('.pn-panel') as HTMLElement);
 		expect(cs.borderTopColor).toBe('rgb(255, 0, 0)');
 		expect(cs.boxShadow).not.toBe('none');
 	});
@@ -58,7 +58,7 @@ describe('Block / Card / Box', () => {
 			Comp: Block,
 			componentProps: { title: 'T', tone: 'threat', children: body }
 		});
-		const cs = getComputedStyle(document.querySelector('.poi-panel') as HTMLElement);
+		const cs = getComputedStyle(document.querySelector('.pn-panel') as HTMLElement);
 		expect(cs.borderTopColor).toBe('rgb(232, 0, 13)');
 		expect(cs.boxShadow).toBe('none');
 	});

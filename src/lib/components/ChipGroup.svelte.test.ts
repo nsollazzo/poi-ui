@@ -18,7 +18,7 @@ describe('ChipGroup', () => {
 		await expect
 			.element(screen.getByRole('group', { name: 'Filter by letter' }))
 			.toBeInTheDocument();
-		expect(document.querySelectorAll('.poi-chip')).toHaveLength(3); // All + Alpha + Beta
+		expect(document.querySelectorAll('.pn-chip')).toHaveLength(3); // All + Alpha + Beta
 	});
 
 	test('selecting an option presses it and clears the others', async () => {

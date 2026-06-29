@@ -1,4 +1,4 @@
-<!-- Thanks for contributing to POI-UI! -->
+<!-- Thanks for contributing to positronick-ui! -->
 
 ## What does this PR do?
 

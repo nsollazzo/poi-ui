@@ -24,7 +24,7 @@ describe('SortControl', () => {
 			componentProps: props({ label: 'Sort' })
 		});
 		await expect.element(screen.getByRole('group', { name: 'Sort subjects' })).toBeInTheDocument();
-		const chips = document.querySelectorAll('.poi-sort .poi-chip');
+		const chips = document.querySelectorAll('.pn-sort .pn-chip');
 		expect(chips.length).toBe(2);
 		expect(chips[0].getAttribute('aria-pressed')).toBe('true');
 		expect(chips[1].getAttribute('aria-pressed')).toBe('false');
@@ -38,7 +38,7 @@ describe('SortControl', () => {
 		});
 		const active = screen.getByRole('button', { name: 'Sort by Name, ascending' });
 		await expect.element(active).toBeInTheDocument();
-		expect(document.querySelector('.poi-sort__arrow')!.textContent).toBe('↑');
+		expect(document.querySelector('.pn-sort__arrow')!.textContent).toBe('↑');
 	});
 
 	test('clicking the active field flips the direction', async () => {
@@ -51,7 +51,7 @@ describe('SortControl', () => {
 		await expect
 			.element(screen.getByRole('button', { name: 'Sort by Name, descending' }))
 			.toBeInTheDocument();
-		expect(document.querySelector('.poi-sort__arrow')!.textContent).toBe('↓');
+		expect(document.querySelector('.pn-sort__arrow')!.textContent).toBe('↓');
 	});
 
 	test("switching fields applies the new field's default direction", async () => {

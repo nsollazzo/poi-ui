@@ -1,14 +1,14 @@
-# POI-UI
+# positronick-ui
 
-[![npm version](https://img.shields.io/npm/v/@nsollazzo/poi-ui)](https://www.npmjs.com/package/@nsollazzo/poi-ui)
-[![CI](https://github.com/nsollazzo/poi-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/nsollazzo/poi-ui/actions/workflows/ci.yml)
-[![Coverage Status](https://coveralls.io/repos/github/nsollazzo/poi-ui/badge.svg?branch=main)](https://coveralls.io/github/nsollazzo/poi-ui?branch=main)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/nsollazzo/poi-ui/badge)](https://scorecard.dev/viewer/?uri=github.com/nsollazzo/poi-ui)
-[![license](https://img.shields.io/npm/l/@nsollazzo/poi-ui)](./LICENSE)
+[![npm version](https://img.shields.io/npm/v/@positronick/ui)](https://www.npmjs.com/package/@positronick/ui)
+[![CI](https://github.com/positronick/ui/actions/workflows/ci.yml/badge.svg)](https://github.com/positronick/ui/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/positronick/ui/badge.svg?branch=main)](https://coveralls.io/github/positronick/ui?branch=main)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/positronick/ui/badge)](https://scorecard.dev/viewer/?uri=github.com/positronick/ui)
+[![license](https://img.shields.io/npm/l/@positronick/ui)](./LICENSE)
 
 > An AI's point of view, rendered as UI.
 
-A **Svelte 5** component library and design system styled after the two artificial superintelligences in _Person of Interest_ — **The Machine** and **Samaritan**. A surveillance‑HUD aesthetic of corner‑bracket targeting boxes, monospace data rows, designation tags, and processing readouts.
+**positronick-ui** is a **Svelte 5** component library and design system. Its visual language is inspired by the two artificial superintelligences in _Person of Interest_ — **The Machine** and **Samaritan** — a surveillance‑HUD aesthetic of corner‑bracket targeting boxes, monospace data rows, designation tags, and processing readouts.
 
 **One component set, two runtime‑switchable themes** — selected by a single `data-theme` attribute on a `<ThemeProvider>`:
 
@@ -30,7 +30,7 @@ By **[Nicholas Sollazzo](https://nsollazzo.com)**. MIT licensed.
 ## Install
 
 ```sh
-pnpm add @nsollazzo/poi-ui svelte
+pnpm add @positronick/ui svelte
 ```
 
 `svelte@^5` is a peer dependency.
@@ -39,12 +39,12 @@ pnpm add @nsollazzo/poi-ui svelte
 
 ```svelte
 <script>
-	import { ThemeProvider } from '@nsollazzo/poi-ui';
-	import '@nsollazzo/poi-ui/tokens.css';
+	import { ThemeProvider } from '@positronick/ui';
+	import '@positronick/ui/tokens.css';
 </script>
 
 <ThemeProvider theme="machine">
-	<!-- POI-UI components render here, themed by the provider -->
+	<!-- positronick-ui components render here, themed by the provider -->
 </ThemeProvider>
 ```
 
@@ -69,12 +69,12 @@ All components render in both themes and are exported from the package root.
 | `RecDot`                     | Pulsing record indicator                                                                           |
 | `Loading`                    | Rotating cube loader                                                                               |
 
-Also exported: `useTheme`, the `reducedMotion` helper, the `MACHINE_DESIGNATIONS` / `SAMARITAN_DESIGNATIONS` vocabularies, and the `PoiTheme` / `Designation` types.
+Also exported: `useTheme`, the `reducedMotion` helper, the `MACHINE_DESIGNATIONS` / `SAMARITAN_DESIGNATIONS` vocabularies, and the `PositronickTheme` / `Designation` types.
 
 ## Demo & docs
 
-- **Kitchen-sink demo** (both themes side by side): https://nsollazzo.github.io/poi-ui/
-- **Storybook** (per-component, with a11y checks): https://nsollazzo.github.io/poi-ui/storybook/
+- **Kitchen-sink demo** (both themes side by side): https://positronick.github.io/ui/
+- **Storybook** (per-component, with a11y checks): https://positronick.github.io/ui/storybook/
 
 ## Develop
 
@@ -93,7 +93,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Accessibility
 
-POI-UI targets WCAG AA contrast in **both** theme directions, ships visible themed keyboard focus rings, uses real `<button>`/`<dialog>` semantics, and gates **all** motion behind `prefers-reduced-motion`.
+positronick-ui targets WCAG AA contrast in **both** theme directions, ships visible themed keyboard focus rings, uses real `<button>`/`<dialog>` semantics, and gates **all** motion behind `prefers-reduced-motion`.
 
 ## Credits
 

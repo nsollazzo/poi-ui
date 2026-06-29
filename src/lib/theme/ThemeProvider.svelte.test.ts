@@ -4,19 +4,19 @@ import { describe, expect, test } from 'vitest';
 import ThemeProvider from './ThemeProvider.svelte';
 
 const child = createRawSnippet(() => ({
-	render: () => `<p data-testid="poi-child">ACQUIRING</p>`
+	render: () => `<p data-testid="pn-child">ACQUIRING</p>`
 }));
 
 function root(): HTMLElement {
-	const el = document.querySelector<HTMLElement>('.poi-root');
-	if (!el) throw new Error('.poi-root not found');
+	const el = document.querySelector<HTMLElement>('.pn-root');
+	if (!el) throw new Error('.pn-root not found');
 	return el;
 }
 
 describe('ThemeProvider', () => {
 	test('renders its children', async () => {
 		const screen = render(ThemeProvider, { theme: 'machine', children: child });
-		await expect.element(screen.getByTestId('poi-child')).toBeInTheDocument();
+		await expect.element(screen.getByTestId('pn-child')).toBeInTheDocument();
 	});
 
 	test('marks the active theme with a data-theme attribute', () => {

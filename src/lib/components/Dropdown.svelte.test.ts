@@ -13,13 +13,13 @@ const props = (value: string | null = null) => ({ value, options, label: 'Framew
 describe('Dropdown', () => {
 	test('is a collapsed disclosure trigger with no menu shown', () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Dropdown, componentProps: props() });
-		const trigger = document.querySelector('.poi-dropdown .poi-chip') as HTMLElement;
+		const trigger = document.querySelector('.pn-dropdown .pn-chip') as HTMLElement;
 		// Honest disclosure: the popup contains plain buttons, not menuitems, so the
 		// trigger must not claim aria-haspopup="menu".
 		expect(trigger.getAttribute('aria-haspopup')).toBeNull();
 		expect(trigger.getAttribute('aria-expanded')).toBe('false');
 		expect(trigger.getAttribute('aria-controls')).toBeNull();
-		expect(document.querySelector('.poi-dropdown__menu')).toBeNull();
+		expect(document.querySelector('.pn-dropdown__menu')).toBeNull();
 	});
 
 	test('opens the menu on trigger click', async () => {
@@ -29,11 +29,9 @@ describe('Dropdown', () => {
 			componentProps: props()
 		});
 		await screen.getByRole('button', { name: 'Framework' }).click();
-		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).not.toBeNull();
+		await expect.poll(() => document.querySelector('.pn-dropdown__menu')).not.toBeNull();
 		expect(
-			(document.querySelector('.poi-dropdown .poi-chip') as HTMLElement).getAttribute(
-				'aria-expanded'
-			)
+			(document.querySelector('.pn-dropdown .pn-chip') as HTMLElement).getAttribute('aria-expanded')
 		).toBe('true');
 	});
 
@@ -45,8 +43,8 @@ describe('Dropdown', () => {
 		});
 		await screen.getByRole('button', { name: 'Framework' }).click();
 		await screen.getByRole('button', { name: 'Svelte' }).click();
-		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).toBeNull();
-		const trigger = document.querySelector('.poi-dropdown .poi-chip') as HTMLElement;
+		await expect.poll(() => document.querySelector('.pn-dropdown__menu')).toBeNull();
+		const trigger = document.querySelector('.pn-dropdown .pn-chip') as HTMLElement;
 		expect(trigger.textContent).toContain('Svelte');
 		expect(trigger.getAttribute('data-active')).toBe('true'); // a value is held
 	});
@@ -58,9 +56,9 @@ describe('Dropdown', () => {
 			componentProps: props()
 		});
 		await screen.getByRole('button', { name: 'Framework' }).click();
-		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).not.toBeNull();
+		await expect.poll(() => document.querySelector('.pn-dropdown__menu')).not.toBeNull();
 		document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).toBeNull();
+		await expect.poll(() => document.querySelector('.pn-dropdown__menu')).toBeNull();
 	});
 
 	test('closes on Escape', async () => {
@@ -70,9 +68,9 @@ describe('Dropdown', () => {
 			componentProps: props()
 		});
 		await screen.getByRole('button', { name: 'Framework' }).click();
-		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).not.toBeNull();
+		await expect.poll(() => document.querySelector('.pn-dropdown__menu')).not.toBeNull();
 		window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).toBeNull();
+		await expect.poll(() => document.querySelector('.pn-dropdown__menu')).toBeNull();
 	});
 
 	test('the open trigger is wired to the menu via aria-controls', async () => {
@@ -82,9 +80,9 @@ describe('Dropdown', () => {
 			componentProps: props()
 		});
 		await screen.getByRole('button', { name: 'Framework' }).click();
-		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).not.toBeNull();
-		const trigger = document.querySelector('.poi-dropdown .poi-chip') as HTMLElement;
-		const menu = document.querySelector('.poi-dropdown__menu') as HTMLElement;
+		await expect.poll(() => document.querySelector('.pn-dropdown__menu')).not.toBeNull();
+		const trigger = document.querySelector('.pn-dropdown .pn-chip') as HTMLElement;
+		const menu = document.querySelector('.pn-dropdown__menu') as HTMLElement;
 		expect(menu.id).not.toBe('');
 		expect(trigger.getAttribute('aria-controls')).toBe(menu.id);
 	});
@@ -99,7 +97,7 @@ describe('Dropdown', () => {
 		// Keyboard users land in the popup, not stranded on the trigger.
 		await expect
 			.poll(() => (document.activeElement as HTMLElement | null)?.className)
-			.toContain('poi-dropdown__item');
+			.toContain('pn-dropdown__item');
 	});
 
 	test('Escape returns focus to the trigger', async () => {
@@ -109,10 +107,10 @@ describe('Dropdown', () => {
 			componentProps: props()
 		});
 		await screen.getByRole('button', { name: 'Framework' }).click();
-		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).not.toBeNull();
+		await expect.poll(() => document.querySelector('.pn-dropdown__menu')).not.toBeNull();
 		window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
-		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).toBeNull();
-		expect(document.activeElement).toBe(document.querySelector('.poi-dropdown .poi-chip'));
+		await expect.poll(() => document.querySelector('.pn-dropdown__menu')).toBeNull();
+		expect(document.activeElement).toBe(document.querySelector('.pn-dropdown .pn-chip'));
 	});
 
 	test('selecting an option returns focus to the trigger', async () => {
@@ -123,7 +121,7 @@ describe('Dropdown', () => {
 		});
 		await screen.getByRole('button', { name: 'Framework' }).click();
 		await screen.getByRole('button', { name: 'Svelte' }).click();
-		await expect.poll(() => document.querySelector('.poi-dropdown__menu')).toBeNull();
-		expect(document.activeElement).toBe(document.querySelector('.poi-dropdown .poi-chip'));
+		await expect.poll(() => document.querySelector('.pn-dropdown__menu')).toBeNull();
+		expect(document.activeElement).toBe(document.querySelector('.pn-dropdown .pn-chip'));
 	});
 });

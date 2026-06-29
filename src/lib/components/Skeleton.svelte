@@ -8,24 +8,24 @@
 </script>
 
 <!-- Decorative placeholder; the loading state should be announced elsewhere (e.g. <Loading role="status">). -->
-<div class="poi-skeleton {className}" aria-hidden="true"></div>
+<div class="pn-skeleton {className}" aria-hidden="true"></div>
 
 <style>
-	.poi-skeleton {
+	.pn-skeleton {
 		display: block;
-		background: var(--poi-surface-2);
-		animation: poi-skeleton-pulse var(--poi-dur-pulse) var(--poi-ease) infinite;
+		background: var(--pn-surface-2);
+		animation: pn-skeleton-pulse var(--pn-dur-pulse) var(--pn-ease) infinite;
 	}
 
 	/* Sensible default size so a bare <Skeleton /> is visible, but at zero
 	   specificity (:where) so any consumer width/height set via `class` wins —
 	   including sizes smaller than this default. */
-	:where(.poi-skeleton) {
+	:where(.pn-skeleton) {
 		width: 100%;
 		height: 1rem;
 	}
 
-	@keyframes poi-skeleton-pulse {
+	@keyframes pn-skeleton-pulse {
 		0%,
 		100% {
 			opacity: 1;
@@ -36,7 +36,7 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.poi-skeleton {
+		.pn-skeleton {
 			animation: none;
 		}
 	}

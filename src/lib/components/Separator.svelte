@@ -9,21 +9,21 @@
 	let { orientation = 'horizontal', class: className = '' }: Props = $props();
 </script>
 
-<div class="poi-separator {className}" role="separator" aria-orientation={orientation}></div>
+<div class="pn-separator {className}" role="separator" aria-orientation={orientation}></div>
 
 <style>
-	.poi-separator {
+	.pn-separator {
 		flex-shrink: 0;
 		border: 0;
-		background: var(--poi-line);
+		background: var(--pn-line);
 	}
-	.poi-separator[aria-orientation='horizontal'] {
+	.pn-separator[aria-orientation='horizontal'] {
 		width: 100%;
-		height: var(--poi-hairline-width);
+		height: var(--pn-hairline-width);
 	}
-	.poi-separator[aria-orientation='vertical'] {
+	.pn-separator[aria-orientation='vertical'] {
 		align-self: stretch;
-		width: var(--poi-hairline-width);
+		width: var(--pn-hairline-width);
 		height: 100%;
 	}
 </style>

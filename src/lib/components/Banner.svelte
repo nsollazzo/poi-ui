@@ -32,38 +32,38 @@
 	});
 </script>
 
-<p class="poi-banner" data-solid={solid || undefined}>
+<p class="pn-banner" data-solid={solid || undefined}>
 	<!-- Full text for assistive tech; the animated words are decorative. -->
-	<span class="poi-sr-only">{text}</span>
+	<span class="pn-sr-only">{text}</span>
 	<span aria-hidden="true">
-		{#each words as word, i (i)}<span class="poi-banner__word" class:visible={i < shown}
+		{#each words as word, i (i)}<span class="pn-banner__word" class:visible={i < shown}
 				>{word + ' '}</span
 			>{/each}
 	</span>
 </p>
 
 <style>
-	.poi-banner {
+	.pn-banner {
 		margin: 0;
-		padding: var(--poi-space-3) var(--poi-space-4);
-		border-bottom: var(--poi-hairline-width) solid var(--poi-line);
-		color: var(--poi-ink);
-		font-family: var(--poi-font-display);
-		font-size: var(--poi-font-size-4);
+		padding: var(--pn-space-3) var(--pn-space-4);
+		border-bottom: var(--pn-hairline-width) solid var(--pn-line);
+		color: var(--pn-ink);
+		font-family: var(--pn-font-display);
+		font-size: var(--pn-font-size-4);
 		text-align: center;
 		text-transform: uppercase;
-		letter-spacing: var(--poi-tracking-display);
+		letter-spacing: var(--pn-tracking-display);
 	}
 
-	.poi-banner__word {
+	.pn-banner__word {
 		opacity: 0;
-		transition: opacity var(--poi-dur-fade) var(--poi-ease);
+		transition: opacity var(--pn-dur-fade) var(--pn-ease);
 	}
-	.poi-banner__word.visible {
+	.pn-banner__word.visible {
 		opacity: 1;
 	}
 
-	.poi-sr-only {
+	.pn-sr-only {
 		position: absolute;
 		width: 1px;
 		height: 1px;
@@ -76,7 +76,7 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.poi-banner__word {
+		.pn-banner__word {
 			opacity: 1;
 			transition: none;
 		}

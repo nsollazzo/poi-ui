@@ -23,7 +23,7 @@
 
 	const selectedLabel = $derived(options.find((o) => o.value === value)?.label);
 
-	const trigger = () => root?.querySelector<HTMLButtonElement>('button.poi-chip');
+	const trigger = () => root?.querySelector<HTMLButtonElement>('button.pn-chip');
 
 	// Honest disclosure focus contract: focus lands on the first option when the
 	// popup opens, and returns to the trigger on keyboard close or selection.
@@ -31,7 +31,7 @@
 		open = !open;
 		if (open) {
 			await tick();
-			root?.querySelector<HTMLElement>('.poi-dropdown__item')?.focus();
+			root?.querySelector<HTMLElement>('.pn-dropdown__item')?.focus();
 		}
 	}
 
@@ -62,7 +62,7 @@
 	});
 </script>
 
-<div class="poi-dropdown {className}" bind:this={root}>
+<div class="pn-dropdown {className}" bind:this={root}>
 	<Chip
 		pressed={value !== null}
 		expanded={open}
@@ -71,16 +71,16 @@
 		onclick={toggle}
 	>
 		{label}{#if selectedLabel}: {selectedLabel}{/if}<span
-			class="poi-dropdown__caret"
+			class="pn-dropdown__caret"
 			aria-hidden="true">▾</span
 		>
 	</Chip>
 
 	{#if open}
-		<div class="poi-dropdown__menu" id={menuId}>
+		<div class="pn-dropdown__menu" id={menuId}>
 			<button
 				type="button"
-				class="poi-dropdown__item"
+				class="pn-dropdown__item"
 				data-active={value === null || undefined}
 				onclick={() => choose(null)}
 			>
@@ -89,7 +89,7 @@
 			{#each options as o (o.value)}
 				<button
 					type="button"
-					class="poi-dropdown__item"
+					class="pn-dropdown__item"
 					data-active={value === o.value || undefined}
 					onclick={() => choose(o.value)}
 				>
@@ -101,57 +101,57 @@
 </div>
 
 <style>
-	.poi-dropdown {
+	.pn-dropdown {
 		position: relative;
 		display: inline-flex;
 	}
-	.poi-dropdown__caret {
+	.pn-dropdown__caret {
 		font-size: 0.85em;
 	}
-	.poi-dropdown__menu {
+	.pn-dropdown__menu {
 		position: absolute;
-		top: calc(100% + var(--poi-space-1));
+		top: calc(100% + var(--pn-space-1));
 		right: 0;
 		z-index: 50;
 		min-width: 9rem;
 		display: flex;
 		flex-direction: column;
-		background: var(--poi-surface-base);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
+		background: var(--pn-surface-base);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
 	}
-	.poi-dropdown__item {
-		padding: var(--poi-space-2) var(--poi-space-3);
+	.pn-dropdown__item {
+		padding: var(--pn-space-2) var(--pn-space-3);
 		background: transparent;
-		color: var(--poi-ink);
+		color: var(--pn-ink);
 		border: none;
 		text-align: left;
-		font-family: var(--poi-font-display);
-		font-size: var(--poi-font-size-1);
+		font-family: var(--pn-font-display);
+		font-size: var(--pn-font-size-1);
 		text-transform: uppercase;
-		letter-spacing: var(--poi-tracking-display);
+		letter-spacing: var(--pn-tracking-display);
 		cursor: pointer;
 		transition:
-			color 0.12s var(--poi-ease),
-			background 0.12s var(--poi-ease);
+			color 0.12s var(--pn-ease),
+			background 0.12s var(--pn-ease);
 	}
-	.poi-dropdown__item:not(:first-child) {
-		border-top: var(--poi-hairline-width) solid var(--poi-line);
+	.pn-dropdown__item:not(:first-child) {
+		border-top: var(--pn-hairline-width) solid var(--pn-line);
 	}
-	.poi-dropdown__item:hover {
-		color: var(--poi-accent);
+	.pn-dropdown__item:hover {
+		color: var(--pn-accent);
 	}
-	.poi-dropdown__item[data-active] {
-		color: var(--poi-surface-base);
-		background: var(--poi-accent);
+	.pn-dropdown__item[data-active] {
+		color: var(--pn-surface-base);
+		background: var(--pn-accent);
 	}
-	.poi-dropdown__item:focus-visible {
+	.pn-dropdown__item:focus-visible {
 		outline: none;
-		box-shadow: var(--poi-focus-ring);
+		box-shadow: var(--pn-focus-ring);
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.poi-dropdown__item {
+		.pn-dropdown__item {
 			transition: none;
 		}
 	}

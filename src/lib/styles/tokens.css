@@ -1,8 +1,8 @@
-/* POI-UI design tokens — the public theming entry point.
+/* positronick-ui design tokens — the public theming entry point.
    Import once at your app root, or rely on <ThemeProvider>, which imports this.
 
    Layering: primitives (raw) -> semantic (per theme) -> reset (base appearance).
-   Override any --poi-* custom property to retheme without forking a component. */
+   Override any --pn-* custom property to retheme without forking a component. */
 @import './primitives.css';
 @import './theme.machine.css';
 @import './theme.samaritan.css';

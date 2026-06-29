@@ -12,13 +12,13 @@ describe('Banner', () => {
 			Comp: Banner,
 			componentProps: { text: 'THE MACHINE IS WATCHING' }
 		});
-		expect(document.querySelector('.poi-sr-only')?.textContent).toBe('THE MACHINE IS WATCHING');
-		expect(document.querySelector('.poi-banner > span[aria-hidden="true"]')).not.toBeNull();
+		expect(document.querySelector('.pn-sr-only')?.textContent).toBe('THE MACHINE IS WATCHING');
+		expect(document.querySelector('.pn-banner > span[aria-hidden="true"]')).not.toBeNull();
 	});
 
 	test('renders one span per word', () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Banner, componentProps: { text: 'A B C D' } });
-		expect(document.querySelectorAll('.poi-banner__word')).toHaveLength(4);
+		expect(document.querySelectorAll('.pn-banner__word')).toHaveLength(4);
 	});
 
 	// `solid` covers the Backdrop grid with the theme's base surface.
@@ -29,7 +29,7 @@ describe('Banner', () => {
 			componentProps: { text: 'SOLID', solid: true }
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-banner') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-banner') as HTMLElement).backgroundColor
 		).toBe('rgb(255, 255, 255)');
 	});
 });

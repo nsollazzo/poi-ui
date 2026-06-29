@@ -73,7 +73,7 @@
 
 <dialog
 	bind:this={dialog}
-	class="poi-dialog {className}"
+	class="pn-dialog {className}"
 	data-theme={overlayTheme.current}
 	aria-modal="true"
 	aria-labelledby={title ? titleId : undefined}
@@ -86,37 +86,37 @@
 		if (e.target === dialog) dialog?.close();
 	}}
 >
-	<div class="poi-dialog__content">
+	<div class="pn-dialog__content">
 		{#if title}
-			<h2 id={titleId} class="poi-dialog__title">{title}</h2>
+			<h2 id={titleId} class="pn-dialog__title">{title}</h2>
 		{/if}
 		{@render children()}
 	</div>
 </dialog>
 
 <style>
-	.poi-dialog {
+	.pn-dialog {
 		margin: auto;
 		max-width: min(90vw, 32rem);
 		padding: 0;
-		background: var(--poi-surface-base);
-		color: var(--poi-ink);
-		border: var(--poi-hairline-width) solid var(--poi-line);
-		border-radius: var(--poi-radius);
+		background: var(--pn-surface-base);
+		color: var(--pn-ink);
+		border: var(--pn-hairline-width) solid var(--pn-line);
+		border-radius: var(--pn-radius);
 	}
 	/* Fallback literal covers browsers where ::backdrop doesn't inherit the custom property. */
-	.poi-dialog::backdrop {
-		background: var(--poi-overlay-bg, rgba(0, 0, 0, 0.7));
+	.pn-dialog::backdrop {
+		background: var(--pn-overlay-bg, rgba(0, 0, 0, 0.7));
 	}
-	.poi-dialog__content {
-		padding: var(--poi-space-5);
+	.pn-dialog__content {
+		padding: var(--pn-space-5);
 	}
-	.poi-dialog__title {
-		margin: 0 0 var(--poi-space-4);
-		color: var(--poi-accent);
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-1);
+	.pn-dialog__title {
+		margin: 0 0 var(--pn-space-4);
+		color: var(--pn-accent);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-1);
 		text-transform: uppercase;
-		letter-spacing: var(--poi-tracking-display);
+		letter-spacing: var(--pn-tracking-display);
 	}
 </style>

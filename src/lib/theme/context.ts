@@ -1,15 +1,15 @@
 import { getContext, setContext } from 'svelte';
 
-/** The two POI-UI themes. */
-export type PoiTheme = 'machine' | 'samaritan';
+/** The two positronick-ui themes. */
+export type PositronickTheme = 'machine' | 'samaritan';
 
-const THEME_KEY = Symbol('poi-theme');
+const THEME_KEY = Symbol('pn-theme');
 
 export interface ThemeContext {
 	/** The currently active theme. Reactive when read inside a Svelte component. */
-	readonly theme: PoiTheme;
+	readonly theme: PositronickTheme;
 	/** Switch the active theme. */
-	setTheme: (theme: PoiTheme) => void;
+	setTheme: (theme: PositronickTheme) => void;
 }
 
 /** Internal: registers the theme context. Used by `<ThemeProvider>`. */
@@ -38,7 +38,7 @@ export function useThemeOptional(): ThemeContext | undefined {
 }
 
 /** The opposite polarity of a theme (machine ↔ samaritan). */
-export function oppositeTheme(theme: PoiTheme): PoiTheme {
+export function oppositeTheme(theme: PositronickTheme): PositronickTheme {
 	return theme === 'machine' ? 'samaritan' : 'machine';
 }
 
@@ -50,7 +50,9 @@ export function oppositeTheme(theme: PoiTheme): PoiTheme {
  * the "overlays render in the opposite polarity" rule. Read `.current` reactively
  * (mirrors the `reducedMotion.current` convention); call during component init.
  */
-export function useOverlayTheme(invert: () => boolean): { readonly current: PoiTheme | undefined } {
+export function useOverlayTheme(invert: () => boolean): {
+	readonly current: PositronickTheme | undefined;
+} {
 	const context = useThemeOptional();
 	return {
 		get current() {

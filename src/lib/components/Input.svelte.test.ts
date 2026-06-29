@@ -19,7 +19,7 @@ describe('Input', () => {
 			Comp: Input,
 			componentProps: { 'aria-label': 'x', value: 'ROOT' }
 		});
-		expect((document.querySelector('input.poi-input') as HTMLInputElement).value).toBe('ROOT');
+		expect((document.querySelector('input.pn-input') as HTMLInputElement).value).toBe('ROOT');
 	});
 
 	test('passes through native attributes via {...rest}', () => {
@@ -28,7 +28,7 @@ describe('Input', () => {
 			Comp: Input,
 			componentProps: { 'aria-label': 'Email', type: 'email', placeholder: 'you@example.com' }
 		});
-		const el = document.querySelector('input.poi-input') as HTMLInputElement;
+		const el = document.querySelector('input.pn-input') as HTMLInputElement;
 		expect(el.type).toBe('email');
 		expect(el.placeholder).toBe('you@example.com');
 	});
@@ -40,7 +40,7 @@ describe('Input', () => {
 			componentProps: { 'aria-label': 'x', 'aria-invalid': true }
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-input') as HTMLElement).borderTopColor
+			getComputedStyle(document.querySelector('.pn-input') as HTMLElement).borderTopColor
 		).toBe('rgb(255, 0, 0)');
 	});
 
@@ -50,7 +50,7 @@ describe('Input', () => {
 			Comp: Input,
 			componentProps: { 'aria-label': 'x', disabled: true }
 		});
-		const el = document.querySelector('input.poi-input') as HTMLInputElement;
+		const el = document.querySelector('input.pn-input') as HTMLInputElement;
 		expect(el.disabled).toBe(true);
 		expect(getComputedStyle(el).opacity).toBe('0.4');
 	});
@@ -62,7 +62,7 @@ describe('Input', () => {
 			componentProps: { 'aria-label': 'x' }
 		});
 		expect(
-			getComputedStyle(document.querySelector('.poi-input') as HTMLElement).backgroundColor
+			getComputedStyle(document.querySelector('.pn-input') as HTMLElement).backgroundColor
 		).toBe('rgba(0, 0, 0, 0.04)');
 	});
 });

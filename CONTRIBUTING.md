@@ -1,6 +1,6 @@
-# Contributing to POI-UI
+# Contributing to positronick-ui
 
-Thanks for your interest in contributing! POI-UI is an open-source Svelte 5 component library by Nicholas Sollazzo (https://nsollazzo.com).
+Thanks for your interest in contributing! positronick-ui is an open-source Svelte 5 component library by Nicholas Sollazzo (https://nsollazzo.com).
 
 ## Getting started
 

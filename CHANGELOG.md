@@ -1,10 +1,10 @@
-# @nsollazzo/poi-ui
+# @positronick/ui
 
 ## 0.4.1
 
 ### Patch Changes
 
-- [#18](https://github.com/nsollazzo/poi-ui/pull/18) [`4b08f41`](https://github.com/nsollazzo/poi-ui/commit/4b08f411d02c832edb709ee12d45d25d05f893d2) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Terminal: lead with the prompt sigil, add a copy button, and gate the cursor
+- [#18](https://github.com/positronick/ui/pull/18) [`4b08f41`](https://github.com/positronick/ui/commit/4b08f411d02c832edb709ee12d45d25d05f893d2) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Terminal: lead with the prompt sigil, add a copy button, and gate the cursor
   - The prompt sigil (e.g. `$`) now **leads** the command on a single line instead of sitting on a separate line below it.
   - Added a **copy-to-clipboard button** in the top-right that copies the command text only (the sigil is never included); its glyph flips `⧉` → `✓` on success and announces via an `aria-live` region.
   - Added a **`cursor` prop** (default `true`) to toggle the trailing blinking cursor.
@@ -13,7 +13,7 @@
 
 ### Minor Changes
 
-- [#12](https://github.com/nsollazzo/poi-ui/pull/12) [`1374914`](https://github.com/nsollazzo/poi-ui/commit/13749146966fe76bae042a0a799072cadeee6805) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Overlay theme inversion + filter primitives extracted from positronick.
+- [#12](https://github.com/positronick/ui/pull/12) [`1374914`](https://github.com/positronick/ui/commit/13749146966fe76bae042a0a799072cadeee6805) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Overlay theme inversion + filter primitives extracted from positronick.
 
   **New behavior — overlays invert theme polarity by default.** The UI is flat (no
   elevation), so `Dialog`, `Sheet`, `Tooltip` and `Toaster` now render in the
@@ -41,26 +41,26 @@
 
 ### Patch Changes
 
-- [#7](https://github.com/nsollazzo/poi-ui/pull/7) [`1e9fbcc`](https://github.com/nsollazzo/poi-ui/commit/1e9fbcc7034473699cbee7785d4cb1f5e9cc486a) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Declare supported `engines` in `package.json` (Node >= 22.12, pnpm >= 10). This is the only consumer-visible change in a larger internal CI/CD and supply-chain hardening pass.
+- [#7](https://github.com/positronick/ui/pull/7) [`1e9fbcc`](https://github.com/positronick/ui/commit/1e9fbcc7034473699cbee7785d4cb1f5e9cc486a) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Declare supported `engines` in `package.json` (Node >= 22.12, pnpm >= 10). This is the only consumer-visible change in a larger internal CI/CD and supply-chain hardening pass.
 
 ## 0.3.0
 
 ### Minor Changes
 
-- [#5](https://github.com/nsollazzo/poi-ui/pull/5) [`89a13ae`](https://github.com/nsollazzo/poi-ui/commit/89a13aee2fb2eea9954ac010c135681f043efb6f) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Add eleven generic primitives — Dialog, Sheet, Tooltip, Input, Separator, Skeleton, a Toaster (with `toast`/`dismiss`), and a filter family built on a single `Chip` brick (toggle/link/menu-trigger): `ChipGroup` (single-select row), `SegmentedControl` (connected one-of-N), and a chip-triggered single-select `Dropdown` (closes on select/outside-click/Escape). All are pure vanilla CSS over the existing token system (no Tailwind, no runtime deps), accessible (native `<dialog>` focus-trap + focus-return that also survives unmount-while-open, `aria-labelledby`/`aria-label`, Escape; Tooltip links its description to the focusable trigger and dismisses on Escape even when hover-opened; Toaster announces via a persistent polite live region with assertive `role="alert"` errors), and verified in both themes. Adds semantic tokens `--poi-overlay-bg` (modal scrim) and `--poi-status-{info,success,warning,error}`. The `svelte` peer floor is now `^5.20.0` (the new components use `$props.id()`).
+- [#5](https://github.com/positronick/ui/pull/5) [`89a13ae`](https://github.com/positronick/ui/commit/89a13aee2fb2eea9954ac010c135681f043efb6f) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Add eleven generic primitives — Dialog, Sheet, Tooltip, Input, Separator, Skeleton, a Toaster (with `toast`/`dismiss`), and a filter family built on a single `Chip` brick (toggle/link/menu-trigger): `ChipGroup` (single-select row), `SegmentedControl` (connected one-of-N), and a chip-triggered single-select `Dropdown` (closes on select/outside-click/Escape). All are pure vanilla CSS over the existing token system (no Tailwind, no runtime deps), accessible (native `<dialog>` focus-trap + focus-return that also survives unmount-while-open, `aria-labelledby`/`aria-label`, Escape; Tooltip links its description to the focusable trigger and dismisses on Escape even when hover-opened; Toaster announces via a persistent polite live region with assertive `role="alert"` errors), and verified in both themes. Adds semantic tokens `--poi-overlay-bg` (modal scrim) and `--poi-status-{info,success,warning,error}`. The `svelte` peer floor is now `^5.20.0` (the new components use `$props.id()`).
 
 ## 0.2.0
 
 ### Minor Changes
 
-- [#3](https://github.com/nsollazzo/poi-ui/pull/3) [`98b64ed`](https://github.com/nsollazzo/poi-ui/commit/98b64ede9024747fac1c02eaaf5e323906a30979) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Add a page-level `Backdrop` component that paints a theme-aware engineering graph-paper grid behind page content, and an opt-in `solid` prop on the see-through components (`Banner`, `Button`, `DesignationTag`, `Loading`, `ProgressBar`, `StatusRow`, `SubjectFrame`) so they read cleanly over the grid.
+- [#3](https://github.com/positronick/ui/pull/3) [`98b64ed`](https://github.com/positronick/ui/commit/98b64ede9024747fac1c02eaaf5e323906a30979) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Add a page-level `Backdrop` component that paints a theme-aware engineering graph-paper grid behind page content, and an opt-in `solid` prop on the see-through components (`Banner`, `Button`, `DesignationTag`, `Loading`, `ProgressBar`, `StatusRow`, `SubjectFrame`) so they read cleanly over the grid.
 
 ## 0.1.0
 
 ### Minor Changes
 
-- [`2f41aad`](https://github.com/nsollazzo/poi-ui/commit/2f41aad9e87fa1c9fee68b0c0ff684728b913935) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Add the core component set: `StatusRow` (the data primitive), `DesignationTag` (vocab-driven chip), `SubjectFrame`/`TargetBox` (theme-driven corner brackets in The Machine vs. a crosshair reticle in Samaritan), and the `Block` / `Card` / `Box` container densities (shared internal `Panel`). All support `neutral` / `threat` / `asset` tones and are verified in both themes with axe.
+- [`2f41aad`](https://github.com/positronick/ui/commit/2f41aad9e87fa1c9fee68b0c0ff684728b913935) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Add the core component set: `StatusRow` (the data primitive), `DesignationTag` (vocab-driven chip), `SubjectFrame`/`TargetBox` (theme-driven corner brackets in The Machine vs. a crosshair reticle in Samaritan), and the `Block` / `Card` / `Box` container densities (shared internal `Panel`). All support `neutral` / `threat` / `asset` tones and are verified in both themes with axe.
 
-- [`75bad09`](https://github.com/nsollazzo/poi-ui/commit/75bad09f7906f8bf7cfb865180717a6bcd781f81) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Foundation release. Adds `<ThemeProvider>` with two runtime-switchable themes selected by a `data-theme` attribute — The Machine (dark: white + red on black, neon glow) and Samaritan (light: black + red on white, glow-free). Ships a layered CSS-variable token system (primitives → semantic per-theme → component), exposed via `@nsollazzo/poi-ui/tokens.css`; the `useTheme()` context helper; subject designation vocabularies; and a reactive `reducedMotion` helper. All theming is overridable through CSS custom properties.
+- [`75bad09`](https://github.com/positronick/ui/commit/75bad09f7906f8bf7cfb865180717a6bcd781f81) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Foundation release. Adds `<ThemeProvider>` with two runtime-switchable themes selected by a `data-theme` attribute — The Machine (dark: white + red on black, neon glow) and Samaritan (light: black + red on white, glow-free). Ships a layered CSS-variable token system (primitives → semantic per-theme → component), exposed via `@positronick/ui/tokens.css`; the `useTheme()` context helper; subject designation vocabularies; and a reactive `reducedMotion` helper. All theming is overridable through CSS custom properties.
 
-- [`4812d0d`](https://github.com/nsollazzo/poi-ui/commit/4812d0d6dfc202500cf15bd4ae1c50df6dbcd077) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Add the secondary components: `Button` (glow/pulse in The Machine vs. crisp in Samaritan, optional rotate-on-hover), `ProgressBar` (sizes, glowing vs. flat fill), `RecDot` (pulsing record indicator), `Terminal` (monospace with blinking prompt), `Banner` (word-by-word "samaritanWrite" reveal), `Loading` (rotating cube), and `Window` (collapsible, theme-driven chrome — traffic-light dots vs. a severe red title bar). All motion is gated behind `prefers-reduced-motion`; everything is verified in both themes with axe. The full 13-component inventory is now complete.
+- [`4812d0d`](https://github.com/positronick/ui/commit/4812d0d6dfc202500cf15bd4ae1c50df6dbcd077) Thanks [@nsollazzo](https://github.com/nsollazzo)! - Add the secondary components: `Button` (glow/pulse in The Machine vs. crisp in Samaritan, optional rotate-on-hover), `ProgressBar` (sizes, glowing vs. flat fill), `RecDot` (pulsing record indicator), `Terminal` (monospace with blinking prompt), `Banner` (word-by-word "samaritanWrite" reveal), `Loading` (rotating cube), and `Window` (collapsible, theme-driven chrome — traffic-light dots vs. a severe red title bar). All motion is gated behind `prefers-reduced-motion`; everything is verified in both themes with axe. The full 13-component inventory is now complete.

@@ -39,22 +39,22 @@
      region that already exists are announced reliably, whereas a freshly inserted
      role="status" node is not. Errors additionally carry role="alert" so they
      interrupt assertively. -->
-<div class="poi-toaster {className}" data-theme={overlayTheme.current} aria-live="polite">
+<div class="pn-toaster {className}" data-theme={overlayTheme.current} aria-live="polite">
 	{#each store.items as item (item.id)}
 		<div
-			class="poi-toast"
+			class="pn-toast"
 			data-level={item.level}
 			role={item.level === 'error' ? 'alert' : undefined}
 			aria-atomic="true"
 			in:fly={inParams}
 			out:fade={outParams}
 		>
-			<span class="poi-toast__icon" aria-hidden="true">
+			<span class="pn-toast__icon" aria-hidden="true">
 				{#if icon}{@render icon(item.level)}{:else}{glyphs[item.level]}{/if}
 			</span>
-			<span class="poi-toast__message">{item.message}</span>
+			<span class="pn-toast__message">{item.message}</span>
 			<button
-				class="poi-toast__close"
+				class="pn-toast__close"
 				type="button"
 				aria-label="Dismiss"
 				onclick={() => remove(item.id)}
@@ -63,7 +63,7 @@
 			</button>
 			{#if item.duration > 0 && !reducedMotion.current}
 				<span
-					class="poi-toast__progress"
+					class="pn-toast__progress"
 					style:animation-duration="{item.duration}ms"
 					aria-hidden="true"
 				></span>
@@ -73,86 +73,86 @@
 </div>
 
 <style>
-	.poi-toaster {
+	.pn-toaster {
 		position: fixed;
-		top: var(--poi-space-4);
+		top: var(--pn-space-4);
 		left: 50%;
 		transform: translateX(-50%);
 		z-index: 1000;
 		display: flex;
 		flex-direction: column;
-		gap: var(--poi-space-2);
+		gap: var(--pn-space-2);
 		width: max-content;
 		max-width: min(90vw, 28rem);
 		pointer-events: none;
 	}
 
-	.poi-toast {
-		--poi-toast-accent: var(--poi-status-info);
+	.pn-toast {
+		--pn-toast-accent: var(--pn-status-info);
 		position: relative;
 		overflow: hidden;
 		display: flex;
 		align-items: flex-start;
-		gap: var(--poi-space-2);
-		padding: var(--poi-space-2) var(--poi-space-3);
-		background: var(--poi-surface-base);
-		color: var(--poi-ink);
-		border: var(--poi-hairline-width) solid var(--poi-toast-accent);
+		gap: var(--pn-space-2);
+		padding: var(--pn-space-2) var(--pn-space-3);
+		background: var(--pn-surface-base);
+		color: var(--pn-ink);
+		border: var(--pn-hairline-width) solid var(--pn-toast-accent);
 		border-left-width: 3px;
-		border-radius: var(--poi-radius);
-		font-size: var(--poi-font-size-2);
+		border-radius: var(--pn-radius);
+		font-size: var(--pn-font-size-2);
 		pointer-events: auto;
 	}
-	.poi-toast[data-level='success'] {
-		--poi-toast-accent: var(--poi-status-success);
+	.pn-toast[data-level='success'] {
+		--pn-toast-accent: var(--pn-status-success);
 	}
-	.poi-toast[data-level='warning'] {
-		--poi-toast-accent: var(--poi-status-warning);
+	.pn-toast[data-level='warning'] {
+		--pn-toast-accent: var(--pn-status-warning);
 	}
-	.poi-toast[data-level='error'] {
-		--poi-toast-accent: var(--poi-status-error);
+	.pn-toast[data-level='error'] {
+		--pn-toast-accent: var(--pn-status-error);
 	}
 
-	.poi-toast__icon {
+	.pn-toast__icon {
 		flex-shrink: 0;
-		color: var(--poi-toast-accent);
-		font-family: var(--poi-font-mono);
+		color: var(--pn-toast-accent);
+		font-family: var(--pn-font-mono);
 		font-weight: 700;
 		line-height: 1.4;
 	}
-	.poi-toast__message {
+	.pn-toast__message {
 		flex: 1;
 	}
-	.poi-toast__close {
+	.pn-toast__close {
 		flex-shrink: 0;
-		padding: 0 var(--poi-space-1);
+		padding: 0 var(--pn-space-1);
 		background: transparent;
 		border: 0;
-		color: var(--poi-ink-dim);
-		font-family: var(--poi-font-mono);
-		font-size: var(--poi-font-size-3);
+		color: var(--pn-ink-dim);
+		font-family: var(--pn-font-mono);
+		font-size: var(--pn-font-size-3);
 		line-height: 1;
 		cursor: pointer;
 	}
-	.poi-toast__close:hover {
-		color: var(--poi-ink);
+	.pn-toast__close:hover {
+		color: var(--pn-ink);
 	}
-	.poi-toast__close:focus-visible {
+	.pn-toast__close:focus-visible {
 		outline: none;
-		box-shadow: var(--poi-focus-ring);
+		box-shadow: var(--pn-focus-ring);
 	}
 
-	.poi-toast__progress {
+	.pn-toast__progress {
 		position: absolute;
 		left: 0;
 		bottom: 0;
 		width: 100%;
 		height: 2px;
-		background: var(--poi-toast-accent);
+		background: var(--pn-toast-accent);
 		transform-origin: left;
-		animation: poi-toast-shrink linear forwards;
+		animation: pn-toast-shrink linear forwards;
 	}
-	@keyframes poi-toast-shrink {
+	@keyframes pn-toast-shrink {
 		from {
 			transform: scaleX(1);
 		}
