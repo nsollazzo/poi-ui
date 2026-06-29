@@ -37,10 +37,15 @@ jobs:
       # No pnpm cache: this privileged publish job must not restore a store that a
       # less-trusted workflow could have poisoned (zizmor cache-poisoning). A
       # release runs rarely, so a clean install is the right trade.
+      #
+      # No `registry-url`: it makes setup-node write an .npmrc with
+      # `_authToken=${NODE_AUTH_TOKEN}`. With no token set that line still sends
+      # npm down the legacy-token path (unauthenticated → misleading E404) instead
+      # of the OIDC trusted-publishing handshake. Default registry is already
+      # registry.npmjs.org, so OIDC engages cleanly with no token configured.
       - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: 22
-          registry-url: https://registry.npmjs.org
       - run: pnpm install --frozen-lockfile
       # npm trusted publishing (OIDC) needs npm >= 11.5.1; provenance is automatic.
       # Pinned (not @latest): this job holds id-token + write tokens, so a
@@ -48,7 +53,7 @@ jobs:
       - run: npm install -g npm@11.16.0
       # `pnpm release` = `changeset publish`: builds via the package's prepack and
       # publishes any version not yet on npm, authenticating through the existing
-      # OIDC trusted publisher (org positronick, repo ui, workflow release.yml) —
+      # OIDC trusted publisher (org Positronick, repo ui, workflow release.yml) —
       # no NPM_TOKEN. Idempotent: re-running a tag with nothing new is a no-op.
       - name: Publish to npm
         run: pnpm release
