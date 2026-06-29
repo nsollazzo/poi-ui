@@ -36,12 +36,16 @@ Theme names (The Machine / Samaritan), component APIs, and runtime behavior are
    ```
 
 2. **Run the [codemod](#codemod)** over your source to apply the remaining
-   renames (imports, `--poi-*`, `.poi-*`, `PoiTheme`):
+   renames (imports, `--poi-*`, `.poi-*`, `PoiTheme`). **Always `--dry-run`
+   first and review every file it lists** — rule 4 is purely lexical and
+   rewrites _any_ token that begins `poi-`, including your own URLs, string
+   literals, comments, and prose (e.g. `/api/poi-list`, `poi-search`), not just
+   library classes:
 
    ```bash
-   # preview first
+   # 1. preview — REQUIRED. Review every file listed before applying.
    node scripts/migrate-0.4-to-0.5.mjs src --dry-run
-   # then apply
+   # 2. apply once the preview looks right
    node scripts/migrate-0.4-to-0.5.mjs src
    ```
 
@@ -63,8 +67,11 @@ Apply these across your `src/` (skip `node_modules` and lockfiles):
 - `@nsollazzo/poi-ui` → `@positronick/ui`
 - `--poi-` → `--pn-` (CSS custom properties, including inside `var(--poi-…)`)
 - `poi-` → `pn-` at the start of a class token (`.poi-…`, `class="poi-…"`,
-  `classList.add('poi-…')`) — **do not** rewrite `poi-` in the middle of one of
-  your own identifiers
+  `classList.add('poi-…')`). ⚠️ This boundary also matches **any other** token
+  that begins `poi-` — your own URLs, strings, comments, and prose
+  (`/api/poi-list`, `poi-search`). Only `poi` **in the middle** of an identifier
+  (`my-poi-thing`) is left alone. Review a `--dry-run` (or your diff) before
+  committing
 - `PoiTheme` → `PositronickTheme`
 
 ## Codemod
@@ -85,13 +92,21 @@ It applies, in order:
 1. `@nsollazzo/poi-ui` → `@positronick/ui` (package + all subpath imports)
 2. `PoiTheme` → `PositronickTheme` (whole-word only)
 3. `--poi-` → `--pn-` (CSS custom properties)
-4. `poi-` → `pn-` at a token boundary (BEM classes in markup, CSS, and class
-   strings) — a leading `-` or word character is treated as part of one of your
-   own identifiers and left alone, so `--poi-*` is handled only by rule 3 and a
-   class like `my-poi-thing` is never touched.
+4. `poi-` → `pn-` at a token boundary (start of line/string, whitespace, `.`,
+   quote, `(`, `>`, …). A preceding `-` or word character is treated as part of
+   one of your own identifiers and left alone, so `--poi-*` is handled only by
+   rule 3 and a class like `my-poi-thing` is never touched.
+
+   > ⚠️ Rule 4 is **purely lexical** — it has no idea whether a `poi-` token is a
+   > library class or your own code. It rewrites **every** token that begins
+   > `poi-` at a boundary, including your own URLs, string literals, comments,
+   > and text (`/api/poi-list`, `poi-search`). Only mid-token `poi`
+   > (`my-poi-thing`) and `--poi-` (rule 3) are spared. **Always run `--dry-run`
+   > and review the listed files before applying.**
 
 The script is dependency-free (Node ≥ 18). If you vendored it into your own repo,
 adjust the path accordingly. Prefer a one-liner? The rules above map directly to
-`sed`, but the script's token-boundary handling for rule 4 is what keeps it from
-mangling your own `poi`-containing identifiers — reach for the script when in
-doubt.
+`sed`; rule 4's only smarts over a blind substitution is the token boundary that
+spares mid-token `poi` and leaves `--poi-` to rule 3 — it does **not**
+distinguish a library class from your own `poi-`-prefixed string or URL, so the
+`--dry-run` review is the real safety net.

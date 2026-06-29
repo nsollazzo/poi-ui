@@ -15,6 +15,13 @@
 //                                               in markup, CSS selectors, and
 //                                               class strings)
 //
+// CAUTION: rule 4 is purely lexical. It rewrites EVERY token that begins `poi-`
+// at a boundary — including your own URLs, string literals, comments, and prose
+// (e.g. `/api/poi-list`, `poi-search`), not just library classes. Only mid-token
+// `poi` (`my-poi-thing`) and `--poi-` (rule 3) are spared. There is no class-vs-
+// string detection. Always run with --dry-run and review every listed file before
+// applying.
+//
 // Usage:
 //   node scripts/migrate-0.4-to-0.5.mjs [paths...] [--dry-run]
 //
@@ -24,8 +31,9 @@
 // Safe to re-run: idempotent (a second run finds nothing left to rename) and it
 // skips node_modules, lockfiles, VCS metadata, build output, and binary files.
 
-import { readFileSync, writeFileSync, statSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, statSync, readdirSync, realpathSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 // --- rename rules -----------------------------------------------------------
 // Order matters: rewrite the package specifier first so its `poi-ui` segment is
@@ -40,10 +48,13 @@ import { join, basename, extname } from 'node:path';
 // class rule matches `poi-` only at a real token boundary (start, whitespace,
 // `.`, quote, `(`, `>`, …) and explicitly excludes a preceding `-`/word char —
 // leaving both `--poi-` (handled above) and `my-poi-` (not ours) untouched.
-const RULES = [
+export const RULES = [
 	{ name: 'package name + imports', re: /@nsollazzo\/poi-ui/g, to: '@positronick/ui' },
 	{ name: 'PoiTheme type', re: /\bPoiTheme\b/g, to: 'PositronickTheme' },
 	{ name: '--poi-* CSS custom properties', re: /--poi-/g, to: '--pn-' },
+	// `^` only anchors the file start (no `m` flag) — that's fine, because any
+	// newline is itself a `[^\w-]` boundary char, so a line-leading `poi-` still
+	// matches via the `[^\w-]` branch. `$1` carries the boundary char through.
 	{ name: 'poi-* BEM classes', re: /(^|[^\w-])poi-/g, to: '$1pn-' }
 ];
 
@@ -90,7 +101,7 @@ const BINARY_EXT = new Set([
 	'.wasm'
 ]);
 
-function collectFiles(target, out) {
+export function collectFiles(target, out) {
 	let st;
 	try {
 		st = statSync(target);
@@ -109,17 +120,15 @@ function collectFiles(target, out) {
 	out.push(target);
 }
 
-function applyRules(text) {
+export function applyRules(text) {
 	let next = text;
 	const counts = {};
 	for (const rule of RULES) {
-		let n = 0;
-		next = next.replace(rule.re, (...args) => {
-			n++;
-			// Use the rule's replacement, supporting the $1 capture in the poi- rule.
-			return rule.to.replace('$1', args[1] ?? '');
-		});
+		// Count first (full matches), then let native String.replace handle the
+		// substitution — including the `$1` backreference in the poi- rule.
+		const n = (next.match(rule.re) ?? []).length;
 		if (n) counts[rule.name] = n;
+		next = next.replace(rule.re, rule.to);
 	}
 	return { next, counts, changed: next !== text };
 }
@@ -167,4 +176,8 @@ function main() {
 	}
 }
 
-main();
+// Run as a CLI only when invoked directly (`node scripts/migrate-0.4-to-0.5.mjs`),
+// so tests can import the helpers above without triggering a migration pass.
+const invokedDirectly =
+	process.argv[1] && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url));
+if (invokedDirectly) main();
