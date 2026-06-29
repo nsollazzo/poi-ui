@@ -28,6 +28,11 @@
 		line-height: 1.6;
 		font-size: var(--pn-font-size-3);
 	}
+	/* Collapse the leading margin so dropping <Prose> directly under a page title doesn't double the
+	   gap. The trailing margin of the last block is left intact for stacking. */
+	.pn-prose > :global(:first-child) {
+		margin-top: 0;
+	}
 	.pn-prose :global(h1),
 	.pn-prose :global(h2),
 	.pn-prose :global(h3) {

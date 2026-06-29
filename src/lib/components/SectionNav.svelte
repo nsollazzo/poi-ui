@@ -10,7 +10,7 @@
 	import { tick } from 'svelte';
 
 	interface Props {
-		/** The destinations, in order. */
+		/** The destinations, in order. Each `href` must be unique — it is the list key. */
 		items: SectionNavItem[];
 		/** The current location (e.g. a pathname) used to resolve the active item. */
 		current: string;
@@ -19,6 +19,10 @@
 		/**
 		 * Active-item matcher. Defaults to exact equality of `item.href` and `current`. Pass a
 		 * predicate (e.g. a prefix match) to keep the component framework-/route-agnostic.
+		 *
+		 * Note: a prefix matcher can mark more than one item active (an item and its ancestors), so
+		 * multiple links may carry `aria-current="page"`; the active item scrolled into view is the
+		 * first (shallowest) match. The default exact matcher always yields a single active item.
 		 */
 		isActive?: (item: SectionNavItem, current: string) => boolean;
 		/** Extra class(es) forwarded to the root element. */
@@ -32,8 +36,10 @@
 	let navEl: HTMLElement | undefined = $state();
 
 	// On the mobile scroll-row, keep the active tab in view so it is never stranded off-screen when
-	// you land deep in a section. No-op on desktop (the sidebar has no overflow) and when already
-	// in view. Match by index so an href with selector-special characters can't break the lookup.
+	// you land deep in a section. This runs on mount too — deliberately, so a deep active item is
+	// revealed on first paint, not only after navigation. `block/inline: 'nearest'` keeps the nudge
+	// minimal (a no-op when already visible, e.g. the desktop sticky sidebar). Match by index so an
+	// href with selector-special characters can't break the lookup.
 	$effect(() => {
 		const activeIndex = items.findIndex((i) => isActive(i, current));
 		if (!navEl || activeIndex < 0) return;

@@ -16,6 +16,11 @@ const article = createRawSnippet(() => ({
 		</div>`
 }));
 
+// A heading as the DIRECT first child of the wrapper, to exercise the leading-margin reset.
+const soloHeading = createRawSnippet(() => ({
+	render: () => `<h1 data-testid="solo">Solo</h1>`
+}));
+
 function el(sel: string): HTMLElement {
 	const node = document.querySelector<HTMLElement>(`.pn-prose ${sel}`);
 	if (!node) throw new Error(`.pn-prose ${sel} not found`);
@@ -56,6 +61,21 @@ describe('Prose', () => {
 		render(ThemedHarness, { theme: 'machine', Comp: Prose, componentProps: { children: article } });
 		expect(getComputedStyle(el('blockquote')).borderLeftColor).toBe('rgb(255, 0, 0)');
 		expect(getComputedStyle(el('code')).fontFamily).toContain('JetBrains Mono');
+	});
+
+	test('collapses the leading margin of the first child (so it sits flush under a title)', () => {
+		render(ThemedHarness, {
+			theme: 'machine',
+			Comp: Prose,
+			componentProps: { children: soloHeading }
+		});
+		expect(getComputedStyle(el('h1')).marginTop).toBe('0px');
+	});
+
+	test('a heading that is NOT the first child keeps its normal leading margin', () => {
+		// In `article` the h1 is nested under a wrapper div, so the reset must not touch it.
+		render(ThemedHarness, { theme: 'machine', Comp: Prose, componentProps: { children: article } });
+		expect(getComputedStyle(el('h1')).marginTop).toBe('24px'); // var(--pn-space-5) = 1.5rem
 	});
 
 	test('h1 picks up the Samaritan accent (crisp red), proving theme reactivity', () => {
